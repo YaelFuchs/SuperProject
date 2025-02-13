@@ -1,0 +1,47 @@
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Core\bin\Debug\net7.0\Super.Core.deps.json
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Core\bin\Debug\net7.0\Super.Core.dll
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Core\bin\Debug\net7.0\Super.Core.pdb
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.csproj.AssemblyReference.cache
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.AssemblyInfoInputs.cache
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.AssemblyInfo.cs
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.csproj.CoreCompileInputs.cache
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.dll
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\refint\Super.Core.dll
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.pdb
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\ref\Super.Core.dll
+E:\SuperProject\SuperProject\SuperAPI\Super.Core\bin\Debug\net7.0\Super.Core.deps.json
+E:\SuperProject\SuperProject\SuperAPI\Super.Core\bin\Debug\net7.0\Super.Core.dll
+E:\SuperProject\SuperProject\SuperAPI\Super.Core\bin\Debug\net7.0\Super.Core.pdb
+E:\SuperProject\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.GeneratedMSBuildEditorConfig.editorconfig
+E:\SuperProject\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.AssemblyInfoInputs.cache
+E:\SuperProject\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.AssemblyInfo.cs
+E:\SuperProject\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.csproj.CoreCompileInputs.cache
+E:\SuperProject\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.dll
+E:\SuperProject\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\refint\Super.Core.dll
+E:\SuperProject\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.pdb
+E:\SuperProject\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\ref\Super.Core.dll
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Core\bin\Debug\net7.0\Super.Core.deps.json
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Core\bin\Debug\net7.0\Super.Core.dll
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Core\bin\Debug\net7.0\Super.Core.pdb
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.csproj.AssemblyReference.cache
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.AssemblyInfoInputs.cache
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.AssemblyInfo.cs
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.csproj.CoreCompileInputs.cache
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.dll
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\refint\Super.Core.dll
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.pdb
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\ref\Super.Core.dll
+E:\SuperAPI\SuperProject\SuperAPI\Super.Core\bin\Debug\net7.0\Super.Core.deps.json
+E:\SuperAPI\SuperProject\SuperAPI\Super.Core\bin\Debug\net7.0\Super.Core.dll
+E:\SuperAPI\SuperProject\SuperAPI\Super.Core\bin\Debug\net7.0\Super.Core.pdb
+E:\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.GeneratedMSBuildEditorConfig.editorconfig
+E:\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.AssemblyInfoInputs.cache
+E:\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.AssemblyInfo.cs
+E:\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.csproj.CoreCompileInputs.cache
+E:\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.dll
+E:\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\refint\Super.Core.dll
+E:\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.pdb
+E:\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\ref\Super.Core.dll
+E:\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.csproj.AssemblyReference.cache

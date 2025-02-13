@@ -1,0 +1,68 @@
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.csproj.AssemblyReference.cache
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.AssemblyInfoInputs.cache
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.AssemblyInfo.cs
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.csproj.CoreCompileInputs.cache
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Data.deps.json
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Data.runtimeconfig.json
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Data.dll
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Data.pdb
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Core.dll
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Core.pdb
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.csproj.CopyComplete
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.dll
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\refint\Super.Data.dll
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.pdb
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.genruntimeconfig.cache
+C:\Users\user1\OneDrive\ש.ב\שנה ב\c#\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\ref\Super.Data.dll
+E:\SuperProject\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Data.deps.json
+E:\SuperProject\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Data.runtimeconfig.json
+E:\SuperProject\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Data.dll
+E:\SuperProject\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Data.pdb
+E:\SuperProject\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Core.dll
+E:\SuperProject\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Core.pdb
+E:\SuperProject\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.csproj.AssemblyReference.cache
+E:\SuperProject\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.GeneratedMSBuildEditorConfig.editorconfig
+E:\SuperProject\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.AssemblyInfoInputs.cache
+E:\SuperProject\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.AssemblyInfo.cs
+E:\SuperProject\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.csproj.CoreCompileInputs.cache
+E:\SuperProject\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.csproj.CopyComplete
+E:\SuperProject\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.dll
+E:\SuperProject\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\refint\Super.Data.dll
+E:\SuperProject\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.pdb
+E:\SuperProject\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.genruntimeconfig.cache
+E:\SuperProject\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\ref\Super.Data.dll
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Data.deps.json
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Data.runtimeconfig.json
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Data.dll
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Data.pdb
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Core.dll
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Core.pdb
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.csproj.AssemblyReference.cache
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.AssemblyInfoInputs.cache
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.AssemblyInfo.cs
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.csproj.CoreCompileInputs.cache
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.csproj.CopyComplete
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.dll
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\refint\Super.Data.dll
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.pdb
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.genruntimeconfig.cache
+C:\Users\user1\OneDrive\ש.ב\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\ref\Super.Data.dll
+E:\SuperAPI\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Data.deps.json
+E:\SuperAPI\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Data.runtimeconfig.json
+E:\SuperAPI\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Data.dll
+E:\SuperAPI\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Data.pdb
+E:\SuperAPI\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Core.dll
+E:\SuperAPI\SuperProject\SuperAPI\Super.Data\bin\Debug\net7.0\Super.Core.pdb
+E:\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.csproj.AssemblyReference.cache
+E:\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.GeneratedMSBuildEditorConfig.editorconfig
+E:\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.AssemblyInfoInputs.cache
+E:\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.AssemblyInfo.cs
+E:\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.csproj.CoreCompileInputs.cache
+E:\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.csproj.CopyComplete
+E:\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.dll
+E:\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\refint\Super.Data.dll
+E:\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.pdb
+E:\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\Super.Data.genruntimeconfig.cache
+E:\SuperAPI\SuperProject\SuperAPI\Super.Data\obj\Debug\net7.0\ref\Super.Data.dll
