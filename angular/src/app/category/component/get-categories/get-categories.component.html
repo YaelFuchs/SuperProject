@@ -1,0 +1,16 @@
+@for(category of categories ;track $index){
+<div style="border: 1px solid brown; margin-bottom: 10px;">
+    <p>מספר סידורי: {{ $index }}</p>
+    <p>קטגוריה ID: {{ category.id }}</p>
+    <p>שם הקטגוריה: {{ category.name }}</p>
+    <button (click)="update(category)">עדכון קטגוריה</button>
+</div>
+@if(categoryToUpdate && categoryToUpdate.id == category.id ){
+    <app-update-category [categoryUpdate]="categoryToUpdate" />
+    }
+}
+
+<button (click)="showAdd = true">הוספת קטגוריה</button>
+@if(showAdd){
+<app-add-category (categoryAdded)="onCategoryAdded($event)" />
+}
