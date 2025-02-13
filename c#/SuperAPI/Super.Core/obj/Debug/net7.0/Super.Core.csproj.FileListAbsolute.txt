@@ -45,3 +45,15 @@ E:\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\refint\Super.Core.
 E:\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.pdb
 E:\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\ref\Super.Core.dll
 E:\SuperAPI\SuperProject\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.csproj.AssemblyReference.cache
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\Super.Core\bin\Debug\net7.0\Super.Core.deps.json
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\Super.Core\bin\Debug\net7.0\Super.Core.dll
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\Super.Core\bin\Debug\net7.0\Super.Core.pdb
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.csproj.AssemblyReference.cache
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.AssemblyInfoInputs.cache
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.AssemblyInfo.cs
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.csproj.CoreCompileInputs.cache
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.dll
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\Super.Core\obj\Debug\net7.0\refint\Super.Core.dll
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.pdb
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\Super.Core\obj\Debug\net7.0\ref\Super.Core.dll

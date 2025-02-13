@@ -11,7 +11,7 @@ import { Category } from '../../category.model';
   styleUrl: './add-category.component.scss'
 })
 export class AddCategoryComponent implements OnInit {
-  @Output()categoryAdded = new EventEmitter<Category>(); 
+  @Output() categoryAdded = new EventEmitter<Category>(); 
   message=''
  public addForm! : FormGroup;
 

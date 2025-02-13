@@ -31,7 +31,7 @@ namespace Super.Data.Repositories
         public void AddCategory(Category category)
         {
             // בדיקה האם קיים משתמש עם אותו שם משתמש
-            var existingCategory = _context.Categories.FirstOrDefault(c => c.Name == c.Name);
+            var existingCategory = _context.Categories.FirstOrDefault(c => c.Name ==category.Name);
 
             if (existingCategory == null) // אם לא קיים משתמש עם שם משתמש זהה
             {

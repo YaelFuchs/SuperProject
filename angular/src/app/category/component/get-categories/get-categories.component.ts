@@ -12,6 +12,7 @@ import { CategoryService } from '../../category.service';
 export class GetCategoriesComponent implements OnInit{
    categories!: Category[]
    showAdd = false
+   showUpdate = false
    message=''
    categoryToUpdate! : Category
    isShow: boolean = false
@@ -37,14 +38,19 @@ export class GetCategoriesComponent implements OnInit{
    })
    }
    onCategoryAdded(category: Category){
-    this.categories.push(category)
     this.showAdd = false;
     this.getCategories();
    }
  update(category: Category){
   this.categoryToUpdate = category;
- }
+  this.showUpdate = true;
 
+ }
+ onUpdateCategory(category: Category) {
+    this.showUpdate = false;
+    this.getCategories();  // קריאה לפונקציה כדי לעדכן את רשימת הקטגוריות
+ 
+}
  
 }
 

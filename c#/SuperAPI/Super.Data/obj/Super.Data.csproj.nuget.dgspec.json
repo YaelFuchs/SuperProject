@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\SuperAPI\\SuperProject\\SuperAPI\\Super.Data\\Super.Data.csproj": {}
+    "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj": {}
   },
   "projects": {
-    "E:\\SuperAPI\\SuperProject\\SuperAPI\\Super.Core\\Super.Core.csproj": {
+    "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\SuperAPI\\SuperProject\\SuperAPI\\Super.Core\\Super.Core.csproj",
+        "projectUniqueName": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj",
         "projectName": "Super.Core",
-        "projectPath": "E:\\SuperAPI\\SuperProject\\SuperAPI\\Super.Core\\Super.Core.csproj",
+        "projectPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj",
         "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-        "outputPath": "E:\\SuperAPI\\SuperProject\\SuperAPI\\Super.Core\\obj\\",
+        "outputPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -59,14 +59,14 @@
         }
       }
     },
-    "E:\\SuperAPI\\SuperProject\\SuperAPI\\Super.Data\\Super.Data.csproj": {
+    "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\SuperAPI\\SuperProject\\SuperAPI\\Super.Data\\Super.Data.csproj",
+        "projectUniqueName": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj",
         "projectName": "Super.Data",
-        "projectPath": "E:\\SuperAPI\\SuperProject\\SuperAPI\\Super.Data\\Super.Data.csproj",
+        "projectPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj",
         "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-        "outputPath": "E:\\SuperAPI\\SuperProject\\SuperAPI\\Super.Data\\obj\\",
+        "outputPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -83,8 +83,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "E:\\SuperAPI\\SuperProject\\SuperAPI\\Super.Core\\Super.Core.csproj": {
-                "projectPath": "E:\\SuperAPI\\SuperProject\\SuperAPI\\Super.Core\\Super.Core.csproj"
+              "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj": {
+                "projectPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj"
               }
             }
           }
