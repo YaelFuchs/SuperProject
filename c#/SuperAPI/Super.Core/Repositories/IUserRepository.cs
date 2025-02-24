@@ -11,8 +11,9 @@ namespace Super.Core.Repositories
     {
         public List<User> GetList();
         public User GetUserById(int Id);
-        public void AddUser(User user);
+        public void SignUp(User user);
         public void UpdateUser(int Id, User user);
         public void DeleteUser(int Id);
+        public User LogIn(User user);
     }
 }

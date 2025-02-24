@@ -26,9 +26,9 @@ namespace Super.Service
             return _userRepository.GetUserById(Id);
 
         }
-        public void AddUser(User user)
+        public void SignUp(User user)
         {
-            _userRepository.AddUser(user);
+            _userRepository.SignUp(user);
         }
         public void UpdateUser(int Id, User user)
         {
@@ -38,6 +38,10 @@ namespace Super.Service
         public void DeleteUser(int Id)
         {
             _userRepository.DeleteUser(Id);
+        }
+        public User LogIn(User user)
+        {
+            return _userRepository.LogIn(user);
         }
     }
 }

@@ -1,10 +1,13 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Super.Core;
+using Super.Core.Mapping;
 using Super.Core.Repositories;
 using Super.Core.Service;
 using Super.Data;
 using Super.Data.Repositories;
 using Super.Service;
+using SuperAPI.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +30,7 @@ builder.Services.AddDbContext<DataContext>(options =>
             options.UseSqlServer(@"Server=DESKTOP-SSNMLFD;DataBase=SuperDb;TrustServerCertificate=True;Trusted_Connection=True"));
 builder.Services.AddScoped<IUserService,UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddAutoMapper(typeof(MappingProfile),typeof(PostModelsMappingProfile));
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepositoy, ProductRepository>();

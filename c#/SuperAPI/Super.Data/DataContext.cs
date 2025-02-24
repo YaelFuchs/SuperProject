@@ -16,6 +16,8 @@ namespace Super.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Branch> Branches { get; set; }
         public DbSet<BranchProduct> BranchProducts { get; set; }
-        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
+        public DataContext(DbContextOptions<DataContext> options) : base(options) { 
+        
+        }
     }
 }

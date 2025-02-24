@@ -28,7 +28,7 @@ namespace Super.Data.Repositories
             }
             return null;
         }
-         public void AddUser(User user)
+         public void SignUp(User user)
          {
          //בדיקה האם קיים משתמש עם אותו שם משתמש
          var existingUser = _context.Users.FirstOrDefault(u => u.UserName == user.UserName
@@ -68,20 +68,24 @@ namespace Super.Data.Repositories
                 _context.SaveChanges();
             }
         }
-        //     public void LogIn(User user)
-        //   {
-        //   var findUser = _context.Users.FirstOrDefault(x => x.UserName == user.UserName);
-        //      if (findUser != null)
-        //     {
-        //         if (findUser.Password != user.Password)
-        //         {
-        //
-        // }
-        //  }
-        //   else
-        //  {
-        //    throw new Exception();
-        // }
-        // }
+
+
+        public User LogIn(User user)
+        {
+            var findUser = _context.Users.FirstOrDefault(x => x.UserName == user.UserName);
+            if (findUser != null)
+            {
+                if (findUser.Password == user.Password)
+                {
+                    return user;
+                }
+                else
+                    throw new Exception();
+            }
+            else
+            {
+                throw new Exception();
+            }
+        }
     }
 }

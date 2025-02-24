@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Super.Core;
+using Super.Core.DTOs;
 using Super.Core.Models;
 using Super.Core.Service;
 
@@ -12,30 +14,43 @@ namespace SuperAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService,IMapper mapper)
         {
             _userService = userService;
+            _mapper = mapper;
         }
         // GET: api/<UsersController>
         [HttpGet]
-        public IEnumerable<User> GetAllUsers()
+        public ActionResult GetAllUsers()
         {
-            return _userService.GetAllUsers();
+            var users = _userService.GetAllUsers();
+            var usersDto=_mapper.Map<List<UserDto>>(users);
+            return Ok(usersDto);
         }
 
         // GET api/<UsersController>/5
         [HttpGet("{Id}")]
-        public User GetUserById(int Id)
+        public UserDto GetUserById(int Id)
         {
-            return _userService.GetUserById(Id);
+            var user= _userService.GetUserById(Id);
+            var userDto=_mapper.Map<UserDto>(user);
+            return userDto;
         }
 
         // POST api/<UsersController>
         [HttpPost]
-        public void Post([FromBody] User user)
+        public void SignUp([FromBody] User user)
         {
-            _userService.AddUser(user);
+            _userService.SignUp(user);
+        }
+
+        //POST api/<UsersController>
+        [HttpPost("/login")]
+        public User LogIn([FromBody] User user)
+        {
+            return _userService.LogIn(user);
         }
 
         // PUT api/<UsersController>/5
