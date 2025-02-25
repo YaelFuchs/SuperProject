@@ -87,5 +87,10 @@ namespace Super.Data.Repositories
                 throw new Exception();
             }
         }
+        public User GetUserByName(string Name)
+        {
+            return _context.Users.FirstOrDefault(u => u.UserName == Name);
+        }
+
     }
 }

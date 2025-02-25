@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Super.Core;
 using Super.Core.DTOs;
 using Super.Core.Models;
 using Super.Core.Service;
+using SuperAPI.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -40,20 +42,23 @@ namespace SuperAPI.Controllers
         }
 
         // POST api/<UsersController>
-        [HttpPost]
-        public void SignUp([FromBody] User user)
-        {
-            _userService.SignUp(user);
-        }
+        //[AllowAnonymous]
+        //[HttpPost]
+        //public void SignUp([FromBody] UserPostModel user)
+        //{
+        //    //להמיר את userPostModel 
+        //    _userService.SignUp(_mapper.Map<UserPostModel> user);
+        //}
 
         //POST api/<UsersController>
-        [HttpPost("/login")]
-        public User LogIn([FromBody] User user)
-        {
-            return _userService.LogIn(user);
-        }
+        //[HttpPost("/login")]
+        //public User LogIn([FromBody] User user)
+        //{
+        //    return _userService.LogIn(user);
+        //}
 
         // PUT api/<UsersController>/5
+        [Authorize(Roles = "User")]
         [HttpPut("{Id}")]
         public void Put(int Id, [FromBody] User user)
         {

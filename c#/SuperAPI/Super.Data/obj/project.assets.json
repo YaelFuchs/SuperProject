@@ -4756,11 +4756,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\super-project-\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj",
+      "projectUniqueName": "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj",
       "projectName": "Super.Data",
-      "projectPath": "E:\\super-project-\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj",
+      "projectPath": "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj",
       "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-      "outputPath": "E:\\super-project-\\c#\\SuperAPI\\Super.Data\\obj\\",
+      "outputPath": "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\Super.Data\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4777,8 +4777,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "E:\\super-project-\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj": {
-              "projectPath": "E:\\super-project-\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj"
+            "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj": {
+              "projectPath": "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj"
             }
           }
         }

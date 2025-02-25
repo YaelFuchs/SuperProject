@@ -92,3 +92,15 @@ E:\super-project-\c#\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.dll
 E:\super-project-\c#\SuperAPI\Super.Core\obj\Debug\net7.0\refint\Super.Core.dll
 E:\super-project-\c#\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.pdb
 E:\super-project-\c#\SuperAPI\Super.Core\obj\Debug\net7.0\ref\Super.Core.dll
+C:\Users\user1\super-project-cloned\c#\SuperAPI\Super.Core\bin\Debug\net7.0\Super.Core.deps.json
+C:\Users\user1\super-project-cloned\c#\SuperAPI\Super.Core\bin\Debug\net7.0\Super.Core.dll
+C:\Users\user1\super-project-cloned\c#\SuperAPI\Super.Core\bin\Debug\net7.0\Super.Core.pdb
+C:\Users\user1\super-project-cloned\c#\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.csproj.AssemblyReference.cache
+C:\Users\user1\super-project-cloned\c#\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user1\super-project-cloned\c#\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.AssemblyInfoInputs.cache
+C:\Users\user1\super-project-cloned\c#\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.AssemblyInfo.cs
+C:\Users\user1\super-project-cloned\c#\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.csproj.CoreCompileInputs.cache
+C:\Users\user1\super-project-cloned\c#\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.dll
+C:\Users\user1\super-project-cloned\c#\SuperAPI\Super.Core\obj\Debug\net7.0\refint\Super.Core.dll
+C:\Users\user1\super-project-cloned\c#\SuperAPI\Super.Core\obj\Debug\net7.0\Super.Core.pdb
+C:\Users\user1\super-project-cloned\c#\SuperAPI\Super.Core\obj\Debug\net7.0\ref\Super.Core.dll

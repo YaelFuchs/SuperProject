@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "de/vOrfR0UxFQZx7KyW0Jra9mKxmSaXNW7oQwdxrXDhfuciGxbOrv7KoyTvX61mSpHEjFImHokApRoDp1jqDow==",
+  "dgSpecHash": "V0ES8Uzabk6ez5Xy8tvK0Kcf7fM3rDLS/zW1bADPgO/xW7nH3mgGKzNvX0mvd07Wz2IFbxJgCy9RE1WRNf6LTQ==",
   "success": true,
-  "projectFilePath": "E:\\super-project-\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj",
+  "projectFilePath": "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user1\\.nuget\\packages\\automapper\\6.0.2\\automapper.6.0.2.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

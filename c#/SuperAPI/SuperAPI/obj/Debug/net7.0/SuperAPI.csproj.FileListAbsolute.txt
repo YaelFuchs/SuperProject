@@ -575,3 +575,13 @@ E:\super-project-\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\SuperAPI.genruntimeconfi
 E:\super-project-\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\ref\SuperAPI.dll
 E:\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\AutoMapper.dll
 E:\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\user1\super-project-cloned\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\SuperAPI.csproj.AssemblyReference.cache
+C:\Users\user1\super-project-cloned\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\SuperAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user1\super-project-cloned\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\SuperAPI.AssemblyInfoInputs.cache
+C:\Users\user1\super-project-cloned\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\SuperAPI.AssemblyInfo.cs
+C:\Users\user1\super-project-cloned\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\SuperAPI.csproj.CoreCompileInputs.cache
+C:\Users\user1\super-project-cloned\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\SuperAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\user1\super-project-cloned\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\SuperAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\user1\super-project-cloned\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\SuperAPI.dll
+C:\Users\user1\super-project-cloned\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\refint\SuperAPI.dll
+C:\Users\user1\super-project-cloned\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\SuperAPI.pdb

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wx1j0I9IqujgEOjDMgfaFK97Mcc4g0KbH3NfN7HJrkh+mz5FjfdlRa2jZ0MtmGWCu0xkXw1Jo+7sALRCFjKfAA==",
+  "dgSpecHash": "UhELw9+GsbHPBLT1xi2SPmVW+rrp7OgS0Q4wVBx1LrqNofaAe2wF20lOg35MkrgX5V6PsBZ520ZLE6JMInibzA==",
   "success": true,
-  "projectFilePath": "E:\\super-project-\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj",
+  "projectFilePath": "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user1\\.nuget\\packages\\automapper\\6.0.2\\automapper.6.0.2.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

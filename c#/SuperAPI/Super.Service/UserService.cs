@@ -43,5 +43,10 @@ namespace Super.Service
         {
             return _userRepository.LogIn(user);
         }
+        public User GetUserByName(string Name)
+        {
+            return _userRepository.GetUserByName(Name);
+        }
+
     }
 }

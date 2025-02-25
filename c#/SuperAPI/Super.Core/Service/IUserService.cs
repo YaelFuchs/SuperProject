@@ -15,5 +15,7 @@ namespace Super.Core.Service
         public void UpdateUser(int Id, User user);
         public void DeleteUser(int Id);
         public User LogIn(User user);
+        public User GetUserByName(string Name);
+
     }
 }
