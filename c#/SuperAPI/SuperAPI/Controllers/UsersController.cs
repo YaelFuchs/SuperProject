@@ -27,9 +27,11 @@ namespace SuperAPI.Controllers
         [HttpGet]
         public ActionResult GetAllUsers()
         {
+            //להראות ליעל שחוזר פה הסיסמה המוצפנתתתתת
             var users = _userService.GetAllUsers();
-            var usersDto=_mapper.Map<List<UserDto>>(users);
-            return Ok(usersDto);
+            //var usersDto=_mapper.Map<List<UserDto>>(users);
+            //return Ok(usersDto);
+            return Ok(users);
         }
 
         // GET api/<UsersController>/5
@@ -41,14 +43,14 @@ namespace SuperAPI.Controllers
             return userDto;
         }
 
-        // POST api/<UsersController>
-        //[AllowAnonymous]
-        //[HttpPost]
-        //public void SignUp([FromBody] UserPostModel user)
-        //{
-        //    //להמיר את userPostModel 
-        //    _userService.SignUp(_mapper.Map<UserPostModel> user);
-        //}
+        //POST api/<UsersController>
+        [AllowAnonymous]
+        [HttpPost]
+        public void SignUp([FromBody] User user)
+        {
+            //להמיר את userPostModel 
+            _userService.SignUp( user);
+        }
 
         //POST api/<UsersController>
         //[HttpPost("/login")]

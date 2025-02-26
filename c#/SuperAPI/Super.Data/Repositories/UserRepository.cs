@@ -1,4 +1,5 @@
-﻿using Super.Core.Models;
+﻿using BCrypt.Net;
+using Super.Core.Models;
 using Super.Core.Repositories;
 using System;
 using System.Collections.Generic;
@@ -28,18 +29,24 @@ namespace Super.Data.Repositories
             }
             return null;
         }
-         public void SignUp(User user)
-         {
-         //בדיקה האם קיים משתמש עם אותו שם משתמש
-         var existingUser = _context.Users.FirstOrDefault(u => u.UserName == user.UserName
-            && u.Password == user.Password);
-
-          if (existingUser == null) // אם לא קיים משתמש עם שם משתמש זהה
+        public void SignUp(User user)
         {
-        _context.Users.Add(user);
-         _context.SaveChanges();
-          }
+            var existingUser = _context.Users.FirstOrDefault(u => u.UserName == user.UserName);
 
+            if (existingUser == null)
+            {
+                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password, workFactor: 8);
+                Console.WriteLine($"Creating user: {user.UserName} with hashed password: {hashedPassword}");
+
+                user.Password = hashedPassword; // לשמור את הסיסמה המוצפנת במסד הנתונים
+                _context.Users.Add(user);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception();
+
+            }
         }
         public void UpdateUser(int Id, User user)
         {

@@ -15,6 +15,11 @@ using SuperAPI.Mapping;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+    .AddEnvironmentVariables();
 
 // Add services to the container.
 
@@ -55,7 +60,9 @@ builder.Services.AddSwaggerGen(options =>
     }
     });  
 });
-
+Console.WriteLine($"Issuer: {builder.Configuration["JWT:Issuer"]}");
+Console.WriteLine($"Audience: {builder.Configuration["JWT:Audience"]}");
+Console.WriteLine($"Key: {builder.Configuration["JWT:Key"]}");
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme =
@@ -63,6 +70,7 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme =
     JwtBearerDefaults.AuthenticationScheme;
 })
+
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
