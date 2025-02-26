@@ -12,7 +12,9 @@ using SuperAPI.Models;
 namespace SuperAPI.Controllers
 {
     [Route("api/[controller]")]
+
     [ApiController]
+    [Authorize(Roles = "ROLE_USER")]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -24,11 +26,12 @@ namespace SuperAPI.Controllers
             _mapper = mapper;
         }
         // GET: api/<UsersController>
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult GetAllUsers()
         {
-            //להראות ליעל שחוזר פה הסיסמה המוצפנתתתתת
             var users = _userService.GetAllUsers();
+            //לאחר הבדיקות אפשר להחזיר את זה לDTO
             //var usersDto=_mapper.Map<List<UserDto>>(users);
             //return Ok(usersDto);
             return Ok(users);
@@ -46,21 +49,13 @@ namespace SuperAPI.Controllers
         //POST api/<UsersController>
         [AllowAnonymous]
         [HttpPost]
-        public void SignUp([FromBody] User user)
+        public void SignUp([FromBody] UserPostModel user)
         {
-            //להמיר את userPostModel 
-            _userService.SignUp( user);
+            _userService.SignUp(_mapper.Map<User>(user));
         }
 
-        //POST api/<UsersController>
-        //[HttpPost("/login")]
-        //public User LogIn([FromBody] User user)
-        //{
-        //    return _userService.LogIn(user);
-        //}
 
         // PUT api/<UsersController>/5
-        [Authorize(Roles = "User")]
         [HttpPut("{Id}")]
         public void Put(int Id, [FromBody] User user)
         {

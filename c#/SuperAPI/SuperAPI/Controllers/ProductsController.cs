@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Super.Core;
 using Super.Core.Models;
 using Super.Core.Service;
 using Super.Service;
+using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,6 +12,7 @@ namespace SuperAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "ROLE_ADMIN")]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -19,6 +22,7 @@ namespace SuperAPI.Controllers
             _productService = productService;
         }
         // GET: api/<ProductsController>
+        [AllowAnonymous]
         [HttpGet]
         public IEnumerable<Product> GetAllProducts()
         {
@@ -26,6 +30,7 @@ namespace SuperAPI.Controllers
         }
 
         // GET api/<ProductsController>/5
+        [AllowAnonymous]
         [HttpGet("{Id}")]
         public Product GetProductById(int Id)
         {

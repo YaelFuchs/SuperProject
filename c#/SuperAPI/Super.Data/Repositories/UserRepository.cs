@@ -35,11 +35,48 @@ namespace Super.Data.Repositories
 
             if (existingUser == null)
             {
-                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password, workFactor: 8);
-                Console.WriteLine($"Creating user: {user.UserName} with hashed password: {hashedPassword}");
+               string salt = BCrypt.Net.BCrypt.GenerateSalt(12);  // או כל רמת קושי אחרת
+        string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password, salt); // הצפנת הסיסמה עם ה-salt החדש
+        Console.WriteLine($"Creating user: {user.UserName} with hashed password: {hashedPassword}");
 
-                user.Password = hashedPassword; // לשמור את הסיסמה המוצפנת במסד הנתונים
+        user.Password = hashedPassword; // לשמור את הסיסמה המוצפנת במסד הנתונים
+
+                var userRole = _context.Roles.FirstOrDefault(r => r.Name == ERole.ROLE_USER);
+                if (userRole == null)
+                {
+                    user.Roles = new List<Role>();
+
+                    userRole = new Role { Name = ERole.ROLE_USER };
+                    _context.Roles.Add(userRole);
+                }
+
+                user.Roles.Add(userRole); // הוספת התפקיד לרשימת התפקידים של המשתמש
+
+                if (user.UserName.StartsWith("Manager"))//אם השם משתמש מתחיל במחרוזת מנהל תוסיף תפקיד מנהל להרשאות
+                {
+                    var adminRole = new Role
+                    {
+                        Name = ERole.ROLE_ADMIN 
+                    };
+                    
+                    user.Roles.Add(adminRole);
+                  
+                }
+                if (user.UserName == "Manager1234")//אם השם משתמש שלך שווה לזה תוסיף הרשאת מנהל ראשי להרשאות
+                {
+                  
+                    var managerRole = new Role
+                    {
+                        Name = ERole.ROLE_MANAGER
+                    };
+                    
+                    user.Roles.Add(managerRole);
+               
+                }
+
                 _context.Users.Add(user);
+                Console.WriteLine($"Roles for {user.UserName}: {string.Join(", ", user.Roles.Select(r => r.Name))}");
+
                 _context.SaveChanges();
             }
             else

@@ -30,31 +30,33 @@ namespace SuperAPI.Controllers
         }
 
         // POST api/<AuthController>
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpPost]
-        public IActionResult Login([FromBody] UserPostModel userPostModel)
+        public IActionResult Login([FromBody] UserLoginModel userLoginModel)
         {
 
-            var findUser = _userService.GetUserByName(userPostModel.UserName);
+            var findUser = _userService.GetUserByName(userLoginModel.UserName);
             if (findUser == null)
             {
                 return BadRequest(new { message = "User not found" });
             }
-            else if (!BCrypt.Net.BCrypt.Verify(userPostModel.Password, findUser.Password)) {
+            else if (!BCrypt.Net.BCrypt.Verify(userLoginModel.Password, findUser.Password))
+{
                 return Unauthorized(new { message = "Incorrect password" });
             }
+
             var claims = new List<Claim>()
 {
                 new Claim(ClaimTypes.Name,findUser.UserName ),
-                new Claim(ClaimTypes.Role, "manager")
+                new Claim(ClaimTypes.Role, string.Join(",", findUser.Roles.Select(r => r.Name.ToString())))
                 };
             var secretKey = new
-            SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("JWT: Key")));
+            SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("JWT:Key")));
             var signinCredentials = new SigningCredentials(secretKey,
             SecurityAlgorithms.HmacSha256);
             var tokeOptions = new JwtSecurityToken(
-            issuer: _configuration.GetValue<string>(" JWT: Issuer"),
-            audience: _configuration.GetValue<string>(" JWT: Audience"),
+            issuer: _configuration.GetValue<string>("JWT:Issuer"),
+            audience: _configuration.GetValue<string>("JWT:Audience"),
             claims: claims,
             expires: DateTime.Now.AddMinutes(720),
             signingCredentials: signinCredentials

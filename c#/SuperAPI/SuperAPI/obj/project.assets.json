@@ -3315,11 +3315,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\SuperAPI\\SuperAPI.csproj",
+      "projectUniqueName": "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\SuperAPI\\SuperAPI.csproj",
       "projectName": "SuperAPI",
-      "projectPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\SuperAPI\\SuperAPI.csproj",
+      "projectPath": "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\SuperAPI\\SuperAPI.csproj",
       "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\SuperAPI\\obj\\",
+      "outputPath": "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\SuperAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3337,8 +3337,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj": {
-              "projectPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj"
+            "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj": {
+              "projectPath": "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj"
             }
           }
         }

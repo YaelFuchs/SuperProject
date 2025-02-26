@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Super.Core;
 using Super.Core.Models;
 using Super.Core.Service;
+using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,6 +11,7 @@ namespace SuperAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "ROLE_ADMIN")]
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
@@ -18,6 +21,7 @@ namespace SuperAPI.Controllers
             _categoryService = categoryService;
         }
         // GET: api/<CategoriesController>
+        [AllowAnonymous]
         [HttpGet]
         public IEnumerable<Category> GetAllCategories()
         {
@@ -25,6 +29,7 @@ namespace SuperAPI.Controllers
         }
 
         // GET api/<CategoriesController>/5
+        [AllowAnonymous]
         [HttpGet("{Id}")]
         public Category GetCategoryById(int Id)
         {

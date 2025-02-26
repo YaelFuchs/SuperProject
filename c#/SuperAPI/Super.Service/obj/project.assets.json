@@ -4719,11 +4719,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj",
+      "projectUniqueName": "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj",
       "projectName": "Super.Service",
-      "projectPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj",
+      "projectPath": "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj",
       "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Service\\obj\\",
+      "outputPath": "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\Super.Service\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4740,11 +4740,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj": {
-              "projectPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj"
+            "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj": {
+              "projectPath": "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj"
             },
-            "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj": {
-              "projectPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj"
+            "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj": {
+              "projectPath": "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj"
             }
           }
         }

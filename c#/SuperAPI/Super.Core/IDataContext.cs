@@ -16,5 +16,7 @@ namespace Super.Core
         List<Category> Categories { get; set; }
         List<BranchProduct> BranchProducts { get; set; }
         List<Branch> Branches { get; set; }
+        List<Role> Roles { get; set; }
+        List<UserRole> UserRoles { get; set; }
     }
 }
