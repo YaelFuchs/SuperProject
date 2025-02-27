@@ -7,12 +7,9 @@ using Super.Core.Models;
 using Super.Core.Service;
 using SuperAPI.Models;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace SuperAPI.Controllers
 {
     [Route("api/[controller]")]
-
     [ApiController]
     [Authorize(Roles = "ROLE_USER")]
     public class UsersController : ControllerBase
@@ -32,20 +29,19 @@ namespace SuperAPI.Controllers
         {
             var users = _userService.GetAllUsers();
             //לאחר הבדיקות אפשר להחזיר את זה לDTO
-            //var usersDto=_mapper.Map<List<UserDto>>(users);
-            //return Ok(usersDto);
-            return Ok(users);
+            var usersDto = _mapper.Map<List<UserDto>>(users);
+            return Ok(usersDto);
         }
 
         // GET api/<UsersController>/5
         [AllowAnonymous]
 
         [HttpGet("{Id}")]
-        public UserDto GetUserById(int Id)
+        public ActionResult GetUserById(int Id)
         {
             var user= _userService.GetUserById(Id);
             var userDto=_mapper.Map<UserDto>(user);
-            return userDto;
+            return Ok(userDto);
         }
 
         //POST api/<UsersController>
@@ -59,14 +55,13 @@ namespace SuperAPI.Controllers
 
         // PUT api/<UsersController>/5
         [HttpPut("{Id}")]
-        public void Put(int Id, [FromBody] User user)
+        public void Put(int Id, [FromBody] UserPostModel user)
         {
-            _userService.UpdateUser(Id, user);
+            _userService.UpdateUser(Id, _mapper.Map<User>(user));
         }
 
         // DELETE api/<UsersController>/5
-        [AllowAnonymous]
-
+        [Authorize(Roles = "ROLE_USER,ROLE_ADMIN,ROLE_MANAGER")]
         [HttpDelete("{Id}")]
         public void Delete(int Id)
         {

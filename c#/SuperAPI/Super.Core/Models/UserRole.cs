@@ -11,9 +11,9 @@ namespace Super.Core.Models
         public int Id { get; set; }
 
         public int UserId { get; set; }
-        public User User { get; set; } // קשר למשתמש
+        public User User { get; set; } 
 
         public int RoleId { get; set; }
-        public Role Role { get; set; } // קשר לתפקיד
+        public Role Role { get; set; } 
     }
 }
