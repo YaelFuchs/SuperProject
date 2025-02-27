@@ -51,6 +51,8 @@ export class GetCategoriesComponent implements OnInit{
     this.getCategories();  // קריאה לפונקציה כדי לעדכן את רשימת הקטגוריות
  
 }
- 
+showDetailes(id: number){
+  this._router.navigate(['get-category-id',id])
+}
 }
 

@@ -1,75 +1,72 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Super.Core.Models;
 using Super.Core.Service;
-using Super.Service;
 using SuperAPI.Models;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace SuperAPI.Controllers
+[Route("api/[controller]")]
+[ApiController]
+public class AuthController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AuthController : ControllerBase
+    private readonly IConfiguration _configuration;
+    private readonly IUserService _userService;
+
+    public AuthController(IConfiguration configuration, IUserService userService)
     {
-        private readonly IConfiguration _configuration;
-        private readonly IUserService _userService;
-        public AuthController(IConfiguration configuration, IUserService userService)
+        _configuration = configuration;
+        _userService = userService;
+    }
 
+    // POST api/<AuthController>
+    [HttpPost]
+    public IActionResult Login([FromBody] UserLoginModel userLoginModel)
+    {
+        // חפש את המשתמש במסד הנתונים
+        var findUser = _userService.GetUserByName(userLoginModel.UserName);
+        if (findUser == null)
         {
-            _configuration = configuration;
-            _userService = userService;
+            return BadRequest(new { message = "User not found" });
         }
-
-        // POST api/<AuthController>
-        //[AllowAnonymous]
-        [HttpPost]
-        public IActionResult Login([FromBody] UserLoginModel userLoginModel)
+        // הדפסת ה-UserRoles כדי לוודא שהם נטענים
+        // בדוק אם הסיסמה נכונה
+        else if (!BCrypt.Net.BCrypt.Verify(userLoginModel.Password, findUser.Password))
         {
+            return Unauthorized(new { message = "Incorrect password" });
+        }
+        var roles = findUser.UserRoles?.Select(ur => ur.Role.Name).ToList() ?? new List<string>();
+        // צור רשימה של Claims, כולל שם המשתמש ותפקידים
+        var claims = new List<Claim>()
+        {
+            new Claim(ClaimTypes.Name, findUser.UserName),
+            new Claim("http://schemas.microsoft.com/ws/2008/06/identity/claims/role", string.Join(",", roles)) // שינוי כאן
+    };
 
-            var findUser = _userService.GetUserByName(userLoginModel.UserName);
-            if (findUser == null)
-            {
-                return BadRequest(new { message = "User not found" });
-            }
-            else if (!BCrypt.Net.BCrypt.Verify(userLoginModel.Password, findUser.Password))
-{
-                return Unauthorized(new { message = "Incorrect password" });
-            }
+        // קח את המפתח הסודי מהקונפיגורציה
+        var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("JWT:Key")));
+        var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
-            var claims = new List<Claim>()
-{
-                new Claim(ClaimTypes.Name,findUser.UserName ),
-                new Claim(ClaimTypes.Role, string.Join(",", findUser.UserRoles.Select(r => r.Role.Name.ToString())))
-                };
-            var secretKey = new
-            SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("JWT:Key")));
-            var signinCredentials = new SigningCredentials(secretKey,
-            SecurityAlgorithms.HmacSha256);
-            var tokeOptions = new JwtSecurityToken(
+        // צור את הטוקן
+        var tokenOptions = new JwtSecurityToken(
             issuer: _configuration.GetValue<string>("JWT:Issuer"),
             audience: _configuration.GetValue<string>("JWT:Audience"),
             claims: claims,
-            expires: DateTime.Now.AddMinutes(720),
+            expires: DateTime.Now.AddMinutes(420), // טווח הזמן של הטוקן (כאן הוא מוגדר לשעה)
             signingCredentials: signinCredentials
-            );
-            var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
-            return Ok(new { Token = tokenString });
-        }
+        );
+
+        // הפוך את הטוקן ל-String
+        var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+
+        // החזר את הטוקן כתגובה
+        return Ok(new { Token = tokenString });
     }
 }
 
-    
 
-       
 
-       
-    
+
+
+
+

@@ -4,6 +4,7 @@
     <p>קטגוריה ID: {{ category.id }}</p>
     <p>שם הקטגוריה: {{ category.name }}</p>
     <button (click)="update(category)">עדכון קטגוריה</button>
+    <button (click) = "showDetailes(category.id)">פרטים נוספים</button>
 </div>
 @if(categoryToUpdate && categoryToUpdate.id == category.id ){
     <app-update-category  [categoryUpdate]="categoryToUpdate"/>

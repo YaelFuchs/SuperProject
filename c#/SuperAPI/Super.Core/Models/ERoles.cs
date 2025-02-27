@@ -8,9 +8,9 @@ namespace Super.Core.Models
 {
     public enum ERole
     {
-        ROLE_USER=1,
-        ROLE_ADMIN=2,
-        ROLE_MANAGER=3
+        ROLE_USER,
+        ROLE_ADMIN,
+        ROLE_MANAGER
     }
 
 }

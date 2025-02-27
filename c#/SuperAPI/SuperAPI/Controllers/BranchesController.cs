@@ -15,7 +15,8 @@ namespace SuperAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "ROLE_ADMIN")]
+    [Authorize(Policy = "User")]
+
     public class BranchesController : ControllerBase
     {
         private readonly IBranchService _IbranchService;
@@ -38,14 +39,15 @@ namespace SuperAPI.Controllers
         // GET api/<BranchesController>/5
         [AllowAnonymous]
         [HttpGet("{Id}")]
-        public BranchDto GetBranchById(int Id)
+        public ActionResult GetBranchById(int Id)
         {
             var branch = _IbranchService.GetBranchById(Id);
             var branchDto=_mapper.Map<BranchDto>(branch);
-            return branchDto ;
+            return Ok(branchDto) ;
         }
 
         // POST api/<BranchesController>
+        [Authorize(Policy = "Admin")]
         [HttpPost]
         public void AddBranch([FromBody] BranchPostModel branch)
         {
@@ -54,6 +56,7 @@ namespace SuperAPI.Controllers
         }
 
         // PUT api/<BranchesController>/5
+        [Authorize(Policy = "Admin")]
         [HttpPut("{Id}")]
         public void UpdateBranch(int Id, [FromBody] Branch branch)
         {
@@ -61,6 +64,7 @@ namespace SuperAPI.Controllers
         }
 
         // DELETE api/<BranchesController>/5
+        [Authorize(Policy = "Admin")]
         [HttpDelete("{Id}")]
         public void DeleteBranch(int Id)
         {

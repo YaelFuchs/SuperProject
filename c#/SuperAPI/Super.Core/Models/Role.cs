@@ -11,7 +11,10 @@ namespace Super.Core.Models
     public class Role
     {
         public int Id { get; set; }
-        public  ERole Name { get; set; }
-        public List<UserRole> UserRoles { get; set; } = new List<UserRole>();
+        public string Name { get; set; } = string.Empty;
+        // קשר many-to-many עם משתמשים
+        public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
+
     }
+
 }

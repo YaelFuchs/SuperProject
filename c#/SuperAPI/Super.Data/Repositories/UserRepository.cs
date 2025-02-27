@@ -37,61 +37,72 @@ namespace Super.Data.Repositories
 
         public void SignUp(User user)
         {
-            var existingUser = _context.Users.FirstOrDefault(u => u.UserName == user.UserName);
+            // בודקים אם המשתמש כבר קיים
+            var existingUser = _context.Users
+                .Include(u => u.UserRoles) // מוודאים שטבלת התפקידים נטענת
+                .FirstOrDefault(u => u.UserName == user.UserName);
 
-            if (existingUser == null)
-            {
-                string salt = BCrypt.Net.BCrypt.GenerateSalt(12);
-                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password, salt);
-                user.Password = hashedPassword;
-
-                var userRole = _context.Roles.FirstOrDefault(r => r.Name == ERole.ROLE_USER);
-                if (userRole == null)
-                {
-                    userRole = new Role { Name = ERole.ROLE_USER };
-                    _context.Roles.Add(userRole);
-                    _context.SaveChanges();
-                }
-
-                user.UserRoles.Add(new UserRole { User = user, Role = userRole });
-
-                if (user.UserName.StartsWith("manager"))
-                {
-                    var adminRole = _context.Roles.FirstOrDefault(r => r.Name == ERole.ROLE_ADMIN);
-                    if (adminRole == null)
-                    {
-                        adminRole = new Role { Name = ERole.ROLE_ADMIN };
-                        _context.Roles.Add(adminRole);
-                        _context.SaveChanges();
-                    }
-                    user.UserRoles.Add(new UserRole { User = user, Role = adminRole });
-                }
-
-                if (user.UserName == "manager1234")
-                {
-                    var managerRole = _context.Roles.FirstOrDefault(r => r.Name == ERole.ROLE_MANAGER);
-                    if (managerRole == null)
-                    {
-                        managerRole = new Role { Name = ERole.ROLE_MANAGER };
-                        _context.Roles.Add(managerRole);
-                        _context.SaveChanges();
-                    }
-                    user.UserRoles.Add(new UserRole { User = user, Role = managerRole });
-                }
-                _context.Users.Add(user);
-                _context.SaveChanges();
-                // ✅ בדיקה אם נוספו התפקידים
-                Console.WriteLine($"User {user.UserName} has the following roles:");
-                foreach (var u in user.UserRoles)
-                {
-                    Console.WriteLine($"- {u.Role.Name}");
-                }
-            }
-            else
+            if (existingUser != null)
             {
                 throw new Exception("User already exists!");
             }
+
+            // הצפנת סיסמה
+            string salt = BCrypt.Net.BCrypt.GenerateSalt(12);
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password, salt);
+            user.Password = hashedPassword;
+
+            // אתחול רשימת התפקידים של המשתמש
+            user.UserRoles = new List<UserRole>();
+
+            // קבלת תפקיד ברירת מחדל (ROLE_USER)
+            var userRole = _context.Roles.FirstOrDefault(r => r.Name == ERole.ROLE_USER.ToString());
+            if (userRole == null)
+            {
+                userRole = new Role { Name = ERole.ROLE_USER.ToString() };
+                _context.Roles.Add(userRole);
+                _context.SaveChanges(); // שמירה כדי לקבל ID
+            }
+            user.UserRoles.Add(new UserRole { User = user, Role = userRole });
+
+            // אם המשתמש מתחיל ב-"manager" מקבל ROLE_ADMIN
+            if (user.UserName.StartsWith("manager"))
+            {
+                var adminRole = _context.Roles.FirstOrDefault(r => r.Name == ERole.ROLE_ADMIN.ToString());
+                if (adminRole == null)
+                {
+                    adminRole = new Role { Name = ERole.ROLE_ADMIN.ToString() };
+                    _context.Roles.Add(adminRole);
+                    _context.SaveChanges();
+                }
+                user.UserRoles.Add(new UserRole { User = user, Role = adminRole });
+            }
+
+            // אם המשתמש הוא "manager1234", מקבל גם ROLE_MANAGER
+            if (user.UserName == "manager1234")
+            {
+                var managerRole = _context.Roles.FirstOrDefault(r => r.Name == ERole.ROLE_MANAGER.ToString());
+                if (managerRole == null)
+                {
+                    managerRole = new Role { Name = ERole.ROLE_MANAGER.ToString() };
+                    _context.Roles.Add(managerRole);
+                    _context.SaveChanges();
+                }
+                user.UserRoles.Add(new UserRole { User = user, Role = managerRole });
+            }
+
+            // הוספת המשתמש ושמירה
+            _context.Users.Add(user);
+            _context.SaveChanges();
+
+            // ✅ הדפסת המשתמש והתפקידים שלו
+            Console.WriteLine($"User {user.UserName} has the following roles:");
+            foreach (var ur in user.UserRoles)
+            {
+                Console.WriteLine($"- {ur.Role.Name}");
+            }
         }
+
 
         public void UpdateUser(int Id, User user)
         {
@@ -147,10 +158,14 @@ namespace Super.Data.Repositories
                 throw new Exception();
             }
         }
-        public User GetUserByName(string Name)
+        public User GetUserByName(string userName)
         {
-            return _context.Users.FirstOrDefault(u => u.UserName == Name);
+            return _context.Users
+                .Include(u => u.UserRoles) // טוען את הקשרים בין המשתמש לתפקידים
+                .ThenInclude(ur => ur.Role) // טוען את שם התפקיד
+                .FirstOrDefault(u => u.UserName == userName);
         }
+
 
     }
 }

@@ -11,7 +11,7 @@ namespace SuperAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "ROLE_USER")]
+    [Authorize(Policy = "User")]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -23,7 +23,8 @@ namespace SuperAPI.Controllers
             _mapper = mapper;
         }
         // GET: api/<UsersController>
-        [AllowAnonymous]
+        [Authorize(Policy = "Manager")]
+
         [HttpGet]
         public ActionResult GetAllUsers()
         {
@@ -34,8 +35,6 @@ namespace SuperAPI.Controllers
         }
 
         // GET api/<UsersController>/5
-        [AllowAnonymous]
-
         [HttpGet("{Id}")]
         public ActionResult GetUserById(int Id)
         {
@@ -61,11 +60,18 @@ namespace SuperAPI.Controllers
         }
 
         // DELETE api/<UsersController>/5
-        [Authorize(Roles = "ROLE_USER,ROLE_ADMIN,ROLE_MANAGER")]
         [HttpDelete("{Id}")]
-        public void Delete(int Id)
+        public ActionResult Delete(int Id)
         {
+            var userClaims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
+            Console.WriteLine("Claims received from token:");
+            foreach (var claim in userClaims)
+            {
+                Console.WriteLine($"{claim.Type}: {claim.Value}");
+            }
+
             _userService.DeleteUser(Id);
+            return Ok(new { message = "User deleted successfully" });
         }
     }
 }

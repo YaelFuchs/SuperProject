@@ -30,4 +30,8 @@ export class CategoryService {
         return this._httpClient.put<Category>(`${this.basicUrl}/${id}`, category);
     }
 
+    getCategoryById(id: number):Observable<Category>{
+      return this._httpClient.get<Category>(`${this.basicUrl}/${id}`)
+    }
+
 }
