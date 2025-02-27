@@ -12,6 +12,6 @@ namespace Super.Core.Models
     {
         public int Id { get; set; }
         public  ERole Name { get; set; }
-       
+        public List<UserRole> UserRoles { get; set; } = new List<UserRole>();
     }
 }

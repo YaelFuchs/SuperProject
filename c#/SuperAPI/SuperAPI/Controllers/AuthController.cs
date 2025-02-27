@@ -48,7 +48,7 @@ namespace SuperAPI.Controllers
             var claims = new List<Claim>()
 {
                 new Claim(ClaimTypes.Name,findUser.UserName ),
-                new Claim(ClaimTypes.Role, string.Join(",", findUser.Roles.Select(r => r.Name.ToString())))
+                new Claim(ClaimTypes.Role, string.Join(",", findUser.UserRoles.Select(r => r.Role.Name.ToString())))
                 };
             var secretKey = new
             SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("JWT:Key")));
@@ -64,12 +64,12 @@ namespace SuperAPI.Controllers
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
             return Ok(new { Token = tokenString });
         }
+    }
+}
+
     
 
-
-    }
-
        
 
        
-    }
+    

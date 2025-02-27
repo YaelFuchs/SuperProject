@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rm6EAPFCqIl0VVrEHerHc8eX3LWux6ILm+L3Jd4rDh/dIgg4lnF6AGQvfffYs7l53Xppt1vxbtMG3LT+A9ur/g==",
+  "dgSpecHash": "m3TMpEPW1bC3k+nsbDwpgKsPAcHvU34gt80faQPusAPPvuc+34Wx6Ar6VoDkOOBn4lwKdjfiIIh3b72m3o+DMA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user1\\super-project-cloned\\c#\\SuperAPI\\SuperAPI\\SuperAPI.csproj",
+  "projectFilePath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\SuperAPI\\SuperAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user1\\.nuget\\packages\\automapper\\8.0.0\\automapper.8.0.0.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\6.0.0\\automapper.extensions.microsoft.dependencyinjection.6.0.0.nupkg.sha512",
