@@ -38,6 +38,8 @@ namespace SuperAPI.Controllers
         }
 
         // GET api/<UsersController>/5
+        [AllowAnonymous]
+
         [HttpGet("{Id}")]
         public UserDto GetUserById(int Id)
         {
@@ -63,6 +65,8 @@ namespace SuperAPI.Controllers
         }
 
         // DELETE api/<UsersController>/5
+        [AllowAnonymous]
+
         [HttpDelete("{Id}")]
         public void Delete(int Id)
         {
