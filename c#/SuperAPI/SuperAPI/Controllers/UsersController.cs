@@ -11,7 +11,7 @@ namespace SuperAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Policy = "User")]
+    //[Authorize(Policy = "User")]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -23,7 +23,7 @@ namespace SuperAPI.Controllers
             _mapper = mapper;
         }
         // GET: api/<UsersController>
-        [Authorize(Policy = "Manager")]
+        //[Authorize(Policy = "Manager")]
 
         [HttpGet]
         public ActionResult GetAllUsers()

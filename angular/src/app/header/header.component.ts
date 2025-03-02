@@ -14,6 +14,9 @@ export class HeaderComponent {
   goToCategories() {
     this._router.navigate(['/category'])
   }
+  goToUser() {
+    this._router.navigate(['/user'])
+  }
 }
 //====================================================
 //לבדוק מה העניין בדף הזה

@@ -7,7 +7,6 @@ import { Category } from "./category.model";
     providedIn: 'root'  // ← מוודא שהשירות זמין בכל האפליקציה!
 })
 export class CategoryService {
-    categoriesList: Category[] = []
     basicUrl = 'https://localhost:7173/api/Categories';
     $source: Observable<number> = new Observable<number>((observer) => {
         observer.next(1) //on succeed
@@ -33,5 +32,7 @@ export class CategoryService {
     getCategoryById(id: number):Observable<Category>{
       return this._httpClient.get<Category>(`${this.basicUrl}/${id}`)
     }
-
+    deleteCategory(id: number):Observable<any>{
+       return this._httpClient.delete<number>(`${this.basicUrl}/${id}`)
+    }
 }

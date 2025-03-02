@@ -13,6 +13,7 @@ export class GetCategoriesComponent implements OnInit{
    categories!: Category[]
    showAdd = false
    showUpdate = false
+   selectedCategory! : Category
    message=''
    categoryToUpdate! : Category
    isShow: boolean = false
@@ -52,7 +53,8 @@ export class GetCategoriesComponent implements OnInit{
  
 }
 showDetailes(id: number){
-  this._router.navigate(['get-category-id',id])
+  this.isShow=true;
+  this._router.navigate(['category/get-category-id',id]);
 }
 }
 

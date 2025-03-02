@@ -1,0 +1,40 @@
+<form [formGroup] = "addForm">
+    <div>
+        <label>
+            user name:
+        </label>
+        <input type="text" formControleName = "name" #id>
+        @if(addForm.controls['name'].errors){
+            <div>you must enter user name</div>
+        }
+    </div>
+    <div>
+        <label>
+            email:
+        </label>
+        <input type="email" formControleName = "email">
+        @if(addForm.controls['email'].errors){
+            @if(addForm.controls['email'].errors['required']){
+                <div>you must enter email</div>
+            }
+            @else{
+                <div>אימייל לא חוקי</div>
+            }     
+        }
+    </div>
+    <div>
+        <label>
+            password:
+        </label>
+        <input type="text" formControleName = "password">
+        @if(addForm.controls['password'].errors){
+            @if(addForm.controls['password'].errors['required']){
+                <div>you must enter password</div>
+            }
+            @else{
+                <div>you must write al least 8 chars</div>
+            }     
+        }
+    </div>
+    <button (click)="signUp()" [disabled]="addForm.invalid">הרשמה</button>
+</form>

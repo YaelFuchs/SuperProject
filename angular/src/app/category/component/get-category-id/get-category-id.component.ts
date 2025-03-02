@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../category.service';
 import { Category } from '../../category.model';
 
@@ -8,26 +8,40 @@ import { Category } from '../../category.model';
   templateUrl: './get-category-id.component.html',
   styleUrl: './get-category-id.component.scss'
 })
-export class GetCategoryIdComponent implements OnInit{
-  message=''
-  id=0
+export class GetCategoryIdComponent implements OnInit {
+  message = ''
+  id = 0
   categoryDetails!: Category
+  constructor(private _categoryService: CategoryService, private _router: ActivatedRoute, private _r: Router) { }
   ngOnInit(): void {
-    this._router.params.subscribe((param)=>{
-      this.id = param['id'];
+    this._router.params.subscribe((param) => {
+      this.id = +param['id'];
       this._categoryService.getCategoryById(this.id).subscribe({
-        next:(res)=>{
+        next: (res) => {
           this.categoryDetails = res;
         },
-        error:(err)=>{
+        error: (err) => {
           this.message = err;
         }
       })
     });
   }
-  constructor(private _router: ActivatedRoute, private _categoryService: CategoryService){}
 
-  
-  
+  public delete(id: number) {
+    this._categoryService.deleteCategory(id).subscribe({
+      next: (res) => {
+        console.log("delete: ", res);
+        this._r.navigate(['category/'])
+      },
+      error: (err) => {
+        this.message = err;
+      }
+    })
+  }
+
+  goBack() {
+    this._r.navigate(['category/'])
+  }
+
 
 }
