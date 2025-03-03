@@ -356,7 +356,6 @@ C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\refin
 C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\SuperAPI.pdb
 C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\SuperAPI.genruntimeconfig.cache
 C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\ref\SuperAPI.dll
-C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\appsettings (1).json
 C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\appsettings.Development (1).json
 C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\SuperAPI.exe
 C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\SuperAPI.deps.json
@@ -655,3 +654,8 @@ C:\Users\user1\super-project-cloned\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\scoped
 C:\Users\user1\super-project-cloned\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\SuperAPI.csproj.CopyComplete
 C:\Users\user1\super-project-cloned\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\SuperAPI.genruntimeconfig.cache
 C:\Users\user1\super-project-cloned\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\ref\SuperAPI.dll
+C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\appsettings.json
+C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\AutoMapper.dll
+C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\BCrypt.Net-Next.dll
+C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

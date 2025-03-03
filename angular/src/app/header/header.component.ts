@@ -17,6 +17,9 @@ export class HeaderComponent {
   goToUser() {
     this._router.navigate(['/user'])
   }
+  goToLogin() {
+    this._router.navigate(['/login'])
+  }
 }
 //====================================================
 //לבדוק מה העניין בדף הזה

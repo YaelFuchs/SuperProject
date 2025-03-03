@@ -17,7 +17,7 @@ export class UpdateCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.category = {
-      id: this.categoryUpdate.id,
+      id: this.category.id,
       name: this.categoryUpdate.name
     }
   }

@@ -24,6 +24,14 @@ export class CategoryService {
     addCategoryServise(category: Category): Observable<Category>{
         return  this._httpClient.post<Category>(this.basicUrl, category);
     }
+    // addCategoryServise(category: Category): Observable<Category> {
+    //     const token = localStorage.getItem('authToken');
+    //     const headers = {
+    //       Authorization: token ? `Bearer ${JSON.parse(token).token}` : ''
+    //     };
+      
+    //     return this._httpClient.post<Category>(this.basicUrl, category, { headers });
+    //   }
 
     updateCategory(id: number, category: Category): Observable<any>{
         return this._httpClient.put<Category>(`${this.basicUrl}/${id}`, category);
@@ -33,6 +41,6 @@ export class CategoryService {
       return this._httpClient.get<Category>(`${this.basicUrl}/${id}`)
     }
     deleteCategory(id: number):Observable<any>{
-       return this._httpClient.delete<number>(`${this.basicUrl}/${id}`)
+       return this._httpClient.delete<any>(`${this.basicUrl}/${id}`)
     }
 }

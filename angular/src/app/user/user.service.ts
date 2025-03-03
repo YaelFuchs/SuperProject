@@ -6,7 +6,7 @@ import { User } from "./user.model";
     providedIn: 'root'
 })
 export class UserService{
-    basicUrl = 'https://localhost:7173/api/User';
+    basicUrl = 'https://localhost:7173/api/Users';
     $source: Observable<number> = new Observable<number>((observer) => {
         observer.next(1) //on succeed
         observer.complete(); //on ending
@@ -15,7 +15,7 @@ export class UserService{
     constructor(private _httpClient: HttpClient){}
 
     signUp(user: User):Observable<any>{
-        return this._httpClient.post<User>(this.basicUrl, user);
+        return this._httpClient.post<any>(this.basicUrl, user);
     }
 
 }

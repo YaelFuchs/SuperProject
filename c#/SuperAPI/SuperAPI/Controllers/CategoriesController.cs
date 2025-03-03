@@ -11,7 +11,7 @@ namespace SuperAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Policy = "User")]
+    [Authorize(Policy = "User")]
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
@@ -38,8 +38,8 @@ namespace SuperAPI.Controllers
         }
 
         // POST api/<CategoriesController>
-        //[Authorize(Policy = "Manager")]
-        [AllowAnonymous]
+        [Authorize(Policy = "Manager")]
+        //[AllowAnonymous]
 
         [HttpPost]
         public void AddCategory([FromBody] Category category)
@@ -48,8 +48,8 @@ namespace SuperAPI.Controllers
         }
 
         // PUT api/<CategoriesController>/5
-        //[Authorize(Policy = "Manager")]
-        [AllowAnonymous]
+        [Authorize(Policy = "Manager")]
+        //[AllowAnonymous]
 
         [HttpPut("{Id}")]
         public void UpdateCategory(int Id, [FromBody] Category category)
@@ -58,7 +58,7 @@ namespace SuperAPI.Controllers
         }
 
         // DELETE api/<CategoriesController>/5
-        //[Authorize(Policy = "Manager")]
+        [Authorize(Policy = "Manager")]
         [HttpDelete("{Id}")]
         public void DeleteCategory(int Id)
         {

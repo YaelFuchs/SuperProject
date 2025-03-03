@@ -44,10 +44,11 @@ namespace SuperAPI.Controllers
         }
 
         //POST api/<UsersController>
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpPost]
         public void SignUp([FromBody] UserPostModel user)
         {
+            Console.WriteLine("הצלחתי להיכנס");
             _userService.SignUp(_mapper.Map<User>(user));
         }
 

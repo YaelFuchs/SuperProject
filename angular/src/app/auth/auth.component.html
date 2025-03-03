@@ -7,19 +7,6 @@
         }
     </div>
     <div>
-        <label>email:</label>
-        <input type="email" formControlName="Email">
-        @if (addForm.controls['Email'].invalid && (addForm.controls['Email'].dirty || addForm.controls['Email'].touched)) {
-            @if (addForm.controls['Email'].errors?.['required']) {
-                <div>you must enter email</div>
-            }
-            @if (addForm.controls['Email'].errors?.['email']) {
-                <div>אימייל לא חוקי</div>
-            }
-        }
-    </div>
-
-    <div>
         <label>password:</label>
         <input type="password" formControlName="Password">
         @if (addForm.controls['Password'].invalid && (addForm.controls['Password'].dirty || addForm.controls['Password'].touched)) {
@@ -31,5 +18,5 @@
             }
         }
     </div>
-    <button (click)="signUp()" [disabled]="addForm.invalid">הרשמה</button>
+    <button (click)="login()" [disabled]="addForm.invalid">התחברות</button>
 </form>

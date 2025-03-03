@@ -8,17 +8,19 @@ import { UserService } from '../../user.service';
   styleUrl: './sign-up.component.scss'
 })
 export class SignUpComponent implements OnInit {
-  public addForm!: FormGroup
+public addForm !: FormGroup;
 constructor(private _userService: UserService){}
-  ngOnInit(): void {
-    this.addForm = new FormGroup({
-      userName:  new FormControl('',Validators.required),
-      email: new FormControl('',[Validators.required,Validators.email]),
-      password: new FormControl('',[Validators.required, Validators.minLength(8)])
-    })
-   }
+ngOnInit() {
+  this.addForm = new FormGroup({
+      UserName: new FormControl('', Validators.required),
+      Email: new FormControl('', [Validators.required, Validators.email]),
+      Password: new FormControl('', [Validators.required, Validators.minLength(8)])
+  });
+}
 
    signUp(){
+    console.log("פה");
+    console.log(this.addForm.value);
     this._userService.signUp(this.addForm.value).subscribe({
       next:(res)=>{
         console.log(res);
