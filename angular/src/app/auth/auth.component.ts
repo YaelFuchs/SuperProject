@@ -20,20 +20,6 @@ export class AuthComponent implements OnInit {
          Password: new FormControl('', [Validators.required, Validators.minLength(1)])
      });
    }
-   //  login(){
-   
-   //   this._authService.login(this.addForm.value).subscribe({
-   //     next:(res)=>{
-   //       console.log("login seccesfull",res);
-        
-   //       this._router.navigate(['']);
-         
-   //     },
-   //     error:(err)=>{
-   //       console.log("error:",err);     
-   //     }
-   //   })
-   //  }
      login(){
        this._authService.login(this.addForm.value)
      }

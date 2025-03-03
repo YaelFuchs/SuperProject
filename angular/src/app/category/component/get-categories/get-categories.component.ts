@@ -1,7 +1,8 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from '../../category.model';
 import { CategoryService } from '../../category.service';
+import { AuthService } from '../../../auth/auth.service';
 
 
 @Component({
@@ -20,9 +21,15 @@ export class GetCategoriesComponent implements OnInit{
 
    ngOnInit() {
     this.getCategories();
-     
    }
-  constructor(private _router: Router, private _categoryService: CategoryService){}
+
+  // constructor(private _router: Router, private _categoryService: CategoryService){}
+  constructor(
+    private _router: Router,
+    private _categoryService: CategoryService,
+    private _authService: AuthService, // הזרקת AuthService
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
    getCategories(){
    this._categoryService.getCategoriesFromServer().subscribe({
@@ -38,6 +45,7 @@ export class GetCategoriesComponent implements OnInit{
     }
    })
    }
+   
    onCategoryAdded(category: Category){
     this.showAdd = false;
     this.getCategories();
@@ -47,14 +55,18 @@ export class GetCategoriesComponent implements OnInit{
   this.showUpdate = true;
 
  }
- onUpdateCategory(category: Category) {
-    this.showUpdate = false;
-    this.getCategories();  // קריאה לפונקציה כדי לעדכן את רשימת הקטגוריות
- 
+ onUpdatecategory() {
+  console.log("onUpdatecategory called with:22222222222222");
+  this.showUpdate = false;
+  this.getCategories();
 }
 showDetailes(id: number){
   this.isShow=true;
   this._router.navigate(['category/get-category-id',id]);
+}
+// בדיקה אם המשתמש הוא מנהל
+isAdmin(): boolean {
+  return this._authService.isAdmin();
 }
 }
 

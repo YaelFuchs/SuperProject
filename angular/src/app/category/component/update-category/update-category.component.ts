@@ -8,25 +8,27 @@ import { CategoryService } from '../../category.service';
   styleUrl: './update-category.component.scss'
 })
 export class UpdateCategoryComponent implements OnInit {
+  @Output() updatecategory = new EventEmitter<Category>();
   @Input()  public categoryUpdate!: Category
-  @Output() updateCategory = new EventEmitter<Category>();
   message = '';
   public category!: Category
  
   constructor(private _categoryService: CategoryService) { }
 
   ngOnInit(): void {
+
     this.category = {
-      id: this.category.id,
+      id: this.categoryUpdate.id,
       name: this.categoryUpdate.name
     }
   }
   saveChanges() {
+    console.log("id:",this.category.id );
     this._categoryService.updateCategory(this.category.id, this.category).subscribe({
       next: (res) => {
         console.log("העדכון עבר בהצלחה", res);
-        this.updateCategory.emit(res);
-      },
+        this.updatecategory.emit(res);
+         },
       error: (err) => {
         this.message = err;
         console.log("שגיאה בעדכון!");

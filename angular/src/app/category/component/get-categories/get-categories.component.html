@@ -7,22 +7,18 @@
     <button (click)="update(category)">עדכון קטגוריה</button>
     <button (click)="showDetailes(category.id)">פרטים נוספים</button>
 </div>
-@if(categoryToUpdate && categoryToUpdate.id == category.id ){
-<app-update-category [categoryUpdate]="categoryToUpdate" />
-}
+@if (categoryToUpdate && categoryToUpdate.id == category.id && showUpdate) {
+    <app-update-category [categoryUpdate]="categoryToUpdate" (updatecategory)="onUpdatecategory()" />
+  }
 }
 }
 @else{
     <button (click)="isShow=false">go back</button>
 }
+@if(isAdmin()){
+ <button (click)="showAdd = true">הוספת קטגוריה</button>   
+}
 
-
-
-
-<button (click)="showAdd = true">הוספת קטגוריה</button>
 @if(showAdd){
 <app-add-category (categoryAdded)="onCategoryAdded($event)" />
-}
-@if(showUpdate){
-<app-update-category (updateCategory)="onUpdateCategory($event)" />
 }

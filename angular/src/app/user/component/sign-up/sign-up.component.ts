@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup,Validators } from '@angular/forms';
 import { UserService } from '../../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,7 +10,7 @@ import { UserService } from '../../user.service';
 })
 export class SignUpComponent implements OnInit {
 public addForm !: FormGroup;
-constructor(private _userService: UserService){}
+constructor(private _userService: UserService, private _router: Router){}
 ngOnInit() {
   this.addForm = new FormGroup({
       UserName: new FormControl('', Validators.required),
@@ -19,12 +20,11 @@ ngOnInit() {
 }
 
    signUp(){
-    console.log("פה");
     console.log(this.addForm.value);
     this._userService.signUp(this.addForm.value).subscribe({
       next:(res)=>{
         console.log(res);
-        
+        this._router.navigate(['/login'])
       },
       error:(err)=>{
         console.log(err);
