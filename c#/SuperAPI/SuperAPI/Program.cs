@@ -132,10 +132,7 @@ builder.Services.AddAutoMapper(typeof(MappingProfile), typeof(PostModelsMappingP
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepositoy, ProductRepository>();
 builder.Services.AddAutoMapper(typeof(MappingProduct), typeof(PostProductMapping));
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();

@@ -18,8 +18,8 @@
 @else {
     <button (click)="isShow=false">go back</button>
 }
-@if(isManager()){
+<!-- @if(isManager()){ -->
     <button (click)="showAdd=true">להוספת סניף</button>
-}
+<!-- } -->
 @if(showAdd){
 <app-add-branch (branchAdded)="onBrabchAdded($event)"/>}

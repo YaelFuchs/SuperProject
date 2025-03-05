@@ -49,11 +49,8 @@ namespace SuperAPI.Controllers
         [HttpPost]
         public void Post([FromBody] ProductPostModel product)
         {
-<<<<<<< Updated upstream
             _productService.AddProduct(_mapper.Map <Product>(product));
-=======
-            _productService.AddProduct(_mapper.Map<Product> (product));
->>>>>>> Stashed changes
+
         }
 
         // PUT api/<ProductsController>/5

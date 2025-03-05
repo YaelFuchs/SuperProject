@@ -110,10 +110,10 @@ export class AuthService implements OnInit{
   }
 
   logout(): void {
-<<<<<<< Updated upstream
     if (isPlatformBrowser(this._platformId)) {
       localStorage.removeItem('authToken');
-=======
+    }
+  
     const authDataString = localStorage.getItem('authToken');
     if (authDataString) {
       try {
@@ -126,15 +126,11 @@ export class AuthService implements OnInit{
       }
     } else {
       console.log('אין authToken ב-localStorage');
->>>>>>> Stashed changes
     }
   
     this._httpClient.delete<any>(`${'https://localhost:7173/api/Users'}/${this.userId}`).subscribe({
       next: (res) => {
         console.log('המשתמש נמחק בהצלחה:', res);
-        if (isPlatformBrowser(this.platformId)) {
-          localStorage.removeItem('authToken');
-        }
         this.isAuthenticated$.next(false);
         this.roles = [];
         this._router.navigate(['/login']); // הפניית המשתמש לדף התחברות אחרי מחיקת המשתמש
@@ -145,6 +141,4 @@ export class AuthService implements OnInit{
       }
     });
   }
-  
-
-}
+}  

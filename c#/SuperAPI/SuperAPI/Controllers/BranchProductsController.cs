@@ -14,7 +14,7 @@ namespace SuperAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Policy = "User")]
+    //[Authorize(Policy = "User")]
     public class BranchProductsController : ControllerBase
     {
         private readonly IBranchProductService _IbranchProduct;
@@ -41,7 +41,7 @@ namespace SuperAPI.Controllers
         }
 
         // POST api/<BranchProductsController>
-        [Authorize(Policy = "Admin")]
+        //[Authorize(Policy = "Admin")]
         [HttpPost]
         public void AddBranchProduct([FromBody] BranchProductPostModel branchProduct)
         {
@@ -49,7 +49,7 @@ namespace SuperAPI.Controllers
         }
 
         // PUT api/<BranchProductsController>/5
-        [Authorize(Policy = "Admin")]
+        //[Authorize(Policy = "Admin")]
         [HttpPut("{Id}")]
         public void UpdateBranchProduct(int Id, [FromBody] BranchProductPostModel branchProduct)
         {

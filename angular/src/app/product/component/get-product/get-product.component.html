@@ -12,12 +12,12 @@
   </div>
   
   <!-- אם צריך להציג אפשרות להוספת מוצר רק אם המשתמש הוא אדמין -->
-  <div *ngIf="isAdmin()">
+  <!-- <div *ngIf="isAdmin()">
     <button (click)="showAdd = true">הוספת מוצר</button>
-  </div>
+  </div> -->
   
   <!-- אם צריך להציג את רכיב הוספת מוצר -->
-  <div *ngIf="showAdd">
+  <!-- <div *ngIf="showAdd">
     <app-add-product (productAdded)="onProductAdded($event)"></app-add-product>
-  </div>
+  </div> -->
   

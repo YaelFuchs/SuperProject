@@ -15,7 +15,7 @@ namespace SuperAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Policy = "User")]
+    //[Authorize(Policy = "User")]
 
     public class BranchesController : ControllerBase
     {
@@ -47,7 +47,7 @@ namespace SuperAPI.Controllers
         }
 
         // POST api/<BranchesController>
-        [Authorize(Policy = "Admin")]
+        //[Authorize(Policy = "Admin")]
         [HttpPost]
         public void AddBranch([FromBody] BranchPostModel branch)
         {
@@ -55,7 +55,7 @@ namespace SuperAPI.Controllers
         }
 
         // PUT api/<BranchesController>/5
-        [Authorize(Policy = "Admin")]
+        //[Authorize(Policy = "Admin")]
         [HttpPut("{Id}")]
         public void UpdateBranch(int Id, [FromBody] BranchPostModel branch)
         {
@@ -63,7 +63,7 @@ namespace SuperAPI.Controllers
         }
 
         // DELETE api/<BranchesController>/5
-        [Authorize(Policy = "Admin")]
+        //[Authorize(Policy = "Admin")]
         [HttpDelete("{Id}")]
         public void DeleteBranch(int Id)
         {
