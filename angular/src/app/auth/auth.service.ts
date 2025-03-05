@@ -85,8 +85,8 @@ export class AuthService implements OnInit{
         console.log('תגובת השרת:', res);
         if (isPlatformBrowser(this._platformId)) {
           try {
-           localStorage.setItem('authToken', JSON.stringify({ userId: res.id, token: res.token }));
-           
+            localStorage.setItem('authToken', JSON.stringify({ userId: res.id, token: res.token }));
+            console.log('✅ טוקן נשמר בהצלחה:', localStorage.getItem('authToken'));           
             this.isAuthenticated$.next(true);
             this.roles = this.getRolesFromToken(res.token);
           } catch (error) {
@@ -110,10 +110,7 @@ export class AuthService implements OnInit{
   }
 
   logout(): void {
-    if (isPlatformBrowser(this._platformId)) {
-      localStorage.removeItem('authToken');
-    }
-  
+    
     const authDataString = localStorage.getItem('authToken');
     if (authDataString) {
       try {
@@ -127,6 +124,7 @@ export class AuthService implements OnInit{
     } else {
       console.log('אין authToken ב-localStorage');
     }
+  console.log("המשתמש שאני רוצה למחוק!!!!!!!!!!!1", this.userId);
   
     this._httpClient.delete<any>(`${'https://localhost:7173/api/Users'}/${this.userId}`).subscribe({
       next: (res) => {
