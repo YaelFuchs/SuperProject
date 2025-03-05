@@ -1,0 +1,46 @@
+<form [formGroup]="addForm" (ngSubmit)="addBranchProduc()">
+  <div>
+    <label for="branchId">סניף:</label>
+    <select id="branchId" formControlName="branchId">
+      <option value="">בחר סניף</option>
+      <option *ngFor="let branch of branches" [value]="branch.id">
+        {{ branch.name }}
+      </option>
+    </select>
+    @if (addForm.controls['branchId'].invalid && (addForm.controls['branchId'].dirty || addForm.controls['branchId'].touched)) {
+      @if (addForm.controls['branchId'].errors?.['required']) {
+        <div>חובה להכניס סניף</div>
+        }
+      }
+  </div>
+
+  <div>
+    <label for="productId">מוצר:</label>
+    <select id="productId" formControlName="productId">
+      <option value="">בחר מוצר</option>
+      <option *ngFor="let product of products" [value]="product.id">
+        {{ product.name }}
+      </option>
+    </select>
+    @if (addForm.controls['productId'].invalid && (addForm.controls['productId'].dirty || addForm.controls['productId'].touched)) {
+      @if (addForm.controls['productId'].errors?.['required']) {
+        <div>חובה להכניס מוצר</div>
+        }
+      }
+  </div>
+
+  <div>
+    <label for="price">מחיר:</label>
+    <input type="text" id="price" formControlName="price">
+    @if (addForm.controls['price'].invalid && (addForm.controls['price'].dirty || addForm.controls['price'].touched)) {
+      @if (addForm.controls['price'].errors?.['required']) {
+        <div>חובה להזין מחיר</div>
+        }
+        @if (addForm.controls['price'].errors?.['min']) {
+          <div>מחיר המינימום גדול מ0</div>
+          }
+      }
+  </div>
+
+  <button type="submit" [disabled]="addForm.invalid">הוסף מוצר לסניף</button>
+</form>

@@ -1,0 +1,28 @@
+@if(!isShow){
+    @for(product of products ;track $index){
+        <div style="border: 1px solid brown; margin-bottom: 10px;">
+            <p>מוצר ID: {{ product.id }}</p>
+            <p>שם מוצר: {{ product.name }}</p>
+            <!-- <button (click)="update(product)">עדכון מוצר</button> -->
+            <button (click)="showDetailes(product.id)">פרטים נוספים</button>
+        </div>
+        }
+    }
+    @else{ 
+        <button (click)="isShow=false">go back</button>
+    } 
+       
+        <!-- @if (productToUpdate && productToUpdate.id == product.id && showUpdate) {
+            <app-update-product [productUpdate]="productToUpdate" (updateproduct)="onUpdateproduct()" />
+          } -->
+       
+     
+
+        @if(isAdmin()){
+         <button (click)="showAdd = true">הוספת מוצר</button>   
+        }
+        
+        <!-- @if(showAdd){
+        <app-add-product (productAdded)="onProductAdded($event)" />
+        }
+    -->

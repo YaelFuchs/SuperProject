@@ -1,0 +1,9 @@
+@if (branchDetails) {
+    <p>קוד סניף:{{branchDetails.id}}</p>
+    <p>שם סניף:{{branchDetails.name}}</p>
+    <p>אימייל:{{branchDetails.email}}</p>
+    <p>טלפון:{{branchDetails.phone}}</p>
+    <p>כתובת:{{branchDetails.address}}</p>
+    <button (click)="delete(branchDetails.id)">מחיקה</button>
+    <button (click)="goBack()">חזרה לרשימת סניפים</button>}
+

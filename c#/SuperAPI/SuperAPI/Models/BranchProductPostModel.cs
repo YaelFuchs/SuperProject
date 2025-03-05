@@ -4,8 +4,8 @@ namespace SuperAPI.Models
 {
     public class BranchProductPostModel
     {
-        public Branch Branch { get; set; }
-        public Product Product { get; set; }
+        public int BranchId { get; set; }
+        public int ProductId { get; set; } 
         public double Price { get; set; }
     }
 }

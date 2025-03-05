@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HAsYzVP0pgq6zPTeuWG7T8fd92msgL4Lg01ohPI0fhGmdQlbWeEYblNemv+085VIaG7rGzXzTY6YqVPipw/w1w==",
+  "dgSpecHash": "plXHBA60rZTVnUTu2HzkXSUtMzmqHfSvM1KKs1X7jBZmIUST+GID5EdEUO8//ess+5faN6i+QgzEFxlvwq8UPQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj",
+  "projectFilePath": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user1\\.nuget\\packages\\automapper\\6.0.2\\automapper.6.0.2.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",

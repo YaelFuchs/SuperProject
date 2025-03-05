@@ -51,16 +51,15 @@ namespace SuperAPI.Controllers
         [HttpPost]
         public void AddBranch([FromBody] BranchPostModel branch)
         {
-            
             _IbranchService.AddBranch(_mapper.Map<Branch>(branch));
         }
 
         // PUT api/<BranchesController>/5
         [Authorize(Policy = "Admin")]
         [HttpPut("{Id}")]
-        public void UpdateBranch(int Id, [FromBody] Branch branch)
+        public void UpdateBranch(int Id, [FromBody] BranchPostModel branch)
         {
-            _IbranchService.UpdateBranch(Id, branch);
+            _IbranchService.UpdateBranch(Id, _mapper.Map<Branch>(branch));
         }
 
         // DELETE api/<BranchesController>/5

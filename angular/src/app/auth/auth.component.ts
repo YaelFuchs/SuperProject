@@ -13,11 +13,11 @@ import { AuthService } from './auth.service';
 export class AuthComponent implements OnInit {
 
     addForm !:FormGroup
-    constructor(private _authService : AuthService,private _router: Router){}
+    constructor(private _authService : AuthService){}
     ngOnInit() {
      this.addForm = new FormGroup({
          UserName: new FormControl('', Validators.required),
-         Password: new FormControl('', [Validators.required, Validators.minLength(1)])
+         Password: new FormControl('', [Validators.required, Validators.minLength(4)])
      });
    }
      login(){

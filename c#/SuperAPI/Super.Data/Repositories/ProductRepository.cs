@@ -1,4 +1,5 @@
-﻿using Super.Core.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Super.Core.Models;
 using Super.Core.Repositories;
 using System;
 using System.Collections.Generic;
@@ -17,12 +18,16 @@ namespace Super.Data.Repositories
         }
         public List<Product> GetProductList()
         {
-            return _context.Products.ToList();
+            return _context.Products
+           .Include(p => p.Category) // מביא גם את הקטגוריה
+           .ToList();
         }
 
         public Product GetProductById(int Id)
         {
-            var product = _context.Products.Find(Id);
+            var product = _context.Products
+            .Include(p => p.Category) // מביא גם את הקטגוריה
+            .FirstOrDefault(p => p.Id == Id);
             if (product != null)
             {
                 return product;
@@ -31,15 +36,29 @@ namespace Super.Data.Repositories
         }
         public void AddProduct(Product product)
         {
-            // בדיקה האם קיים משתמש עם אותו שם משתמש
-            var existingProduct = _context.Products.FirstOrDefault(p => p.Name == p.Name);
+            var existingProduct = _context.Products.FirstOrDefault(p => p.Name == product.Name);
 
-            if (existingProduct == null) // אם לא קיים משתמש עם שם משתמש זהה
+            if (existingProduct == null)
             {
-                _context.Products.Add(product);
-                _context.SaveChanges();
-            }
+                var category = _context.Categories.FirstOrDefault(c => c.Id == product.CategoryId);
 
+                if (category != null)
+                {
+                    product.Category = category; // קישור ל-Navigation Property
+
+                    _context.Products.Add(product); // הוספת המוצר ל-context
+                    _context.SaveChanges(); // שמירת השינויים
+                    return; // יציאה מהמתודה אם הצלחנו
+                }
+                else
+                {
+                    throw new Exception($"קטגוריה עם Id {product.CategoryId} לא נמצאה בדאטהבייס");
+                }
+            }
+            else
+            {
+                throw new Exception("מוצר עם שם זה כבר קיים");
+            }
         }
         public void UpdateProduct(int Id, Product product)
         {

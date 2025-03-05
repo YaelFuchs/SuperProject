@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
+import { Component,OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from '../../category.model';
 import { CategoryService } from '../../category.service';
@@ -27,9 +27,7 @@ export class GetCategoriesComponent implements OnInit{
   constructor(
     private _router: Router,
     private _categoryService: CategoryService,
-    private _authService: AuthService, // הזרקת AuthService
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+    private _authService: AuthService) {}
 
    getCategories(){
    this._categoryService.getCategoriesFromServer().subscribe({
@@ -56,7 +54,6 @@ export class GetCategoriesComponent implements OnInit{
 
  }
  onUpdatecategory() {
-  console.log("onUpdatecategory called with:22222222222222");
   this.showUpdate = false;
   this.getCategories();
 }
@@ -67,6 +64,9 @@ showDetailes(id: number){
 // בדיקה אם המשתמש הוא מנהל
 isAdmin(): boolean {
   return this._authService.isAdmin();
+}
+isManager(): boolean {
+  return this._authService.isManager();
 }
 }
 

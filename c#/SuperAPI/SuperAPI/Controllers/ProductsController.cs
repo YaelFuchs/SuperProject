@@ -6,6 +6,7 @@ using Super.Core.DTOs;
 using Super.Core.Models;
 using Super.Core.Service;
 using Super.Service;
+using SuperAPI.Models;
 using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -43,9 +44,9 @@ namespace SuperAPI.Controllers
         // POST api/<ProductsController>
         [Authorize(Policy = "Admin")]
         [HttpPost]
-        public void Post([FromBody] Product product)
+        public void Post([FromBody] ProductPostModel product)
         {
-            _productService.AddProduct(product);
+            _productService.AddProduct(_mapper.Map <Product>(product));
         }
 
         // PUT api/<ProductsController>/5

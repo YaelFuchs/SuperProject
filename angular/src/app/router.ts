@@ -3,6 +3,9 @@ export class Router{
     Category = "category"
     User="user"
     Login ="login"
+    Branch="branch"
+    Product="product"
+    BranchProduct="branchProduct"
 }
 
     // לא בטוחה אם נחוץ
