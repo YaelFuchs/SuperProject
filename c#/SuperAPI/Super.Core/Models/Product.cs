@@ -18,6 +18,7 @@ namespace Super.Core.Models
         public string Name { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+        public int CategoryId { get; set; }
         public eUnitOfMeasure UnitOfMeasure { get; set; }
         [JsonIgnore]
         public List <BranchProduct> ListOfProductBranch {get ; set;}

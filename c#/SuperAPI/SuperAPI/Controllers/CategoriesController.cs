@@ -38,8 +38,8 @@ namespace SuperAPI.Controllers
         }
 
         // POST api/<CategoriesController>
-        [Authorize(Policy = "Manager")]
-        //[AllowAnonymous]
+        //[Authorize(Policy = "Manager")]
+        [AllowAnonymous]
 
         [HttpPost]
         public void AddCategory([FromBody] Category category)

@@ -1,58 +1,3 @@
-// import { HttpClient } from "@angular/common/http";
-// import { Injectable } from "@angular/core";
-// import { BehaviorSubject, Observable } from "rxjs";
-// import { Auth } from "./auth.model";
-
-// @Injectable({
-//     providedIn: 'root'  // ← מוודא שהשירות זמין בכל האפליקציה!
-// })
-// export class AuthService{
-//     basicUrl='https://localhost:7173/api/Auth';
-//     $source:Observable<number>=new Observable<number>((observe)=>{
-//         observe.next(1);
-//         observe.complete();
-//         observe.error('error');
-//     })
-//     constructor( private _httpClient:HttpClient){}
-//     isAuthtnticated$= new BehaviorSubject<boolean>(!!localStorage.getItem("authToken"));
-
-//     get isAuthenticated():boolean{
-//         return this.isAuthtnticated$.getValue();
-//     }
-//      login(auth:Auth):void{
-//         this._httpClient.post<{token : string}>(this.basicUrl,auth).subscribe({
-//             next:(res)=>{
-//                 console.log(res);
-//               try{
-//                 localStorage.setItem('authToken',JSON.stringify({token : res.token}))
-//                 this.isAuthtnticated$.next(true);
-//               } catch(error){
-//                   console.log("שגיאה בשמירה",error);                 
-//               }
-//             },
-//             error: (err)=>{               
-//                alert("שגיאה בהתחברות"+err.error);              
-//             }
-//         })
-//      }
-
-//     // login(auth:Auth):Observable<{token : string}>{
-//     //     const token= this._httpClient.post<{token : string}>(this.basicUrl,auth);
-//     //     localStorage.setItem('authToken',JSON.stringify(token));
-//     //     return token;
-//     // }
-    
-//     getToken(): string | null{
-//         return localStorage.getItem('authToken');
-//     }
-//     logout(): void {
-//         localStorage.removeItem('authToken')
-//     }
-//     // isLoggedIn() :boolean {
-//     //     return !! this.getToken();
-//     // }
-// }
-
 import { HttpClient } from "@angular/common/http";
 import { Injectable, PLATFORM_ID, Inject, OnInit } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
@@ -75,6 +20,8 @@ export class AuthService implements OnInit{
 
   isAuthenticated$ = new BehaviorSubject<boolean>(false); // השם הנכון
   private roles: string[] = [];
+  public userId: number = 0;
+
 
   constructor(
     private _httpClient: HttpClient,private _router: Router,
@@ -133,12 +80,13 @@ export class AuthService implements OnInit{
   }
 
   login(auth: Auth): void {
-    this._httpClient.post<{ token: string }>(this.basicUrl, auth).subscribe({
+    this._httpClient.post<{id: number, token: string }>(this.basicUrl, auth).subscribe({
       next: (res) => {
         console.log('תגובת השרת:', res);
         if (isPlatformBrowser(this._platformId)) {
           try {
-            localStorage.setItem('authToken', JSON.stringify({ token: res.token }));
+           localStorage.setItem('authToken', JSON.stringify({ userId: res.id, token: res.token }));
+           
             this.isAuthenticated$.next(true);
             this.roles = this.getRolesFromToken(res.token);
           } catch (error) {
@@ -162,10 +110,41 @@ export class AuthService implements OnInit{
   }
 
   logout(): void {
+<<<<<<< Updated upstream
     if (isPlatformBrowser(this._platformId)) {
       localStorage.removeItem('authToken');
+=======
+    const authDataString = localStorage.getItem('authToken');
+    if (authDataString) {
+      try {
+        const authData = JSON.parse(authDataString);
+        this.userId = authData.userId || 0;
+        console.log('User ID מ-localStorage:', this.userId);
+      } catch (error) {
+        console.error('שגיאה בפרסור authToken:', error);
+        this.userId = 0;
+      }
+    } else {
+      console.log('אין authToken ב-localStorage');
+>>>>>>> Stashed changes
     }
-    this.isAuthenticated$.next(false);
-    this.roles = [];
+  
+    this._httpClient.delete<any>(`${'https://localhost:7173/api/Users'}/${this.userId}`).subscribe({
+      next: (res) => {
+        console.log('המשתמש נמחק בהצלחה:', res);
+        if (isPlatformBrowser(this.platformId)) {
+          localStorage.removeItem('authToken');
+        }
+        this.isAuthenticated$.next(false);
+        this.roles = [];
+        this._router.navigate(['/login']); // הפניית המשתמש לדף התחברות אחרי מחיקת המשתמש
+      },
+      error: (err) => {
+        console.error('שגיאה במחיקת המשתמש:', err);
+        alert('שגיאה בעת ההתנתקות');
+      }
+    });
   }
+  
+
 }

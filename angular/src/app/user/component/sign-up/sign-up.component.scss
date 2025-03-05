@@ -1,7 +1,132 @@
-input.ng-invalid {
-    border-left: 3px solid red;
-}
-
-input.ng-valid {
-    border-left: 3px solid green;
-}
+// הגדרות כלליות לטופס
+form {
+    max-width: 400px;
+    width: 90%; // שינוי מרוחב קבוע לאחוזים כדי להתאים למסכים קטנים
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  // סגנון לכל div שמכיל שדה
+  div {
+    margin-bottom: 20px;
+  }
+  
+  // עיצוב תוויות
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  // עיצוב שדות הקלט
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+  
+    &:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    }
+  }
+  
+  // סגנון לשדות לא תקינים
+  input.ng-invalid.ng-touched,
+  input.ng-invalid.ng-dirty {
+    border-left: 3px solid #dc3545;
+  }
+  
+  // סגנון לשדות תקינים
+  input.ng-valid.ng-touched,
+  input.ng-valid.ng-dirty {
+    border-left: 3px solid #28a745;
+  }
+  
+  // עיצוב הודעות שגיאה
+  div > div {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  // עיצוב הכפתור
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  
+    &:hover:not(:disabled) {
+      background-color: #0056b3;
+    }
+  
+    &:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+  }
+  
+  // רקע כללי לדף (אופציונלי)
+  body {
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+  
+  // מדיה קוורי למסכים קטנים (עד 600px - טלפונים)
+  @media (max-width: 600px) {
+    form {
+      padding: 20px;
+      margin: 20px auto; // פחות מרווח עליון ותחתון
+    }
+  
+    input {
+      font-size: 14px; // הקטנת גודל הפונט לשדות קלט
+      padding: 8px;
+    }
+  
+    label {
+      font-size: 14px; // הקטנת גודל התוויות
+    }
+  
+    button {
+      padding: 10px;
+      font-size: 14px; // הקטנת גודל הכפתור
+    }
+  
+    div > div {
+      font-size: 12px; // הקטנת הודעות שגיאה
+    }
+  }
+  
+  // מדיה קוורי למסכים בינוניים (600px-900px - טאבלטים)
+  @media (min-width: 601px) and (max-width: 900px) {
+    form {
+      max-width: 500px;
+      padding: 25px;
+    }
+  
+    input {
+      font-size: 15px;
+    }
+  
+    button {
+      font-size: 15px;
+    }
+  }

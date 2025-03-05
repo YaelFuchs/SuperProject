@@ -1,7 +1,7 @@
 export class User{
     id!: number
-    userName!:string
-    email!:string
+    UserName!:string
+    Email!:string
     Password!:string
   
 }

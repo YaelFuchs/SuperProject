@@ -17,5 +17,10 @@ export class UserService{
     signUp(user: User):Observable<any>{
         return this._httpClient.post<any>(this.basicUrl, user);
     }
-
+    updateUser(id:number, user: User):Observable<any>{
+        return this._httpClient.put<any>(`${this.basicUrl}/${id}`,user);
+    }
+    getUserById(id: number) :Observable<User>{
+        return this._httpClient.get<User>(`${this.basicUrl}/${id}`);
+    }
 }

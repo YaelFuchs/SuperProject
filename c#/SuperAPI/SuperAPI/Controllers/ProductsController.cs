@@ -34,19 +34,26 @@ namespace SuperAPI.Controllers
             return Ok(_mapper.Map<List<ProductDto>>(_productService.GetAllProducts()));
         }
 
+
         // GET api/<ProductsController>/5
         [HttpGet("{Id}")]
+        [AllowAnonymous]
         public ActionResult GetProductById(int Id)
         {
             return Ok(_mapper.Map<ProductDto>(_productService.GetProductById(Id)));
         }
 
         // POST api/<ProductsController>
-        [Authorize(Policy = "Admin")]
+        //[Authorize(Policy = "Admin")]
+        [AllowAnonymous]
         [HttpPost]
         public void Post([FromBody] ProductPostModel product)
         {
+<<<<<<< Updated upstream
             _productService.AddProduct(_mapper.Map <Product>(product));
+=======
+            _productService.AddProduct(_mapper.Map<Product> (product));
+>>>>>>> Stashed changes
         }
 
         // PUT api/<ProductsController>/5
@@ -58,7 +65,8 @@ namespace SuperAPI.Controllers
         }
 
         // DELETE api/<ProductsController>/5
-        [Authorize(Policy = "Admin")]
+        //[Authorize(Policy = "Admin")]
+        [AllowAnonymous]
         [HttpDelete("{Id}")]
         public void Delete(int Id)
         {

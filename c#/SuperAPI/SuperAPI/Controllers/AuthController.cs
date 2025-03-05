@@ -60,7 +60,7 @@ public class AuthController : ControllerBase
         var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
         // החזר את הטוקן כתגובה
-        return Ok(new { Token = tokenString });
+        return Ok(new { findUser.Id, Token = tokenString });
     }
 }
 

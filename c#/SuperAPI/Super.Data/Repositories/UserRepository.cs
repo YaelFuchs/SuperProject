@@ -113,7 +113,14 @@ namespace Super.Data.Repositories
 
                 userToUpdate.Email = user.Email;
 
-                userToUpdate.Password = user.Password;
+                if (user.Password != null )
+                {
+                    // הצפנת הסיסמה החדשה
+                    string salt = BCrypt.Net.BCrypt.GenerateSalt(12);
+                    string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password, salt);
+                    userToUpdate.Password = hashedPassword;
+                }
+                
 
                 _context.SaveChanges();
             }
@@ -141,23 +148,7 @@ namespace Super.Data.Repositories
              }
 
 
-            public User LogIn(User user)
-        {
-            var findUser = _context.Users.FirstOrDefault(x => x.UserName == user.UserName);
-            if (findUser != null)
-            {
-                if (findUser.Password == user.Password)
-                {
-                    return user;
-                }
-                else
-                    throw new Exception();
-            }
-            else
-            {
-                throw new Exception();
-            }
-        }
+
         public User GetUserByName(string userName)
         {
             return _context.Users

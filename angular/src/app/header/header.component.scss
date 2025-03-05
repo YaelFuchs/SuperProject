@@ -1,0 +1,42 @@
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: white; /* רקע לבן */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* צל עדין */
+    direction: rtl; /* כיוון לימין */
+    position: fixed; /* נשאר קבוע בראש */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #d3d3d3; /* מסגרת אפורה עדינה בתחתית */
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    color: #007bff; /* צבע טקסט כחול לכפתורים */
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* אפקטים */
+}
+
+button:hover {
+    background-color: #007bff; /* רקע כחול בכפתור בעת hover */
+    color: white; /* טקסט לבן בעת hover */
+    transform: scale(1.05); /* אפקט סיבוב קטן */
+}
+
+.router-link-active {
+    background-color: #007bff; /* צבע רקע כחול לכפתור פעיל */
+    color: white; /* טקסט לבן בכפתור פעיל */
+    font-weight: bold; /* הדגשה לכפתור פעיל */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15); /* צל עדין לכפתור הפעיל */
+    border-radius: 5px; /* פינות מעוגלות לכפתור הפעיל */
+}

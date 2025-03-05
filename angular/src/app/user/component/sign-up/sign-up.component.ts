@@ -22,8 +22,7 @@ ngOnInit() {
    signUp(){
     console.log(this.addForm.value);
     this._userService.signUp(this.addForm.value).subscribe({
-      next:(res)=>{
-        console.log(res);
+      next:(res)=>{        
         this._router.navigate(['/login'])
       },
       error:(err)=>{

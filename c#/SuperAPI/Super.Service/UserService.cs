@@ -39,10 +39,7 @@ namespace Super.Service
         {
             _userRepository.DeleteUser(Id);
         }
-        public User LogIn(User user)
-        {
-            return _userRepository.LogIn(user);
-        }
+    
         public User GetUserByName(string Name)
         {
             return _userRepository.GetUserByName(Name);

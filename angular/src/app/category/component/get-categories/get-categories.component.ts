@@ -33,7 +33,6 @@ export class GetCategoriesComponent implements OnInit{
    this._categoryService.getCategoriesFromServer().subscribe({
     next: (res)=>{
       console.log('res'+ res);
-
       this.categories = res;
       console.log(this.categories);
       

@@ -49,7 +49,7 @@ namespace SuperAPI.Controllers
         public void SignUp([FromBody] UserPostModel user)
         {
             Console.WriteLine("הצלחתי להיכנס");
-            _userService.SignUp(_mapper.Map<User>(user));
+             _userService.SignUp(_mapper.Map<User>(user));
         }
 
 

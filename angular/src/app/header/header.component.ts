@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,16 +10,11 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  constructor(private _router: Router) { }
+  constructor(private _router: Router, private _authService: AuthService) { }
 
-  goToCategories() {
-    this._router.navigate(['/category'])
-  }
-  goToUser() {
-    this._router.navigate(['/user'])
-  }
-  goToLogin() {
-    this._router.navigate(['/login'])
+  logout(){
+   this._authService.logout()
+
   }
   goToBranch() {
     this._router.navigate(['/branch'])
@@ -30,5 +26,4 @@ export class HeaderComponent {
     this._router.navigate(['/branchProduct'])
   }
 }
-//====================================================
-//לבדוק מה העניין בדף הזה
+
