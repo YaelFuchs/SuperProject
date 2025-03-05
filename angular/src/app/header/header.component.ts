@@ -20,6 +20,15 @@ export class HeaderComponent {
   goToLogin() {
     this._router.navigate(['/login'])
   }
+  goToBranch() {
+    this._router.navigate(['/branch'])
+  }
+  goToProduct() {
+    this._router.navigate(['/product'])
+  }
+  goToBranchProduct() {
+    this._router.navigate(['/branchProduct'])
+  }
 }
 //====================================================
 //לבדוק מה העניין בדף הזה

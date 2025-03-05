@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Super.Core.Models
@@ -16,7 +17,7 @@ namespace Super.Core.Models
         public string Email { get; set; }
 
         //אנחנו צריכות להוסיף רשימה מסוג מוצר סניף עם קשרי גומלין
-
+        [JsonIgnore]
         public List<BranchProduct> BranchProducts { get; set; }
     }
 }

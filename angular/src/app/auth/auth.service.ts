@@ -54,7 +54,7 @@
 // }
 
 import { HttpClient } from "@angular/common/http";
-import { Injectable, PLATFORM_ID, Inject } from "@angular/core";
+import { Injectable, PLATFORM_ID, Inject, OnInit } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { Auth } from "./auth.model";
 import { isPlatformBrowser } from '@angular/common';
@@ -62,9 +62,10 @@ import { Router } from '@angular/router';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
+  
 })
-export class AuthService {
+export class AuthService implements OnInit{
   basicUrl = 'https://localhost:7173/api/Auth';
   $source: Observable<number> = new Observable<number>((observe) => {
     observe.next(1);
@@ -77,11 +78,13 @@ export class AuthService {
 
   constructor(
     private _httpClient: HttpClient,private _router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {
-    if (isPlatformBrowser(this.platformId)) {
+    @Inject(PLATFORM_ID) private _platformId: Object ) {  }
+
+  ngOnInit(): void {
+    if (isPlatformBrowser(this._platformId)) {
       this.checkAuth();
     }
+    
   }
 
   private checkAuth(): void {
@@ -118,6 +121,10 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
+    return this.roles.includes('ROLE_USER,ROLE_ADMIN,ROLE_MANAGER') ||
+            this.roles.includes('ROLE_USER,ROLE_ADMIN') ;
+  }
+  isManager(): boolean {
     return this.roles.includes('ROLE_USER,ROLE_ADMIN,ROLE_MANAGER');
   }
 
@@ -129,7 +136,7 @@ export class AuthService {
     this._httpClient.post<{ token: string }>(this.basicUrl, auth).subscribe({
       next: (res) => {
         console.log('תגובת השרת:', res);
-        if (isPlatformBrowser(this.platformId)) {
+        if (isPlatformBrowser(this._platformId)) {
           try {
             localStorage.setItem('authToken', JSON.stringify({ token: res.token }));
             this.isAuthenticated$.next(true);
@@ -147,7 +154,7 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    if (isPlatformBrowser(this.platformId)) {
+    if (isPlatformBrowser(this._platformId)) {
       const tokenString = localStorage.getItem('authToken');
       return tokenString ? JSON.parse(tokenString).token : null;
     }
@@ -155,7 +162,7 @@ export class AuthService {
   }
 
   logout(): void {
-    if (isPlatformBrowser(this.platformId)) {
+    if (isPlatformBrowser(this._platformId)) {
       localStorage.removeItem('authToken');
     }
     this.isAuthenticated$.next(false);

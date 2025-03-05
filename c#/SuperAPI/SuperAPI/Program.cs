@@ -131,15 +131,19 @@ builder.Services.AddAutoMapper(typeof(MappingProfile), typeof(PostModelsMappingP
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepositoy, ProductRepository>();
+builder.Services.AddAutoMapper(typeof(MappingProduct), typeof(PostProductMapping));
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddAutoMapper( typeof(PostCategoryMapping));
 
 builder.Services.AddScoped<IBranchProductService, BranchProductService>();
 builder.Services.AddScoped<IBranchProductRepository, BranchProductRepository>();
+builder.Services.AddAutoMapper(typeof(MappingBranchProduct),typeof(PostBranchProductMapping));
 
 builder.Services.AddScoped<IBranchService, BranchService>();
 builder.Services.AddScoped<IBranchRepository, BranchRepository>();
+builder.Services.AddAutoMapper(typeof(MappingBranch), typeof(PostBranchMapping));
 
 var app = builder.Build();
 

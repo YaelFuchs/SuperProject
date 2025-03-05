@@ -31,10 +31,11 @@ namespace Super.Data.Repositories
         public void AddBranch(Branch branch)
         {
             // בדיקה האם קיים משתמש עם אותו שם משתמש
-            var existingBranch = _context.Branches.FirstOrDefault(b => b.Name == b.Name);
+            var existingBranch = _context.Branches.FirstOrDefault(b => b.Name == branch.Name);
 
             if (existingBranch == null) // אם לא קיים משתמש עם שם משתמש זהה
             {
+
                 _context.Branches.Add(branch);
                 _context.SaveChanges();
             }
