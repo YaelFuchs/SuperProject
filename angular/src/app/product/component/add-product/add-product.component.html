@@ -1,0 +1,34 @@
+<form [formGroup]='addForm'>
+
+  <div>
+    <label>
+      name:
+    </label>
+    <input type="text" formControlName="name" #id>
+    <div *ngIf="addForm.controls['name'].errors?.['required']"> you must enter product name!</div>
+  </div>
+  <div>
+    <label>
+      בחר קטגוריה:
+    </label>
+      <select id="categortId" formControlName="categoryId">
+        <option value="">
+          בחר קטגוריה:
+        </option>
+        <option *ngFor="let c of categories" [value]="c.id">
+          {{c.name}}
+        </option>
+      </select>
+    </div>
+    <div>
+      <select id="UnitOfMeasure" formControlName="UnitOfMeasure">
+        <option value="">
+          בחר סוג:
+        </option>
+        <option *ngFor="let unit of unitOptions" [value]="unit.value">
+          {{ unit.key }}
+        </option>
+      </select>
+    </div>
+    <button (click)='addProduct()' [disabled]='addForm.invalid'>הוספה</button>
+</form>

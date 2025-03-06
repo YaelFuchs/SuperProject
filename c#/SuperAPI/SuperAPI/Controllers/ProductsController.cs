@@ -15,7 +15,7 @@ namespace SuperAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Policy = "User")]
+    //[Authorize(Policy = "User")]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;

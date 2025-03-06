@@ -15,9 +15,9 @@
 @else{
     <button (click)="isShow=false">go back</button>
 }
-@if(isManager()){
+<!-- @if(isManager()){ -->
  <button (click)="showAdd = true">הוספת קטגוריה</button>   
-}
+<!-- } -->
 
 @if(showAdd){
 <app-add-category (categoryAdded)="onCategoryAdded($event)" />

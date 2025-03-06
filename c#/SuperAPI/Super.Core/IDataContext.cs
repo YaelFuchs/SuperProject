@@ -18,5 +18,7 @@ namespace Super.Core
         List<Branch> Branches { get; set; }
         List<Role> Roles { get; set; }
         List<UserRole> UserRoles { get; set; }
+        List<ShoppingCart> ShoppingCarts { get; set; }
+        List<ShoppingCartItem> ShoppingCartItems { get; set;}
     }
 }

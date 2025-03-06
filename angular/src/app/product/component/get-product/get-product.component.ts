@@ -47,15 +47,15 @@ export class GetProductComponent implements OnInit {
     this.getProducts();  // אחרי הוספת מוצר, נטען את המוצרים מחדש
   }
 
-  update(product: Product): void {
-    this.productToUpdate = product;
-    this.showUpdate = true;  // נציג את הטופס לעדכון
-  }
+  // update(product: Product): void {
+  //   this.productToUpdate = product;
+  //   this.showUpdate = true;  // נציג את הטופס לעדכון
+  // }
 
-  onUpdateProduct(): void {
-    this.showUpdate = false;
-    this.getProducts();  // אחרי עדכון, נטען את המוצרים מחדש
-  }
+  // onUpdateProduct(): void {
+  //   this.showUpdate = false;
+  //   this.getProducts();  // אחרי עדכון, נטען את המוצרים מחדש
+  // }
 
   showDetailes(id: number): void {
     this.isShow = true;  // מגדירים את ה- isShow להיות true כדי להציג פרטי מוצר

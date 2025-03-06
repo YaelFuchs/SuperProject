@@ -12,3 +12,9 @@ export class Product{
     category!: Category
     UnitOfMeasure!: eUnitOfMeasure
 }
+
+export class PostProduct{
+    name! : string
+    categoryId!: number
+    UnitOfMeasure!: eUnitOfMeasure
+}

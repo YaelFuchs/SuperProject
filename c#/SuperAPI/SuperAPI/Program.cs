@@ -13,6 +13,7 @@ using Super.Data;
 using Super.Data.Repositories;
 using Super.Service;
 using SuperAPI.Mapping;
+using SuperAPI.Models;
 using System.Security.Claims;
 using System.Text;
 
@@ -145,6 +146,10 @@ builder.Services.AddAutoMapper(typeof(MappingBranchProduct),typeof(PostBranchPro
 builder.Services.AddScoped<IBranchService, BranchService>();
 builder.Services.AddScoped<IBranchRepository, BranchRepository>();
 builder.Services.AddAutoMapper(typeof(MappingBranch), typeof(PostBranchMapping));
+
+builder.Services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
+builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
+builder.Services.AddAutoMapper(typeof(MappingShoppingCartItem), typeof(ShoppingCartMapping));
 
 var app = builder.Build();
 

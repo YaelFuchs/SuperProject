@@ -110,8 +110,10 @@ namespace Super.Data.Repositories
             if (userToUpdate != null)
             {
                 userToUpdate.UserName = user.UserName;
+                userToUpdate.Address = user.Address;
 
                 userToUpdate.Email = user.Email;
+                userToUpdate.Phone = user.Phone;
 
                 if (user.Password != null )
                 {
