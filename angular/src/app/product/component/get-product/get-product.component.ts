@@ -1,8 +1,10 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { Product } from '../../product.model';
+import { Product, eUnitOfMeasure } from '../../product.model';
 import { Router } from '@angular/router';
 import { ProductService } from '../../product.service';
 import { AuthService } from '../../../auth/auth.service';
+import { Category } from '../../../category/category.model';
+import { CategoryService } from '../../../category/category.service';
 
 @Component({
   selector: 'app-get-product',
@@ -17,7 +19,7 @@ export class GetProductComponent implements OnInit {
   message = '';
   productToUpdate: Product | null = null;  // גם אם מדובר במוצר שאנחנו מעדכנים
   isShow = false;
-
+  
   constructor(
     private _router: Router,
     private _productService: ProductService,
@@ -47,15 +49,15 @@ export class GetProductComponent implements OnInit {
     this.getProducts();  // אחרי הוספת מוצר, נטען את המוצרים מחדש
   }
 
-  // update(product: Product): void {
-  //   this.productToUpdate = product;
-  //   this.showUpdate = true;  // נציג את הטופס לעדכון
-  // }
-
-  // onUpdateProduct(): void {
-  //   this.showUpdate = false;
-  //   this.getProducts();  // אחרי עדכון, נטען את המוצרים מחדש
-  // }
+  update(product: Product): void {
+    this.productToUpdate = product;
+    this.showUpdate = true;  // נציג את הטופס לעדכון
+  }
+  
+  onUpdateProduct(): void {
+    this.showUpdate = false;
+    this.getProducts();  // אחרי עדכון, נטען את המוצרים מחדש
+  }
 
   showDetailes(id: number): void {
     this.isShow = true;  // מגדירים את ה- isShow להיות true כדי להציג פרטי מוצר

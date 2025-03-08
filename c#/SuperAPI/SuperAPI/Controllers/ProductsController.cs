@@ -54,11 +54,11 @@ namespace SuperAPI.Controllers
         }
 
         // PUT api/<ProductsController>/5
-        [Authorize(Policy = "Admin")]
+        //[Authorize(Policy = "Admin")]
         [HttpPut("{Id}")]
-        public void Put(int Id, [FromBody] Product product)
+        public void Put(int Id, [FromBody] ProductPostModel product)
         {
-            _productService.UpdateProduct(Id, product);
+            _productService.UpdateProduct(Id, _mapper.Map<Product>(product));
         }
 
         // DELETE api/<ProductsController>/5

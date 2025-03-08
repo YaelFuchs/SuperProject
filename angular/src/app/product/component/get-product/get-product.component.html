@@ -1,23 +1,23 @@
-<div *ngIf="!isShow">
-    <div *ngFor="let product of products; let i = index" style="border: 1px solid brown; margin-bottom: 10px;">
-      <p>מוצר ID: {{ product.id }}</p>
-      <p>שם מוצר: {{ product.name }}</p>
-      <!-- <button (click)="update(product)">עדכון מוצר</button> -->
-      <button (click)="showDetailes(product.id)">פרטים נוספים</button>
-    </div>
-  </div>
-  
-  <div *ngIf="isShow">
-    <button (click)="isShow=false">go back</button>
-  </div>
+@if(!isShow){
+  @for(product of products ;track $index){
+    <p>מוצר ID: {{ product.id }}</p>
+    <p>שם מוצר: {{ product.name }}</p>
+    <button (click)="update(product)">עדכון מוצר</button>
+    <button (click)="showDetailes(product.id)">פרטים נוספים</button>
+
+    @if(productToUpdate && productToUpdate.id == product.id && showUpdate){
+      <app-update-product [productUpdate] = "productToUpdate" (updateProduct)="onUpdateProduct()"></app-update-product>
+     }
+  }
+}
+@else{
+  <button (click)="isShow=false">go back</button>
+  }    
+
   <button (click)="showAdd = true">הוספת מוצר</button>
-  <!-- אם צריך להציג אפשרות להוספת מוצר רק אם המשתמש הוא אדמין -->
-  <!-- <div *ngIf="isAdmin()">
-    <button (click)="showAdd = true">הוספת מוצר</button>
-  </div> -->
-  
-  <!-- אם צריך להציג את רכיב הוספת מוצר -->
+
  @if(showAdd){
   <app-add-product (productAdded)="onProductAdded($event)"></app-add-product>
  }
+
     

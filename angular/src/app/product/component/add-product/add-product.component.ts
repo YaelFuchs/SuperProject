@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product, eUnitOfMeasure } from '../../product.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from '../../product.service';
@@ -23,6 +23,8 @@ export class AddProductComponent implements OnInit{
   constructor(private _productService: ProductService, private _categoryService: CategoryService){}
 
   ngOnInit(): void {
+    console.log("ההמרה של האינם:", this.unitOptions);
+    
     this._categoryService.getCategoriesFromServer().subscribe({
       next:(res)=>{
         this.categories = res;
@@ -35,13 +37,19 @@ export class AddProductComponent implements OnInit{
     this.addForm = new FormGroup({
       name: new FormControl('', Validators.required),
       categoryId: new FormControl('', Validators.required),
-      UnitOfMeasure: new FormControl(null, Validators.required),
+      UnitOfMeasure: new FormControl('', Validators.required),
     })
   }
   addProduct(){
-    console.log("המוצר החדש:", this.addForm.value);
+    const productToSend = {
+        name: this.addForm.value.name,
+        categoryId: Number(this.addForm.value.categoryId),
+        UnitOfMeasure: Number(this.addForm.value.UnitOfMeasure)
+    };
+
+    console.log("המוצר החדש:", productToSend);
     
-    this._productService.addProduct(this.addForm.value).subscribe({
+    this._productService.addProduct(productToSend).subscribe({
       next:(res)=>{
         console.log("המוצר נוסף בהצלחה", res);
         this.productAdded.emit(res);

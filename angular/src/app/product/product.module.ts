@@ -5,9 +5,10 @@ import { CommonModule, NgClass, NgSwitch, NgSwitchCase } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductRoutingModule } from "./product.routing.module";
 import { AddProductComponent } from "./component/add-product/add-product.component";
+import { UpdateProductComponent } from "./component/update-product/update-product.component";
 
 @NgModule({
-    declarations: [GetProductComponent, GetProductIdComponent, AddProductComponent],
+    declarations: [GetProductComponent, GetProductIdComponent, AddProductComponent, UpdateProductComponent],
     imports: [
         CommonModule,
         ReactiveFormsModule,

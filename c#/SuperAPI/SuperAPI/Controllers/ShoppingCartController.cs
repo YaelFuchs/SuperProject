@@ -27,7 +27,7 @@ namespace SuperAPI.Controllers
      
 
         // GET api/<ShoppingCartController>/5
-        [HttpGet("{id}")]
+        [HttpGet]
         public ActionResult GetShoppingCarts(int userId)
         {
             return Ok(_mapper.Map<List<ShoppingCartItemDto>>(_shoppingCartService.GetShoppingCarts(userId)));
@@ -43,8 +43,6 @@ namespace SuperAPI.Controllers
         [HttpPost("/addToCart")]
         public void AddProduct(int userId, [FromBody] ShoppingCartModel shoppingCart)
         {
-            Console.WriteLine("what he give me: ", shoppingCart.ToString());
-
             // שליפת המוצר לפי השם
             var product = _productService.GetAllProducts()
                 .FirstOrDefault(p => p.Name == shoppingCart.Product.Name);
@@ -60,9 +58,15 @@ namespace SuperAPI.Controllers
         }
 
         // PUT api/<ShoppingCartController>/5
-        [HttpPut("{id}")]
-        public void RemoveProduct(int userId, [FromBody] Product product)
+        [HttpPut]
+        public void RemoveProduct(int userId, [FromBody] ShoppingCartModel shoppingCart)
         {
+            var product = _productService.GetAllProducts()
+                .FirstOrDefault(p => p.Name == shoppingCart.Product.Name);
+            if (product == null)
+            {
+                throw new Exception("Product not found");
+            }
             _shoppingCartService.RemoveProduct(userId, product);
         }
 
