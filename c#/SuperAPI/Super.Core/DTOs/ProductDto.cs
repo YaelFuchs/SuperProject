@@ -13,5 +13,6 @@ namespace Super.Core.DTOs
         public string Name { get; set; }
         public Category Category { get; set; }
         public eUnitOfMeasure UnitOfMeasure { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }

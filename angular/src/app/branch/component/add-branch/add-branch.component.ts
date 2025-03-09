@@ -21,7 +21,8 @@ export class AddBranchComponent implements OnInit  {
      name: new FormControl('', Validators.required),
      phone:new FormControl('', [Validators.required,Validators.minLength(7)]),
      address:new FormControl('', Validators.required),
-     email:new FormControl('', [Validators.required,Validators.email])
+     email:new FormControl('', [Validators.required,Validators.email]),
+     shoppingCost : new FormControl('', Validators.required) 
     })
   }
   addBranch(){

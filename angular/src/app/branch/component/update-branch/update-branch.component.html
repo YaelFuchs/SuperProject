@@ -35,6 +35,13 @@
                 invalid email
             </div>     
         </div>
+        <label>עלות משלוח:</label>
+            <input type="text" name="shoppingCost" [(ngModel)]= "branch.shoppingCost" required = "true" #shoppingCost = "ngModel" >
+            <div [ngSwitch] = "shoppingCost.errors">
+                <div *ngSwitchCase = "'required'">
+                    you must enter shoppingCost!
+                </div>
+            </div>
         <button [disabled]="form.invalid" (click)="saveChanges()" >עדכון</button>
     </div>
 

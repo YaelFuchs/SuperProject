@@ -22,9 +22,9 @@ namespace Super.Service
             _shoppingCartRepository.addShoppingCart(userId);
         }
 
-        public void AddProduct(int userId, Product product, double quantity = 1)
+        public void AddProduct(int userId, Product product)
         {
-            _shoppingCartRepository.AddProduct(userId, product, quantity);
+            _shoppingCartRepository.AddProduct(userId, product);
         }
         public void RemoveProduct(int userId, Product product)
         {

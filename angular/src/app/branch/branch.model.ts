@@ -4,4 +4,5 @@ export class Branch{
      phone !:string
      address !:string
      email !: string
+     shoppingCost !:number
 }

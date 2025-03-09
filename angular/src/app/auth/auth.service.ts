@@ -80,7 +80,7 @@ export class AuthService implements OnInit{
   }
 
   login(auth: Auth): void {
-    this._httpClient.post<{id: number, token: string }>(this.basicUrl, auth).subscribe({
+    this._httpClient.post<{id: number, token: string }>(this.basicUrl, auth,{ withCredentials: true }).subscribe({
       next: (res) => {
         console.log('תגובת השרת:', res);
         if (isPlatformBrowser(this._platformId)) {

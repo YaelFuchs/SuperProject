@@ -45,6 +45,9 @@ namespace Super.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ShippingCost")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Branches");
@@ -103,6 +106,9 @@ namespace Super.Data.Migrations
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()

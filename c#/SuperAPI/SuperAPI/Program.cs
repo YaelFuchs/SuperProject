@@ -28,10 +28,12 @@ builder.Configuration
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost", builder =>
-        builder.WithOrigins("http://localhost:4200")  // כתובת הלקוח
+    options.AddPolicy("AllowLocalhost", policy =>
+        policy.WithOrigins("http://localhost:4200")  // כתובת הלקוח
                .AllowAnyMethod()
-               .AllowAnyHeader());
+               .AllowAnyHeader()
+               .AllowCredentials() );
+
 });
 
 // הגדרת Swagger עם תמיכה ב-JWT
@@ -142,6 +144,7 @@ builder.Services.AddAutoMapper( typeof(PostCategoryMapping));
 builder.Services.AddScoped<IBranchProductService, BranchProductService>();
 builder.Services.AddScoped<IBranchProductRepository, BranchProductRepository>();
 builder.Services.AddAutoMapper(typeof(MappingBranchProduct),typeof(PostBranchProductMapping));
+builder.Services.AddAutoMapper(typeof(MappingProductPrice));
 
 builder.Services.AddScoped<IBranchService, BranchService>();
 builder.Services.AddScoped<IBranchRepository, BranchRepository>();
@@ -163,6 +166,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowSpecificOrigin");
 app.UseAuthentication();
 app.UseAuthorization();
 

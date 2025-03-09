@@ -114,6 +114,8 @@ namespace Super.Data.Repositories
 
                 userToUpdate.Email = user.Email;
                 userToUpdate.Phone = user.Phone;
+              
+                
 
                 if (user.Password != null )
                 {

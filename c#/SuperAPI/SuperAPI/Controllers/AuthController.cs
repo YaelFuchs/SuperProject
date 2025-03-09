@@ -59,6 +59,15 @@ public class AuthController : ControllerBase
         // הפוך את הטוקן ל-String
         var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
+        var cookieOptions = new CookieOptions
+        {
+            HttpOnly = true,  // מונע גישה דרך JavaScript
+            Secure = true,    // מחייב שימוש ב-HTTPS
+            SameSite = SameSiteMode.None, // תומך בבקשות Cross-Origin
+            Expires = DateTime.UtcNow.AddMinutes(420)
+        };
+
+        Response.Cookies.Append("jwt", tokenString, cookieOptions);
         // החזר את הטוקן כתגובה
         return Ok(new { findUser.Id, Token = tokenString });
     }

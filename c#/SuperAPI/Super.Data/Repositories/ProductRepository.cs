@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Super.Core.Models;
 using Super.Core.Repositories;
 using System;
@@ -44,7 +45,6 @@ namespace Super.Data.Repositories
             {
                 var category = _context.Categories.FirstOrDefault(c => c.Id == product.CategoryId);
 
-
                 Console.WriteLine($"category: {category?.Name ?? "null"}"); // הדפסת שם הקטגוריה
                 Console.WriteLine($"id: {category?.Id ?? 0}");
 
@@ -55,7 +55,7 @@ namespace Super.Data.Repositories
 
                     Console.WriteLine($"cateroryyyyyy: {category}" );
                     _context.Products.Add(product); // הוספת המוצר ל-context
-                    _context.SaveChanges(); // שמירת השינויים
+                     _context.SaveChanges();
                     return; // יציאה מהמתודה אם הצלחנו
                 }
                 else

@@ -10,7 +10,7 @@ namespace Super.Core.Service
     public interface IShoppingCartService
     {
         public void addShoppingCart(int userId);
-        public void AddProduct(int userId, Product product, double quantity );
+        public void AddProduct(int userId, Product product);
         public void RemoveProduct(int userId, Product product);
         public void ClearCart(int userId);
         public List<ShoppingCartItem> GetShoppingCarts(int userId);

@@ -20,7 +20,8 @@ export class UpdateBranchComponent implements OnInit{
       name:this.branchUpdate.name ,
       phone: this.branchUpdate.phone,
       address: this.branchUpdate.address ,
-      email: this.branchUpdate.email
+      email: this.branchUpdate.email,
+      shoppingCost: this.branchUpdate.shoppingCost
     }   
   }
 

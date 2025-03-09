@@ -37,7 +37,13 @@
             }
         }
     </div>
-
+    <div>
+        <label>  עלות משלוח:  </label>
+        <input type="text" formControlName="shoppingCost"  #id >
+        @if (addForm.controls['shoppingCost'].invalid && (addForm.controls['shoppingCost'].dirty || addForm.controls['shoppingCost'].touched)) {
+            <div>you must enter shoppingCost</div>
+        }   
+    </div>
 
 
 

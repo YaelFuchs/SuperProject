@@ -54,8 +54,8 @@ namespace SuperAPI.Controllers
             }
 
             // הוספת המוצר לסל
-            _shoppingCartService.AddProduct(userId, product, shoppingCart.Quantity);
-        }
+                _shoppingCartService.AddProduct(userId, product);
+            }
 
         // PUT api/<ShoppingCartController>/5
         [HttpPut]

@@ -38,32 +38,52 @@ namespace SuperAPI.Controllers
         [HttpGet("{Id}")]
         public ActionResult GetUserById(int Id)
         {
+            try { 
             var user= _userService.GetUserById(Id);
             var userDto=_mapper.Map<UserDto>(user);
             return Ok(userDto);
+            }
+            catch (Exception ex) { 
+            return BadRequest("problem with fetch the data");
+            }
         }
 
         //POST api/<UsersController>
         //[AllowAnonymous]
         [HttpPost]
-        public void SignUp([FromBody] UserPostModel user)
+        public IActionResult SignUp([FromBody] UserPostModel user)
         {
-            Console.WriteLine("הצלחתי להיכנס");
-             _userService.SignUp(_mapper.Map<User>(user));
+            try
+            {
+                _userService.SignUp(_mapper.Map<User>(user));
+                return Ok("User registered successfully"); // החזרת תגובה מוצלחת
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message); // החזרת תגובה עם הודעת השגיאה
+            }
         }
 
 
         // PUT api/<UsersController>/5
         [HttpPut("{Id}")]
-        public void Put(int Id, [FromBody] UserPostModel user)
+        public IActionResult Put(int Id, [FromBody] UserPostModel user)
         {
-            _userService.UpdateUser(Id, _mapper.Map<User>(user));
+            try {
+                _userService.UpdateUser(Id, _mapper.Map<User>(user));
+                return Ok("update successfully");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest("error");
+            }
         }
 
         // DELETE api/<UsersController>/5
         [HttpDelete("{Id}")]
         public ActionResult Delete(int Id)
         {
+            try { 
             var userClaims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
             Console.WriteLine("Claims received from token:");
             foreach (var claim in userClaims)
@@ -73,6 +93,11 @@ namespace SuperAPI.Controllers
 
             _userService.DeleteUser(Id);
             return Ok(new { message = "User deleted successfully" });
+            }
+            catch
+            {
+                return BadRequest("problem with the delete");
+            }
         }
     }
 }

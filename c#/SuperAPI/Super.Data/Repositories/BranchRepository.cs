@@ -62,6 +62,10 @@ namespace Super.Data.Repositories
                 if(branchToUpdate.Phone != branch.Phone) { 
                     branchToUpdate.Phone = branch.Phone;
                 }
+                if (branchToUpdate.ShippingCost != branch.ShippingCost)
+                {
+                    branchToUpdate.ShippingCost = branch.ShippingCost;
+                }
                 _context.SaveChanges();
 
             }

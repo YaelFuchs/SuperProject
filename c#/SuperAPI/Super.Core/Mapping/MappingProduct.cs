@@ -13,7 +13,11 @@ namespace Super.Core.Mapping
     {
         public MappingProduct()
         {
-            CreateMap<ProductDto,Product>().ReverseMap();
+            CreateMap<Product, ProductDto>().ReverseMap();
         }
+
+       
+     
+
     }
 }
