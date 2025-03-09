@@ -1,4 +1,4 @@
-import { Product } from "../product/product.model"
+import { Product, eUnitOfMeasure } from "../product/product.model"
 
 export class Cart{
     id!:number
@@ -7,9 +7,15 @@ export class Cart{
 }
 export class CartItem{
     Id!:number
-    ShoppingCartId !:number
-    ShoppingCart!:Cart
-    ProductId !:number
-    Product!:Product
-    Quantity!:number
+    shoppingCartId !:number
+    shoppingCart!:Cart
+    productId !:number
+    product!:Product
+    quantity!:number
+}
+
+export class PostCart{
+    name! : string
+    categoryId!: number
+    UnitOfMeasure!: eUnitOfMeasure
 }

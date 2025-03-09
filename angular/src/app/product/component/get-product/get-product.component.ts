@@ -5,6 +5,7 @@ import { ProductService } from '../../product.service';
 import { AuthService } from '../../../auth/auth.service';
 import { Category } from '../../../category/category.model';
 import { CategoryService } from '../../../category/category.service';
+import { CartService } from '../../../cart/cart.service';
 
 @Component({
   selector: 'app-get-product',
@@ -24,6 +25,7 @@ export class GetProductComponent implements OnInit {
     private _router: Router,
     private _productService: ProductService,
     private __authService: AuthService,
+    private _cartService: CartService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
@@ -70,5 +72,33 @@ export class GetProductComponent implements OnInit {
 
   isAdmin(): boolean {
     return this.__authService.isAdmin();  // מחזיר true אם המשתמש הוא אדמין
+  }
+  addProductToCart(product: Product){
+    const shoppingCart = {
+      name: product.name, 
+      categoryId: product.category.id,
+      UnitOfMeasure: product.UnitOfMeasure
+  };
+  this._cartService.addProduct(this.getUserId() ,shoppingCart).subscribe({
+    next:(res)=>{
+      console.log("המוצר נוסף בהצלחה", res);
+    },
+    error: (err)=>{
+      console.log("המוצר לא הצליח להתווסף");
+      
+    }
+  })
+  }
+  private getUserId(): number {
+    const authDataString = localStorage.getItem('authToken');
+    if (authDataString) {
+      try {
+        const authData = JSON.parse(authDataString);
+        return authData.userId || 0;
+      } catch (error) {
+        console.error("שגיאה בפרסור authToken:", error);
+      }
+    }
+    return 0;
   }
 }

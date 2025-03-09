@@ -4,7 +4,9 @@ namespace SuperAPI.Models
 {
     public class ShoppingCartModel
     {
-        public ProductPostModel Product { get; set; }
-        public double Quantity { get; set; } 
+        public string Name { get; set; }
+        public int CategoryId { get; set; }
+        public eUnitOfMeasure UnitOfMeasure { get; set; }
+
     }
 }

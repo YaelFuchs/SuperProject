@@ -4,6 +4,7 @@
     <p>שם מוצר: {{ product.name }}</p>
     <button (click)="update(product)">עדכון מוצר</button>
     <button (click)="showDetailes(product.id)">פרטים נוספים</button>
+    <button (click)="addProductToCart(product)">הוספת מוצר לסל</button>
 
     @if(productToUpdate && productToUpdate.id == product.id && showUpdate){
       <app-update-product [productUpdate] = "productToUpdate" (updateProduct)="onUpdateProduct()"></app-update-product>

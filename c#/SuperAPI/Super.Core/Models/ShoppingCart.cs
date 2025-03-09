@@ -11,7 +11,6 @@ namespace Super.Core.Models
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-
         // במקום Dictionary, רשימה של פריטים בסל
         public List<ShoppingCartItem> Carts { get; set; } = new List<ShoppingCartItem>();
 

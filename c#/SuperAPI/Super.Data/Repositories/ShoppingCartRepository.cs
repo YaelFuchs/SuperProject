@@ -4,6 +4,7 @@ using Super.Core.Models;
 using Super.Core.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,15 +32,18 @@ namespace Super.Data.Repositories
         public void AddProduct(int userId, Product product)
         {
             // בדיקה אם המוצר קיים במסד הנתונים
-            var existingProduct = _context.Products.FirstOrDefault(p => p.Id == product.Id);
+            var existingProduct = _context.Products
+                .FirstOrDefault(p => p.Id == product.Id);
             if (existingProduct == null)
             {
                 throw new Exception("המוצר לא נמצא במסד הנתונים.");
             }
 
             var cart = _context.ShoppingCarts
+                .Where(c => c.UserId == userId)
+                .OrderByDescending(c => c.Id)  
                 .Include(c => c.Carts) // חשוב כדי לטעון את הפריטים בסל
-                .FirstOrDefault(c => c.UserId == userId);
+                .FirstOrDefault();
 
             if (cart == null)
             {
@@ -62,16 +66,25 @@ namespace Super.Data.Repositories
         }
 
 
-        public void RemoveProduct(int userId,Product product)
+        public void RemoveProduct(int userId, Product product)
         {
             var cart = _context.ShoppingCarts
+                .Where(c => c.UserId == userId)
+                .OrderByDescending(c => c.Id)
                 .Include(c => c.Carts)
-                .FirstOrDefault(c => c.UserId == userId);
+                .FirstOrDefault();
+
+            if (cart == null)
+                return;
+
             var existingItem = cart.Carts.FirstOrDefault(i => i.ProductId == product.Id);
-            if (existingItem.Quantity == 0)
+            if (existingItem == null)
+                return;
+
+            if (existingItem.Quantity == 1)
             {
-                _context.ShoppingCartsItem.Remove(existingItem);
-                cart.Carts.Remove(existingItem);
+                _context.ShoppingCartsItem.Remove(existingItem); // מחיקה מה-DB
+                cart.Carts.Remove(existingItem); // מחיקה מהאוסף בזיכרון
             }
             else
             {
@@ -81,32 +94,47 @@ namespace Super.Data.Repositories
             _context.SaveChanges();
         }
 
+
         public void ClearCart(int userId)
         {
             var cart = _context.ShoppingCarts
-                .Include(c => c.Carts) // טוען גם את הפריטים של הסל
-                .FirstOrDefault(c => c.UserId == userId);
+                .Where(c => c.UserId == userId)
+                .OrderByDescending(c => c.Id)
+                .Include(c => c.Carts) // טוען את הפריטים של הסל
+                .FirstOrDefault();
 
-            if (!cart.Carts.Any())
-                return; // אם הסל לא קיים או ריק - אין מה למחוק
+            if (cart == null)
+            {
+                Console.WriteLine("⚠️ לא נמצא סל למשתמש עם ID: " + userId);
+                return;
+            }
+
+            Console.WriteLine("✅ נמצא סל למשתמש: " + userId);
+            Console.WriteLine("🔹 מספר פריטים בסל: " + cart.Carts.Count);
 
             // מחיקת כל הפריטים מה-DbSet של ShoppingCartItems
             _context.ShoppingCartsItem.RemoveRange(cart.Carts);
+            Console.WriteLine("🗑️ פריטי הסל נמחקו");
 
-            // ניקוי הרשימה מתוך האובייקט של הסל
-            cart.Carts.Clear();
+            // מחיקת הסל עצמו מה-DbSet
+            _context.ShoppingCarts.Remove(cart);
+            Console.WriteLine("🗑️ הסל נמחק");
 
             _context.SaveChanges(); // שמירת השינויים בבסיס הנתונים
+            Console.WriteLine("✅ שינויים נשמרו בהצלחה!");
         }
+
 
         public List<ShoppingCartItem> GetShoppingCarts(int userId)
         {
-            var cart =  _context.ShoppingCarts
-                .Include(c => c.Carts) // טוען גם את הפריטים של הסל
-                .ThenInclude(item => item.Product)
-                .ThenInclude(c=> c.Category)
-                .FirstOrDefault(c => c.UserId == userId);
-            if(cart != null)
+            var cart = _context.ShoppingCarts
+             .Where(c => c.UserId == userId)
+             .OrderByDescending(c => c.Id) // מזהה אחרון = סל אחרון
+             .Include(c => c.Carts)
+             .ThenInclude(item => item.Product)
+             .ThenInclude(c => c.Category)
+             .FirstOrDefault();
+            if (cart != null)
             {
                 return cart.Carts;
             }
@@ -115,16 +143,19 @@ namespace Super.Data.Repositories
                 return new List<ShoppingCartItem>();
             }
         }
-        public (List<ProductPriceDto> userResult, CheapestShoppingCartResult managerResult) CalculateCheapestCart(int userId)
+        //=====================================להוסיף את כל הקטע עם האחרון גם כאן?
+        public ResultDto CalculateCheapestCart(int userId)
         {
             var cart = _context.ShoppingCarts
+                .Where(c => c.UserId == userId)
+                .OrderByDescending(c => c.Id)
                 .Include(c => c.Carts)
                 .ThenInclude(item => item.Product)
-                .FirstOrDefault(c => c.UserId == userId);
+                .FirstOrDefault();
 
             if (cart == null || !cart.Carts.Any())
             {
-                return (null, null); // סל ריק או לא קיים
+                return null; // סל ריק או לא קיים
             }
 
             var products = cart.Carts.Select(item => item.Product).ToList();
@@ -223,8 +254,10 @@ namespace Super.Data.Repositories
                 }
                 managerResult.ProductOrigins[products[i]] = branches[cheapestStore];
             }
-
-            return (userResult, managerResult);
+            var result = new ResultDto {Prices= userResult,
+                                        CheapestShoppingCartResult = managerResult 
+                                         };
+            return result;
         }
 
         private double[] CalculateCombinedCost(HashSet<int> selectedBranches, double[][] prices, int numProducts)

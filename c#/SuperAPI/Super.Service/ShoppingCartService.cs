@@ -1,4 +1,5 @@
-﻿using Super.Core.Models;
+﻿using Super.Core.DTOs;
+using Super.Core.Models;
 using Super.Core.Repositories;
 using Super.Core.Service;
 using Super.Data.Repositories;
@@ -37,6 +38,10 @@ namespace Super.Service
         public List<ShoppingCartItem> GetShoppingCarts(int userId)
         {
             return _shoppingCartRepository.GetShoppingCarts(userId);
+        }
+        public ResultDto CalculateCheapestCart(int userId)
+        {
+            return _shoppingCartRepository.CalculateCheapestCart(userId);
         }
     }
 }

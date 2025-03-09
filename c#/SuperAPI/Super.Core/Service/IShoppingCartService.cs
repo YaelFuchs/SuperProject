@@ -1,4 +1,5 @@
-﻿using Super.Core.Models;
+﻿using Super.Core.DTOs;
+using Super.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace Super.Core.Service
         public void RemoveProduct(int userId, Product product);
         public void ClearCart(int userId);
         public List<ShoppingCartItem> GetShoppingCarts(int userId);
+        public ResultDto CalculateCheapestCart(int userId);
     }
 }

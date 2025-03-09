@@ -1,1 +1,14 @@
-<p>get-cart works!</p>
+@if (carts.length > 0) {
+    @for (cart of carts; track cart.Id) {
+      <div style="border: 1px solid brown; margin-bottom: 10px;">
+        <p>שם מוצר: {{ cart.product.name }}</p>
+        <p>מספר יחידות: {{cart.quantity}}</p>
+        <button (click)="addProductFromCart(cart.product)">להוספת יחידה</button>
+        <button (click)="deleteProductFromCart(cart.product)">מחיקת יחידה</button>
+      </div>
+    }
+    <button (click)="orderCart()">לביצוע ההזמנה</button>
+  } @else {
+    <p>כרגע אין מוצרים בסל</p>
+  }
+  

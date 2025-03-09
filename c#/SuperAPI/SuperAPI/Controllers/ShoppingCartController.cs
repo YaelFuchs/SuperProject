@@ -27,10 +27,32 @@ namespace SuperAPI.Controllers
      
 
         // GET api/<ShoppingCartController>/5
-        [HttpGet]
+        [HttpGet("{userId}")]
         public ActionResult GetShoppingCarts(int userId)
         {
-            return Ok(_mapper.Map<List<ShoppingCartItemDto>>(_shoppingCartService.GetShoppingCarts(userId)));
+            //return Ok(_mapper.Map<List<ShoppingCartItemDto>>(_shoppingCartService.GetShoppingCarts(userId)));
+            var shoppingCartDtos = _mapper.Map<List<ShoppingCartItemDto>>(_shoppingCartService.GetShoppingCarts(userId));
+
+            foreach (var cartDto in shoppingCartDtos)
+            {
+                if (cartDto.Product.ImageUrl != null)
+                {
+                    var path = Path.Combine(Environment.CurrentDirectory, "images/", cartDto.Product.ImageUrl);
+                    if (System.IO.File.Exists(path))
+                    {
+                        byte[] bytes = System.IO.File.ReadAllBytes(path);
+                        string imageBase64 = Convert.ToBase64String(bytes);
+                        cartDto.Product.ImageUrl = string.Format("data:image/jpeg;base64,{0}", imageBase64);
+                    }
+                    else
+                    {
+                        // אם הקובץ לא קיים, הגדר את ImageUrl ל-null או תמונה ברירת מחדל
+                        cartDto.Product.ImageUrl = null; // או תמונה ברירת מחדל
+                    }
+                }
+            }
+
+            return Ok(shoppingCartDtos);
         }
 
         // POST api/<ShoppingCartController>
@@ -40,12 +62,12 @@ namespace SuperAPI.Controllers
             _shoppingCartService.addShoppingCart(userId);
         }
         // POST api/<ShoppingCartController>
-        [HttpPost("/addToCart")]
+        [HttpPost("addToCart/{userId}")]
         public void AddProduct(int userId, [FromBody] ShoppingCartModel shoppingCart)
         {
             // שליפת המוצר לפי השם
             var product = _productService.GetAllProducts()
-                .FirstOrDefault(p => p.Name == shoppingCart.Product.Name);
+                .FirstOrDefault(p => p.Name == shoppingCart.Name);
 
             // אם המוצר לא נמצא, מחזירים שגיאה או מבצעים פעולה אחרת
             if (product == null)
@@ -58,11 +80,11 @@ namespace SuperAPI.Controllers
             }
 
         // PUT api/<ShoppingCartController>/5
-        [HttpPut]
+        [HttpPut("{userId}")]
         public void RemoveProduct(int userId, [FromBody] ShoppingCartModel shoppingCart)
         {
             var product = _productService.GetAllProducts()
-                .FirstOrDefault(p => p.Name == shoppingCart.Product.Name);
+                .FirstOrDefault(p => p.Name == shoppingCart.Name);
             if (product == null)
             {
                 throw new Exception("Product not found");
@@ -71,10 +93,16 @@ namespace SuperAPI.Controllers
         }
 
         // DELETE api/<ShoppingCartController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{userId}")]
         public void ClearCart(int userId)
         {
             _shoppingCartService.ClearCart(userId);
+        }
+
+        [HttpGet("getCheapestCart/{userId}")]
+        public IActionResult CalculateCheapestCart(int userId)
+        {
+            return Ok(_shoppingCartService.CalculateCheapestCart(userId));
         }
     }
 }
