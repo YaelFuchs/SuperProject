@@ -8,33 +8,33 @@ import { BranchService } from '../../branch.service';
   templateUrl: './add-branch.component.html',
   styleUrl: './add-branch.component.scss'
 })
-export class AddBranchComponent implements OnInit  {
+export class AddBranchComponent implements OnInit {
   @Output() branchAdded = new EventEmitter<Branch>();
 
-  message=''
-  public addForm!:FormGroup;
+  message = ''
+  public addForm!: FormGroup;
 
-  constructor(private _branchService: BranchService){}
+  constructor(private _branchService: BranchService) { }
 
   ngOnInit(): void {
     this.addForm = new FormGroup({
-     name: new FormControl('', Validators.required),
-     phone:new FormControl('', [Validators.required,Validators.minLength(7)]),
-     address:new FormControl('', Validators.required),
-     email:new FormControl('', [Validators.required,Validators.email]),
-     shoppingCost : new FormControl('', Validators.required) 
+      name: new FormControl('', Validators.required),
+      phone: new FormControl('', [Validators.required, Validators.minLength(7)]),
+      address: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      shoppingCost: new FormControl('', Validators.required)
     })
   }
-  addBranch(){
-    
+  addBranch() {
+
     this._branchService.addBranch(this.addForm.value).subscribe({
-      next: (res)=>{
+      next: (res) => {
         console.log("הסניף נוסף בהצלחה", res);
         this.branchAdded.emit(res);
       },
-      error:(err)=>{
+      error: (err) => {
         this.message = err;
       }
     })
-   }
+  }
 }

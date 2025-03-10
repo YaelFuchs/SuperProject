@@ -4,10 +4,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { UserRoutingModule } from "./user.routing.module";
 import { SignUpComponent } from "./component/sign-up/sign-up.component";
 import { UpdateUserComponent } from "./component/update-user/update-user.component";
+import { PersonalAreaComponent } from "./component/personal-area/personal-area.component";
 
 @NgModule({
-    declarations:[SignUpComponent, UpdateUserComponent],
-    imports:[
+    declarations: [SignUpComponent, UpdateUserComponent, PersonalAreaComponent],
+    imports: [
         CommonModule,
         ReactiveFormsModule,
         NgClass,
@@ -17,4 +18,4 @@ import { UpdateUserComponent } from "./component/update-user/update-user.compone
 
     ]
 })
-export class UserModule{}
+export class UserModule { }

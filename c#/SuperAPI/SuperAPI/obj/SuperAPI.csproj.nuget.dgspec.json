@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\SuperAPI\\SuperAPI.csproj": {}
+    "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\SuperAPI\\SuperAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj": {
+    "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj",
+        "projectUniqueName": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj",
         "projectName": "Super.Core",
-        "projectPath": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj",
+        "projectPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj",
         "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Core\\obj\\",
+        "outputPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -73,14 +73,14 @@
         }
       }
     },
-    "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj": {
+    "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj",
+        "projectUniqueName": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj",
         "projectName": "Super.Data",
-        "projectPath": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj",
+        "projectPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj",
         "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Data\\obj\\",
+        "outputPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -97,8 +97,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj": {
-                "projectPath": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj"
+              "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj": {
+                "projectPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj"
               }
             }
           }
@@ -135,6 +135,10 @@
               "target": "Package",
               "version": "[1.9.1, )"
             },
+            "PayPalServerSDK": {
+              "target": "Package",
+              "version": "[0.6.1, )"
+            },
             "SendGrid": {
               "target": "Package",
               "version": "[9.29.3, )"
@@ -160,14 +164,14 @@
         }
       }
     },
-    "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj": {
+    "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj",
+        "projectUniqueName": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj",
         "projectName": "Super.Service",
-        "projectPath": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj",
+        "projectPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj",
         "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Service\\obj\\",
+        "outputPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -184,11 +188,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj": {
-                "projectPath": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj"
+              "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj": {
+                "projectPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj"
               },
-              "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj": {
-                "projectPath": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj"
+              "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj": {
+                "projectPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj"
               }
             }
           }
@@ -222,14 +226,14 @@
         }
       }
     },
-    "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\SuperAPI\\SuperAPI.csproj": {
+    "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\SuperAPI\\SuperAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\SuperAPI\\SuperAPI.csproj",
+        "projectUniqueName": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\SuperAPI\\SuperAPI.csproj",
         "projectName": "SuperAPI",
-        "projectPath": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\SuperAPI\\SuperAPI.csproj",
+        "projectPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\SuperAPI\\SuperAPI.csproj",
         "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\SuperAPI\\obj\\",
+        "outputPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\SuperAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -247,8 +251,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj": {
-                "projectPath": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj"
+              "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj": {
+                "projectPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Service\\Super.Service.csproj"
               }
             }
           }

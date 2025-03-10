@@ -2,18 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { CartItem, PostCart } from '../../cart.model';
 import { CartService } from '../../cart.service';
 import { Router } from '@angular/router';
-import { PostProduct, Product } from '../../../product/product.model';
+import { Product } from '../../../product/product.model';
 
 @Component({
   selector: 'app-get-cart',
   templateUrl: './get-cart.component.html',
   styleUrl: './get-cart.component.scss'
 })
-export class GetCartComponent implements OnInit{
-  carts:CartItem[] = [];
-  userId=0
+export class GetCartComponent implements OnInit {
+  carts: CartItem[] = [];
+  userId = 0
   shoppingCart!: PostCart
-  constructor(private _cartService: CartService, private _router : Router){}
+  orderPrice: number = 0
+  constructor(private _cartService: CartService, private _router: Router) { }
 
   ngOnInit(): void {
     const authDataString = localStorage.getItem('authToken');
@@ -30,66 +31,81 @@ export class GetCartComponent implements OnInit{
       console.log('אין authToken ב-localStorage');
     }
     this.getCart();
-  }
-getCart(){
-  this._cartService.getCartByUserId(this.userId).subscribe({
-    next: (res)=>{
-      this.carts = res;
-      console.log("הסל שחוזר למשתמש: ", res,);
-    },
-    error: (err)=>{
-      console.log("שגיאה בהבאת סל הקניות של המשתמש", err);
-      
+    const c = localStorage.getItem('orderPrice');
+    if (c) {
+      this.orderPrice = JSON.parse(c);
+      console.log("מהלוקאלסטוראגגגגגג", this.orderPrice);
     }
-  })
-}
-deleteProductFromCart(product: Product){
-  const p = {
-    name: product.name,
-    categoryId: product.category.id,
-    UnitOfMeasure: product.UnitOfMeasure
   }
-  this._cartService.removeProduct(this.userId ,p).subscribe({
-    next:(res)=>{
-      console.log("המוצר נמחק בהצלחה", res);
-      this.getCart();
-    },
-    error: (err)=>{
-      console.log("המוצר לא הצליח להימחק");
-      
-    }
-  })
-}
-addProductFromCart(product: Product){
-   this.shoppingCart = {
-      name: product.name, 
+  getCart() {
+    this._cartService.getCartByUserId(this.userId).subscribe({
+      next: (res) => {
+        this.carts = res;
+        console.log("הסל שחוזר למשתמש: ", res,);
+      },
+      error: (err) => {
+        console.log("שגיאה בהבאת סל הקניות של המשתמש", err);
+      }
+    })
+  }
+  deleteProductFromCart(product: Product) {
+    const p = {
+      name: product.name,
       categoryId: product.category.id,
       UnitOfMeasure: product.UnitOfMeasure
-  };
-  this._cartService.addProduct(this.userId ,this.shoppingCart).subscribe({
-    next:(res)=>{
-      console.log("המוצר נוסף בהצלחה", res);
-      this.getCart();
-    },
-    error: (err)=>{
-      console.log("המוצר לא הצליח להתווסף");
-      
     }
-  })
-}
+    this._cartService.removeProduct(this.userId, p).subscribe({
+      next: (res) => {
+        console.log("המוצר נמחק בהצלחה", res);
+        this.getCart();
+      },
+      error: (err) => {
+        console.log("המוצר לא הצליח להימחק");
+      }
+    })
+  }
+  addProductFromCart(product: Product) {
+    this.shoppingCart = {
+      name: product.name,
+      categoryId: product.category.id,
+      UnitOfMeasure: product.UnitOfMeasure
+    };
+    this._cartService.addProduct(this.userId, this.shoppingCart).subscribe({
+      next: (res) => {
+        console.log("המוצר נוסף בהצלחה", res);
+        this.getCart();
+      },
+      error: (err) => {
+        console.log("המוצר לא הצליח להתווסף");
+      }
+    })
+  }
+  getPrice() {
+    this._cartService.CalculateCheapestCart(this.userId).subscribe({
+      next: (res) => {
+        console.log("תוצאת האלגוריתם:", res);
+        this._cartService.addCart(this.userId);
+        this.orderPrice = res?.cheapestShoppingCartResult?.bestCost
+        localStorage.setItem('orderPrice', JSON.stringify(this.orderPrice))
+      },
+      error: (err) => {
+        alert("שגיאה בביצוע ההזמנה")
+        console.log("err", err);
 
-orderCart(){
-  this._cartService.CalculateCheapestCart(this.userId).subscribe({
-    next:(res)=>{
-      alert("ההזמנה בוצעה")
-      console.log("תוצאת האלגוריתם:",res);
-      this._cartService.addCart(this.userId)     
-    },
-    error:(err)=>{
-      alert("שגיאה בביצוע ההזמנה")
-     console.log("err",err);
-     
-    }
-  })
-}
+      }
+    })
+  }
+  orderCart() {
+    this._router.navigate(['paypal', this.userId, this.orderPrice]);
+    this._cartService.addCart(this.userId).subscribe({
+      next: (res) => {
+        console.log("פתיחת סל חזר בוצעה בהצלחה", res);
+        localStorage.removeItem('orderPrice');
+      },
+      error: (err) => {
+        console.log("לא נפתח סל חדש");
+
+      }
+    })
+  }
 }

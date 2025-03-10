@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IExFAXebcC0zCishJ5rRMdNX7Fot0g7G3g8K+YrFIJmm2VjGJyo8USF9nSbUhGUpBuunJZzJDPcNZUTyIqqVOw==",
+  "dgSpecHash": "cW/lOS7N+eww1uRBZUOgA4g/v0rP4KfF9DtFIlHOYte+zh1Nx9yisWy5dFi8DOI7d3sEUA2VRR4A5OUU92UFkg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj",
+  "projectFilePath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user1\\.nuget\\packages\\automapper\\6.0.2\\automapper.6.0.2.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",

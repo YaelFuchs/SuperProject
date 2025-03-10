@@ -1,8 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../user.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, AbstractControl, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
+export function validatePhoneNumber(control: AbstractControl): ValidationErrors | null {
+  if (!control.value) {
+    return null; // אם השדה ריק - לא מחזירים שגיאה
+  }
+
+  const phoneNumber = parsePhoneNumberFromString(control.value, 'IL'); // IL זה ישראל
+  return phoneNumber && phoneNumber.isValid() ? null : { invalidPhone: true };
+}
 @Component({
   selector: 'app-update-user',
   templateUrl: './update-user.component.html',
@@ -13,7 +22,7 @@ export class UpdateUserComponent implements OnInit {
   public userId: number = 0;
   public userData: any = {}; // ברירת מחדל ריקה עד שהנתונים נטענים
 
-  constructor(private _userService: UserService, private _router: Router) {}
+  constructor(private _userService: UserService, private _router: Router) { }
 
   ngOnInit(): void {
     // חילוץ ה-userId מ-localStorage
@@ -35,7 +44,12 @@ export class UpdateUserComponent implements OnInit {
     this.userForm = new FormGroup({
       userName: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      address: new FormControl('', Validators.required),
+      phone: new FormControl('', [
+        Validators.required,
+        validatePhoneNumber // שימי לב שאין צורך ב-`this`
+      ])
     });
 
     // קריאה לשרת לטעינת נתוני המשתמש
@@ -48,7 +62,9 @@ export class UpdateUserComponent implements OnInit {
         // עדכון ה-FormGroup עם הנתונים מהשרת
         this.userForm.patchValue({
           userName: this.userData.userName || '',
-          email: this.userData.email || ''
+          email: this.userData.email || '',
+          address: this.userData.address || '',
+          phone: this.userData.phone || ''
         });
       },
       error: (err) => {

@@ -9,22 +9,21 @@ using SuperAPI.Models;
 
 namespace SuperAPI.Controllers
 {
+    [Authorize(Policy = "User")]
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Policy = "User")]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public UsersController(IUserService userService,IMapper mapper)
+        public UsersController(IUserService userService, IMapper mapper)
         {
             _userService = userService;
             _mapper = mapper;
         }
         // GET: api/<UsersController>
-        //[Authorize(Policy = "Manager")]
-
+        [Authorize(Policy = "Manager")]
         [HttpGet]
         public ActionResult GetAllUsers()
         {
@@ -38,61 +37,60 @@ namespace SuperAPI.Controllers
         [HttpGet("{Id}")]
         public ActionResult GetUserById(int Id)
         {
-            try { 
-            var user= _userService.GetUserById(Id);
-            var userDto=_mapper.Map<UserDto>(user);
-            return Ok(userDto);
+            try
+            {
+                var user = _userService.GetUserById(Id);
+                var userDto = _mapper.Map<UserDto>(user);
+                return Ok(userDto);
             }
-            catch (Exception ex) { 
-            return BadRequest("problem with fetch the data");
+            catch (Exception ex)
+            {
+                return BadRequest("problem with fetch the data");
             }
         }
-
         //POST api/<UsersController>
-        //[AllowAnonymous]
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult SignUp([FromBody] UserPostModel user)
         {
             try
             {
                 _userService.SignUp(_mapper.Map<User>(user));
-                return Ok("User registered successfully"); // החזרת תגובה מוצלחת
+                return Ok(new { message = "User registered successfully" }); // החזרת תגובה מוצלחת
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message); // החזרת תגובה עם הודעת השגיאה
             }
         }
-
-
         // PUT api/<UsersController>/5
         [HttpPut("{Id}")]
         public IActionResult Put(int Id, [FromBody] UserPostModel user)
         {
-            try {
+            try
+            {
                 _userService.UpdateUser(Id, _mapper.Map<User>(user));
-                return Ok("update successfully");
+                return Ok(new { message = "update successfully" });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest("error");
             }
         }
-
         // DELETE api/<UsersController>/5
         [HttpDelete("{Id}")]
         public ActionResult Delete(int Id)
         {
-            try { 
-            var userClaims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
-            Console.WriteLine("Claims received from token:");
-            foreach (var claim in userClaims)
+            try
             {
-                Console.WriteLine($"{claim.Type}: {claim.Value}");
-            }
-
-            _userService.DeleteUser(Id);
-            return Ok(new { message = "User deleted successfully" });
+                var userClaims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
+                Console.WriteLine("Claims received from token:");
+                foreach (var claim in userClaims)
+                {
+                    Console.WriteLine($"{claim.Type}: {claim.Value}");
+                }
+                _userService.DeleteUser(Id);
+                return Ok(new { message = "User deleted successfully" });
             }
             catch
             {

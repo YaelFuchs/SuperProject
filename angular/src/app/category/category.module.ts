@@ -9,7 +9,7 @@ import { UpdateCategoryComponent } from './component/update-category/update-cate
 import { GetCategoryIdComponent } from './component/get-category-id/get-category-id.component';
 
 @NgModule({
-    declarations: [GetCategoriesComponent, AddCategoryComponent, UpdateCategoryComponent,GetCategoryIdComponent],
+    declarations: [GetCategoriesComponent, AddCategoryComponent, UpdateCategoryComponent, GetCategoryIdComponent],
     imports: [
         CommonModule,
         ReactiveFormsModule,

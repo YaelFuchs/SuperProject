@@ -1,35 +1,34 @@
 <form *ngIf="product" #form="ngForm" (ngSubmit)="saveChanges()">
-    <div>
-        <label for="name">שם:</label>
-        <input type="text" id="name" name="name" [(ngModel)]="product.name" required #name="ngModel">
-        <div *ngIf="name.invalid && name.touched">
-            <div *ngIf="name.errors?.['required']">חובה להזין שם</div>
-
-        </div>
+  <div>
+    <label for="name">שם מוצר:</label>
+    <input type="text" id="name" name="name" [(ngModel)]="product.name" required #name="ngModel">
+    <div *ngIf="name.invalid && name.touched">
+      <div *ngIf="name.errors?.['required']">חובה להזין שם</div>
     </div>
+  </div>
 
-    <div>
-        <label>בחר קטגוריה:</label>
-        <select id="categoryId" name="categoryId" [(ngModel)]="product.categoryId" required #categoryId="ngModel">
-            <option value="">בחר קטגוריה:</option>
-            <option *ngFor="let c of categories" [value]="c.id">
-                {{ c.name }}
-            </option>
-        </select>
-        <div *ngIf="categoryId.invalid && categoryId.touched">
-            <div *ngIf="name.errors?.['required']">חובה לבחור קטגוריה</div>
-        </div>
+  <div>
+    <label>בחר קטגוריה:</label>
+    <select id="categoryId" name="categoryId" [(ngModel)]="product.categoryId" required #categoryId="ngModel">
+      <option value="">בחר קטגוריה</option>
+      <option *ngFor="let c of categories" [value]="c.id">
+        {{ c.name }}
+      </option>
+    </select>
+    <div *ngIf="categoryId.invalid && categoryId.touched">
+      <div *ngIf="categoryId.errors?.['required']">חובה לבחור קטגוריה</div>
     </div>
+  </div>
 
-    <div>
-        <label>בחר סוג:</label>
-        <select id="UnitOfMeasure" name="UnitOfMeasure" [(ngModel)]="product.UnitOfMeasure" required #UnitOfMeasure="ngModel">
-            <option value="">בחר סוג:</option>
-            <option *ngFor="let unit of unitOptions" [value]="unit.value">
-                {{ unit.key }}
-            </option>
-        </select>
-    </div>
-
-    <button type="submit" [disabled]="form.invalid" (click)="saveChanges()">עדכון</button>
+  <div>
+    <label>בחר סוג:</label>
+    <select id="UnitOfMeasure" name="UnitOfMeasure" [(ngModel)]="product.UnitOfMeasure" required
+      #UnitOfMeasure="ngModel">
+      <option value="">בחר סוג</option>
+      <option *ngFor="let unit of unitOptions" [value]="unit.value">
+        {{ unit.key }}
+      </option>
+    </select>
+  </div>
+  <button type="submit" [disabled]="form.invalid">עדכון</button>
 </form>

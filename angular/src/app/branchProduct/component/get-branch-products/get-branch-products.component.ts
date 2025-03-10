@@ -9,39 +9,39 @@ import { AuthService } from '../../../auth/auth.service';
   templateUrl: './get-branch-products.component.html',
   styleUrl: './get-branch-products.component.scss'
 })
-export class GetBranchProductsComponent implements OnInit{
+export class GetBranchProductsComponent implements OnInit {
   branchProducts!: BranchProduct[];
   showAdd = false
   showUpdate = false
-  selectedBranchProduct! : BranchProduct
-  message=''
-  branchProductToUpdate! : BranchProduct
+  selectedBranchProduct!: BranchProduct
+  message = ''
+  branchProductToUpdate!: BranchProduct
   isShow: boolean = false
 
-  constructor(private _branchProductService: BranchProductService,private _router:Router , private _authService: AuthService){}
+  constructor(private _branchProductService: BranchProductService, private _router: Router, private _authService: AuthService) { }
 
   ngOnInit() {
-   this.getBranchProducts();
-    }
+    this.getBranchProducts();
+  }
 
-   getBranchProducts() {
+  getBranchProducts() {
     this._branchProductService.getBranchProducts().subscribe({
-      next:(res)=>{
-        console.log('res',res);
-        this.branchProducts=res;
+      next: (res) => {
+        console.log('res', res);
+        this.branchProducts = res;
       },
-      error:(err)=>{
-        console.log('err',err);       
+      error: (err) => {
+        console.log('err', err);
       }
     })
-   }
+  }
 
-   showDetails(id:number){
-    this.isShow=true;
-    this._router.navigate(['branchProduct/getbranch-product-id',id]);
-   }
+  showDetails(id: number) {
+    this.isShow = true;
+    this._router.navigate(['branchProduct/getbranch-product-id', id]);
+  }
 
-   isAdmin(): boolean {
+  isAdmin(): boolean {
     return this._authService.isAdmin();
   }
 
@@ -49,18 +49,18 @@ export class GetBranchProductsComponent implements OnInit{
     return this._authService.isManager();
   }
 
-  onBranchProductAdded(branchProduct:BranchProduct):void{
-    this.showAdd=false;
+  onBranchProductAdded(branchProduct: BranchProduct): void {
+    this.showAdd = false;
     this.getBranchProducts();
   }
-  
-  update(branchProduct:BranchProduct):void{
-    this.branchProductToUpdate=branchProduct;
-    this.showUpdate=true;
+
+  update(branchProduct: BranchProduct): void {
+    this.branchProductToUpdate = branchProduct;
+    this.showUpdate = true;
   }
 
-  onUpdateBranchProduct():void{    
-    this.showUpdate=false;
+  onUpdateBranchProduct(): void {
+    this.showUpdate = false;
     this.getBranchProducts();
   }
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Super.Data.Repositories
 {
-    public class BranchRepository:IBranchRepository
+    public class BranchRepository : IBranchRepository
     {
         private readonly DataContext _context;
         public BranchRepository(DataContext context)
@@ -30,16 +30,12 @@ namespace Super.Data.Repositories
         }
         public void AddBranch(Branch branch)
         {
-            // בדיקה האם קיים משתמש עם אותו שם משתמש
             var existingBranch = _context.Branches.FirstOrDefault(b => b.Name == branch.Name);
-
-            if (existingBranch == null) // אם לא קיים משתמש עם שם משתמש זהה
+            if (existingBranch == null) 
             {
-
                 _context.Branches.Add(branch);
                 _context.SaveChanges();
             }
-
         }
         public void UpdateBranch(int Id, Branch branch)
         {
@@ -49,17 +45,17 @@ namespace Super.Data.Repositories
                 if (!branchToUpdate.Name.Equals(branch.Name))
                 {
                     branchToUpdate.Name = branch.Name;
-
                 }
-                if(branchToUpdate.Email != branch.Email)
+                if (branchToUpdate.Email != branch.Email)
                 {
                     branchToUpdate.Email = branch.Email;
                 }
-                if(branchToUpdate.Address != branch.Address)
+                if (branchToUpdate.Address != branch.Address)
                 {
                     branchToUpdate.Address = branch.Address;
                 }
-                if(branchToUpdate.Phone != branch.Phone) { 
+                if (branchToUpdate.Phone != branch.Phone)
+                {
                     branchToUpdate.Phone = branch.Phone;
                 }
                 if (branchToUpdate.ShippingCost != branch.ShippingCost)
@@ -67,9 +63,7 @@ namespace Super.Data.Repositories
                     branchToUpdate.ShippingCost = branch.ShippingCost;
                 }
                 _context.SaveChanges();
-
             }
-
         }
         public void DeleteBranch(int Id)
         {

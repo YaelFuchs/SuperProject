@@ -12,64 +12,62 @@ public class AuthController : ControllerBase
 {
     private readonly IConfiguration _configuration;
     private readonly IUserService _userService;
-
     public AuthController(IConfiguration configuration, IUserService userService)
     {
         _configuration = configuration;
         _userService = userService;
     }
-
     // POST api/<AuthController>
     [HttpPost]
     public IActionResult Login([FromBody] UserLoginModel userLoginModel)
     {
-        // חפש את המשתמש במסד הנתונים
         var findUser = _userService.GetUserByName(userLoginModel.UserName);
         if (findUser == null)
         {
             return BadRequest(new { message = "User not found" });
         }
-        // הדפסת ה-UserRoles כדי לוודא שהם נטענים
-        // בדוק אם הסיסמה נכונה
         else if (!BCrypt.Net.BCrypt.Verify(userLoginModel.Password, findUser.Password))
         {
             return Unauthorized(new { message = "Incorrect password" });
         }
         var roles = findUser.UserRoles?.Select(ur => ur.Role.Name).ToList() ?? new List<string>();
-        // צור רשימה של Claims, כולל שם המשתמש ותפקידים
         var claims = new List<Claim>()
         {
             new Claim(ClaimTypes.Name, findUser.UserName),
-            new Claim("http://schemas.microsoft.com/ws/2008/06/identity/claims/role", string.Join(",", roles)) // שינוי כאן
+            new Claim("http://schemas.microsoft.com/ws/2008/06/identity/claims/role", string.Join(",", roles))
     };
 
-        // קח את המפתח הסודי מהקונפיגורציה
         var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("JWT:Key")));
         var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
-        // צור את הטוקן
         var tokenOptions = new JwtSecurityToken(
             issuer: _configuration.GetValue<string>("JWT:Issuer"),
             audience: _configuration.GetValue<string>("JWT:Audience"),
             claims: claims,
-            expires: DateTime.Now.AddMinutes(420), // טווח הזמן של הטוקן (כאן הוא מוגדר לשעה)
+            expires: DateTime.Now.AddMinutes(420),
             signingCredentials: signinCredentials
         );
-
-        // הפוך את הטוקן ל-String
         var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-
         var cookieOptions = new CookieOptions
         {
-            HttpOnly = true,  // מונע גישה דרך JavaScript
-            Secure = true,    // מחייב שימוש ב-HTTPS
-            SameSite = SameSiteMode.None, // תומך בבקשות Cross-Origin
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.None,
             Expires = DateTime.UtcNow.AddMinutes(420)
         };
-
         Response.Cookies.Append("jwt", tokenString, cookieOptions);
-        // החזר את הטוקן כתגובה
         return Ok(new { findUser.Id, Token = tokenString });
+    }
+    // DELETE api/<AuthController>
+    [HttpPost("logout")]
+    public IActionResult Logout()
+    {
+        if (Request.Cookies["jwt"] != null)
+        {
+            Response.Cookies.Delete("jwt");
+            return Ok(new { message = "התנתקות בוצעה בהצלחה" });
+        }
+        return BadRequest(new { message = "המשתמש כבר מנותק" });
     }
 }
 

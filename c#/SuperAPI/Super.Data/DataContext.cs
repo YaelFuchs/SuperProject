@@ -11,6 +11,7 @@ namespace Super.Data
 {
     public class DataContext : DbContext
     {
+        public DbSet<Order> Orders { get; set; }
         public  DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -21,6 +22,7 @@ namespace Super.Data
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<ShoppingCartItem> ShoppingCartsItem { get; set; }
         public DataContext(DbContextOptions<DataContext> options) : base(options)
+
         {
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

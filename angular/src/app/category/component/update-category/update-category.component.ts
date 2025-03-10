@@ -9,10 +9,10 @@ import { CategoryService } from '../../category.service';
 })
 export class UpdateCategoryComponent implements OnInit {
   @Output() updatecategory = new EventEmitter<Category>();
-  @Input()  public categoryUpdate!: Category
+  @Input() public categoryUpdate!: Category
   message = '';
   public category!: Category
- 
+
   constructor(private _categoryService: CategoryService) { }
 
   ngOnInit(): void {
@@ -23,16 +23,17 @@ export class UpdateCategoryComponent implements OnInit {
     }
   }
   saveChanges() {
-    console.log("id:",this.category.id );
+    console.log("id:", this.category.id);
     this._categoryService.updateCategory(this.category.id, this.category).subscribe({
       next: (res) => {
         console.log("העדכון עבר בהצלחה", res);
         this.updatecategory.emit(res);
-         },
+      },
       error: (err) => {
         this.message = err;
         console.log("שגיאה בעדכון!");
-        
+
       }
-    })}
+    })
   }
+}

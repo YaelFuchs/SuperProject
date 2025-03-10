@@ -13,10 +13,9 @@ using System.Data;
 
 namespace SuperAPI.Controllers
 {
+    [Authorize(Policy = "Manager")]
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Policy = "User")]
-
     public class BranchesController : ControllerBase
     {
         private readonly IBranchService _IbranchService;
@@ -28,42 +27,35 @@ namespace SuperAPI.Controllers
             _mapper = mapper;
         }
         // GET: api/<BranchesController>
-        [AllowAnonymous]
+        [Authorize(Policy = "User")]
         [HttpGet]
         public ActionResult GetAllBranches()
         {
             var branches = _mapper.Map<List<BranchDto>>(_IbranchService.GetAllBranches());
             return Ok(branches);
         }
-
         // GET api/<BranchesController>/5
-        [AllowAnonymous]
         [HttpGet("{Id}")]
         public ActionResult GetBranchById(int Id)
         {
             var branch = _IbranchService.GetBranchById(Id);
-            var branchDto=_mapper.Map<BranchDto>(branch);
-            return Ok(branchDto) ;
+            var branchDto = _mapper.Map<BranchDto>(branch);
+            return Ok(branchDto);
         }
-
         // POST api/<BranchesController>
-        //[Authorize(Policy = "Admin")]
         [HttpPost]
         public void AddBranch([FromBody] BranchPostModel branch)
         {
             _IbranchService.AddBranch(_mapper.Map<Branch>(branch));
         }
-
         // PUT api/<BranchesController>/5
-        //[Authorize(Policy = "Admin")]
+        [Authorize(Policy = "Admin")]
         [HttpPut("{Id}")]
         public void UpdateBranch(int Id, [FromBody] BranchPostModel branch)
         {
             _IbranchService.UpdateBranch(Id, _mapper.Map<Branch>(branch));
         }
-
         // DELETE api/<BranchesController>/5
-        //[Authorize(Policy = "Admin")]
         [HttpDelete("{Id}")]
         public void DeleteBranch(int Id)
         {

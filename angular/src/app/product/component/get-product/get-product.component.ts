@@ -1,11 +1,12 @@
-import { Component, Inject,OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../../product.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../product.service';
 import { AuthService } from '../../../auth/auth.service';
 import { CartService } from '../../../cart/cart.service';
 import { Category } from '../../../category/category.model';
 import { CategoryService } from '../../../category/category.service';
+import { PopupService } from '../../../popup/popup.service';
 
 
 @Component({
@@ -26,43 +27,55 @@ export class GetProductComponent implements OnInit {
   activeCategory: string | null = null;
 
 
+
   constructor(
     private _router: Router,
+    private route: ActivatedRoute,
     private _productService: ProductService,
-    private __authService: AuthService,
+    private _authService: AuthService,
     private _cartService: CartService,
     private _categoryService: CategoryService,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) { }
+    private _popupService: PopupService) { }
 
 
   ngOnInit(): void {
-    this.products = [];
-    this.getProducts();
+    this.route.paramMap.subscribe(params => {
+      this.activeCategory = params.get('category');
+      this.getProducts(() => { // מחכה שהמוצרים ייטענו קודם
+        if (this.activeCategory) {
+          this.filterProductsByCategory();
+        }
+      });
+    });
+
     this._categoryService.getCategoriesFromServer().subscribe({
       next: (res) => {
         this.categories = res;
       },
       error: (err) => {
         console.log("לא הצלחתי להביא את הקטגוריות", err);
-
-      }
-    })
-  }
-
-  getProducts(): void {
-    this._productService.getProducts().subscribe({
-      next: (res) => {
-        console.log("קבלת המוצרים עברה בהצלחה", res);
-        this.products = res; // מקבל את המוצרים
-        this.allProducts = res;
-        console.log(this.products);
-      },
-      error: (err) => {
-        this.message = err;  // אם יש בעיה, נשמור את השגיאה במסר
       }
     });
   }
+
+
+  getProducts(callback?: () => void): void {
+    this._productService.getProducts().subscribe({
+      next: (res) => {
+        this.products = res;
+        this.allProducts = res;
+        console.log("המוצרים נטענו בהצלחה", this.products);
+
+        if (callback) { // אם יש פונקציה נוספת שצריך לקרוא לה
+          callback();
+        }
+      },
+      error: (err) => {
+        this.message = err;
+      }
+    });
+  }
+
 
   onProductAdded(product: Product): void {
     this.showAdd = false;
@@ -83,14 +96,6 @@ export class GetProductComponent implements OnInit {
     this.isShow = true;  // מגדירים את ה- isShow להיות true כדי להציג פרטי מוצר
     this._router.navigate(['product/get-product-id', id]);  // מעבירים לעמוד של פרטי המוצר
   }
-
-  isManager(): boolean {
-    return this.__authService.isManager();  // מחזיר true אם המשתמש הוא מנהל
-  }
-
-  isAdmin(): boolean {
-    return this.__authService.isAdmin();  // מחזיר true אם המשתמש הוא אדמין
-  }
   addProductToCart(product: Product) {
     const shoppingCart = {
       name: product.name,
@@ -100,6 +105,7 @@ export class GetProductComponent implements OnInit {
     this._cartService.addProduct(this.getUserId(), shoppingCart).subscribe({
       next: (res) => {
         console.log("המוצר נוסף בהצלחה", res);
+        this._popupService.openPopup(' סל קניות', 'המוצר התווסף לסל הקניות🎉🎉');
       },
       error: (err) => {
         console.log("המוצר לא הצליח להתווסף");
@@ -121,12 +127,16 @@ export class GetProductComponent implements OnInit {
   }
 
   getProductByCategory(category: string) {
-    this.activeCategory = category;
-    this.products = this.allProducts.filter(p => p.category.name === category);
+    this._router.navigate(['product/get-product', category])
+  }
+  filterProductsByCategory() {
+    this.products = this.allProducts.filter(p => p.category.name === this.activeCategory);
+  }
+  isAdmin(): boolean {
+    return this._authService.isAdmin();
+  }
+  isUser(): boolean {
+    return this._authService.isUser();
   }
 
-  resetProducts() {
-    this.products = [...this.allProducts]; // מחזיר את כל המוצרים
-    this.activeCategory = null;
-  }
 }

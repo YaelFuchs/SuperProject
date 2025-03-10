@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Super.Data.Repositories
 {
-    public class ProductRepository:IProductRepositoy
+    public class ProductRepository : IProductRepositoy
     {
         private readonly DataContext _context;
         public ProductRepository(DataContext context)
@@ -29,7 +29,7 @@ namespace Super.Data.Repositories
             var product = _context.Products
             .Include(p => p.Category) // מביא גם את הקטגוריה
             .FirstOrDefault(p => p.Id == Id);
-            
+
 
             if (product != null)
             {
@@ -53,9 +53,9 @@ namespace Super.Data.Repositories
                     product.Category = category; // קישור ל-Navigation Property
 
 
-                    Console.WriteLine($"cateroryyyyyy: {category}" );
+                    Console.WriteLine($"cateroryyyyyy: {category}");
                     _context.Products.Add(product); // הוספת המוצר ל-context
-                     _context.SaveChanges();
+                    _context.SaveChanges();
                     return; // יציאה מהמתודה אם הצלחנו
                 }
                 else
@@ -83,7 +83,7 @@ namespace Super.Data.Repositories
                 {
                     productToUpdate.Category = product.Category;
                 }
-                if(productToUpdate.UnitOfMeasure!=product.UnitOfMeasure)
+                if (productToUpdate.UnitOfMeasure != product.UnitOfMeasure)
                 {
                     productToUpdate.UnitOfMeasure = product.UnitOfMeasure;
                 }
@@ -100,6 +100,11 @@ namespace Super.Data.Repositories
                 _context.Products.Remove(productToRemove);
                 _context.SaveChanges();
             }
+        }
+
+        public Task<bool> ProcessPayment(string orderId, double sumForPay, string currency)
+        {
+            throw new NotImplementedException();
         }
     }
 }

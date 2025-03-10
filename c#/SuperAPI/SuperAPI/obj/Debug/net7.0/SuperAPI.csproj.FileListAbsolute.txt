@@ -340,7 +340,6 @@ C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\Super
 C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\SuperAPI.AssemblyInfoInputs.cache
 C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\SuperAPI.AssemblyInfo.cs
 C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\SuperAPI.csproj.CoreCompileInputs.cache
-C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\SuperAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\SuperAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\staticwebassets\msbuild.SuperAPI.Microsoft.AspNetCore.StaticWebAssets.props
 C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\obj\Debug\net7.0\staticwebassets\msbuild.build.SuperAPI.props
@@ -663,3 +662,13 @@ C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7
 C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\PayPal.dll
 C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\SendGrid.dll
 C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\StarkbankEcdsa.dll
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\PayPal.dll
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\SendGrid.dll
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\StarkbankEcdsa.dll
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\APIMatic.Core.dll
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\Microsoft.Json.Pointer.dll
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\PayPalServerSDK.dll
+C:\Users\user1\Desktop\super-project\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\Polly.dll

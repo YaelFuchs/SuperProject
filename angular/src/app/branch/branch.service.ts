@@ -6,29 +6,29 @@ import { Branch } from "./branch.model";
 @Injectable({
     providedIn: 'root'  // ← מוודא שהשירות זמין בכל האפליקציה!
 })
-export class BranchService{
-    basicUrl='https://localhost:7173/api/Branches';
+export class BranchService {
+    basicUrl = 'https://localhost:7173/api/Branches';
     $source: Observable<number> = new Observable<number>((observer) => {
         observer.next(1);
-        observer.complete(); 
-        observer.error('error'); 
+        observer.complete();
+        observer.error('error');
     })
-    constructor(private  _httpClient: HttpClient){}
+    constructor(private _httpClient: HttpClient) { }
 
-    getBranches(): Observable<Branch[]>{
-      return this._httpClient.get<Branch[]>(this.basicUrl);
+    getBranches(): Observable<Branch[]> {
+        return this._httpClient.get<Branch[]>(this.basicUrl);
     }
-    getBranchById(id:number):Observable<Branch>{
+    getBranchById(id: number): Observable<Branch> {
         return this._httpClient.get<Branch>(`${this.basicUrl}/${id}`);
     }
-    addBranch(branch:Branch):Observable<any>{   
-        return this._httpClient.post<any>(this.basicUrl,branch);
+    addBranch(branch: Branch): Observable<any> {
+        return this._httpClient.post<any>(this.basicUrl, branch);
     }
 
-    updateBranch(id:number,branch:Branch) :Observable<any>{
-        return this._httpClient.put<Branch>(`${this.basicUrl}/${id}`,branch);
+    updateBranch(id: number, branch: Branch): Observable<any> {
+        return this._httpClient.put<Branch>(`${this.basicUrl}/${id}`, branch);
     }
-    deleteBranch(id:number):Observable<any>{
+    deleteBranch(id: number): Observable<any> {
         return this._httpClient.delete<any>(`${this.basicUrl}/${id}`);
     }
 

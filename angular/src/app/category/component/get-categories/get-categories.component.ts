@@ -60,10 +60,6 @@ showDetailes(id: number){
   this.isShow=true;
   this._router.navigate(['category/get-category-id',id]);
 }
-// בדיקה אם המשתמש הוא מנהל
-isAdmin(): boolean {
-  return this._authService.isAdmin();
-}
 isManager(): boolean {
   return this._authService.isManager();
 }

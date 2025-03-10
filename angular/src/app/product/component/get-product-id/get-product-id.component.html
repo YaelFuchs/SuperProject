@@ -1,11 +1,13 @@
 @if(productDetails){
-    <div>
-        <p>id: {{productDetails.id}}</p>
-        <p>name: {{productDetails.name}}</p>
-        <p>סוג מכירה:{{productDetails.UnitOfMeasure === 0 ? 'Units' : 'Kilograms'}}</p>
-        <p>category: {{productDetails.category.name}}</p>
-        <button (click)="delete(productDetails.id)">מחיקה</button>
-        <button (click)="goBack()">חזור לרשימת מוצר</button>
-    </div>
+<div>
+    <img *ngIf="productDetails.imageUrl" [src]="productDetails.imageUrl" alt="תמונה של {{ productDetails.name }}">
+    <p>שם מוצר: {{productDetails.name}}</p>
+    <p>סוג מכירה:{{productDetails.UnitOfMeasure === 0 ? 'Units' : 'Kilograms'}}</p>
+    <p>שם קטגוריה: {{productDetails.category.name}}</p>
+    @if(isManager()){
+    <button (click)="delete(productDetails.id)">מחיקה</button>
+    }
+    <button (click)="goBack()">חזור לרשימת מוצר</button>
+</div>
 
 }

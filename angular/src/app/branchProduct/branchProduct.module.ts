@@ -8,8 +8,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BranchProductRoutingModule } from "./branchProduct.routing.module";
 
 @NgModule({
-    declarations:[GetBranchProductsComponent,GetbranchProductIdComponent,AddBranchProductComponent,UpdateBranchProductComponent],
-    imports:[
+    declarations: [GetBranchProductsComponent, GetbranchProductIdComponent, AddBranchProductComponent, UpdateBranchProductComponent],
+    imports: [
         CommonModule,
         ReactiveFormsModule,
         NgClass,
@@ -19,4 +19,4 @@ import { BranchProductRoutingModule } from "./branchProduct.routing.module";
         BranchProductRoutingModule
     ],
 })
-export class BranchProductModule{}
+export class BranchProductModule { }

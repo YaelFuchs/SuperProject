@@ -33,39 +33,28 @@ namespace Super.Data.Repositories
             }
             return null;
         }
-
-
         public void SignUp(User user)
         {
-            // בודקים אם המשתמש כבר קיים
             var existingUser = _context.Users
-                .Include(u => u.UserRoles) // מוודאים שטבלת התפקידים נטענת
+                .Include(u => u.UserRoles) 
                 .FirstOrDefault(u => u.UserName == user.UserName);
-
             if (existingUser != null)
             {
                 throw new Exception("User already exists!");
             }
 
-            // הצפנת סיסמה
             string salt = BCrypt.Net.BCrypt.GenerateSalt(12);
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password, salt);
             user.Password = hashedPassword;
-
-            // אתחול רשימת התפקידים של המשתמש
             user.UserRoles = new List<UserRole>();
-
-            // קבלת תפקיד ברירת מחדל (ROLE_USER)
             var userRole = _context.Roles.FirstOrDefault(r => r.Name == ERole.ROLE_USER.ToString());
             if (userRole == null)
             {
                 userRole = new Role { Name = ERole.ROLE_USER.ToString() };
                 _context.Roles.Add(userRole);
-                _context.SaveChanges(); // שמירה כדי לקבל ID
+                _context.SaveChanges(); 
             }
             user.UserRoles.Add(new UserRole { User = user, Role = userRole });
-
-            // אם המשתמש מתחיל ב-"manager" מקבל ROLE_ADMIN
             if (user.UserName.StartsWith("manager"))
             {
                 var adminRole = _context.Roles.FirstOrDefault(r => r.Name == ERole.ROLE_ADMIN.ToString());
@@ -78,7 +67,6 @@ namespace Super.Data.Repositories
                 user.UserRoles.Add(new UserRole { User = user, Role = adminRole });
             }
 
-            // אם המשתמש הוא "manager1234", מקבל גם ROLE_MANAGER
             if (user.UserName == "manager1234")
             {
                 var managerRole = _context.Roles.FirstOrDefault(r => r.Name == ERole.ROLE_MANAGER.ToString());
@@ -90,20 +78,14 @@ namespace Super.Data.Repositories
                 }
                 user.UserRoles.Add(new UserRole { User = user, Role = managerRole });
             }
-
-            // הוספת המשתמש ושמירה
             _context.Users.Add(user);
             _context.SaveChanges();
-
-            // ✅ הדפסת המשתמש והתפקידים שלו
             Console.WriteLine($"User {user.UserName} has the following roles:");
             foreach (var ur in user.UserRoles)
             {
                 Console.WriteLine($"- {ur.Role.Name}");
             }
         }
-
-
         public void UpdateUser(int Id, User user)
         {
             var userToUpdate = _context.Users.Find(Id);
@@ -111,21 +93,15 @@ namespace Super.Data.Repositories
             {
                 userToUpdate.UserName = user.UserName;
                 userToUpdate.Address = user.Address;
-
                 userToUpdate.Email = user.Email;
                 userToUpdate.Phone = user.Phone;
-              
-                
 
                 if (user.Password != null )
                 {
-                    // הצפנת הסיסמה החדשה
                     string salt = BCrypt.Net.BCrypt.GenerateSalt(12);
                     string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password, salt);
                     userToUpdate.Password = hashedPassword;
                 }
-                
-
                 _context.SaveChanges();
             }
         }
@@ -137,13 +113,10 @@ namespace Super.Data.Repositories
 
             if (user != null)
             {
-                // מחיקת כל הקשרים בין המשתמש לתפקידים
                 _context.UserRoles.RemoveRange(user.UserRoles);
-                _context.SaveChanges(); // שים לב ששמרנו את השינויים
-
-                // עכשיו ניתן למחוק את המשתמש
+                _context.SaveChanges(); 
                 _context.Users.Remove(user);
-                _context.SaveChanges(); // שמירת המחיקה
+                _context.SaveChanges(); 
             }
             else
             {
@@ -151,16 +124,12 @@ namespace Super.Data.Repositories
             }
              }
 
-
-
         public User GetUserByName(string userName)
         {
             return _context.Users
-                .Include(u => u.UserRoles) // טוען את הקשרים בין המשתמש לתפקידים
-                .ThenInclude(ur => ur.Role) // טוען את שם התפקיד
+                .Include(u => u.UserRoles) 
+                .ThenInclude(ur => ur.Role) 
                 .FirstOrDefault(u => u.UserName == userName);
         }
-
-
     }
 }

@@ -5,17 +5,17 @@ import { NgModule } from "@angular/core";
 import { AddBranchComponent } from "./component/add-branch/add-branch.component";
 import { UpdateBranchComponent } from "./component/update-branch/update-branch.component";
 
-const routes: Route[]=[
-    {path:'',component : GetBranchesComponent},
-    {path:'get-branch-id/:id',component:GetBranchIdComponent},
-    {path:'add-branch',component:AddBranchComponent},
-    {path:'update-branch', component:UpdateBranchComponent}
+const routes: Route[] = [
+    { path: '', component: GetBranchesComponent },
+    { path: 'get-branch-id/:id', component: GetBranchIdComponent },
+    { path: 'add-branch', component: AddBranchComponent },
+    { path: 'update-branch', component: UpdateBranchComponent }
 ]
 @NgModule({
-    imports:[
+    imports: [
         RouterModule.forChild(routes)
     ],
 })
-export class BranchRoutingMoudle{}
+export class BranchRoutingMoudle { }
 
 

@@ -5,11 +5,13 @@ import { GetProductIdComponent } from "./component/get-product-id/get-product-id
 import { AddProductComponent } from "./component/add-product/add-product.component";
 import { UpdateProductComponent } from "./component/update-product/update-product.component";
 
-const routes : Route[] = [
-    {path: "", component: GetProductComponent},
-    { path: 'get-product-id/:id', component: GetProductIdComponent},
-    { path: 'add-product',component:AddProductComponent},
-    { path: 'update-product', component: UpdateProductComponent},
+const routes: Route[] = [
+    { path: "", component: GetProductComponent },
+    { path: 'get-product/:category', component: GetProductComponent },
+    { path: 'get-product-id/:id', component: GetProductIdComponent },
+    { path: 'add-product', component: AddProductComponent },
+    { path: 'update-product', component: UpdateProductComponent },
+
 ]
 
 @NgModule({
@@ -17,4 +19,4 @@ const routes : Route[] = [
         RouterModule.forChild(routes),
     ]
 })
-export class ProductRoutingModule{}
+export class ProductRoutingModule { }

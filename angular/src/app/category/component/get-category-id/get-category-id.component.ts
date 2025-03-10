@@ -14,7 +14,7 @@ export class GetCategoryIdComponent implements OnInit {
   id = 0
   categoryDetails!: Category
   constructor(private _categoryService: CategoryService, private _router: ActivatedRoute, private _r: Router,
-    private _authService:AuthService ) { }
+    private _authService: AuthService) { }
   ngOnInit(): void {
     this._router.params.subscribe((param) => {
       this.id = +param['id'];
@@ -40,7 +40,7 @@ export class GetCategoryIdComponent implements OnInit {
       }
     })
   }
-  
+
   goBack() {
     this._r.navigate(['category/'])
   }

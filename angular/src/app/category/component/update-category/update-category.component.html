@@ -1,18 +1,16 @@
 @if(category){
-  <form #form = "ngForm">
+<form #form="ngForm">
     <div>
         <label>
-            name: 
+            שם קטגוריה:
         </label>
-        <input type="text" name="name" [(ngModel)]= "category.name" required = "true" #name = "ngModel">
-        <div [ngSwitch] = "name.errors">
-            <div *ngSwitchCase = "'required'">
-                you must enter category name!
+        <input type="text" name="name" [(ngModel)]="category.name" required="true" #name="ngModel">
+        <div [ngSwitch]="name.errors">
+            <div *ngSwitchCase="'required'">
+                חובה להכניס שם קטגוריה!
             </div>
         </div>
-
-        
     </div>
-    <button [disabled]="form.invalid" (click)="saveChanges()" >עדכון</button>
+    <button [disabled]="form.invalid" (click)="saveChanges()">עדכון</button>
 </form>
 }

@@ -2,141 +2,173 @@
 
 // כללי לדף
 .get-product-container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+}
+
+// עיצוב לקטגוריות
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+  justify-content: center;
   
-  // עיצוב לקטגוריות
-  .category-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 30px;
-    justify-content: center;
-    
-    button {
-      padding: 10px 20px;
-      background-color: #f0f0f0;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      font-size: 16px;
-      min-width: 120px;
-      transition: all 0.3s ease;
-  
-      &:hover {
-        background-color: #e0e0e0;
-        transform: translateY(-2px);
-      }
-  
-      &:active {
-        transform: translateY(0);
-      }
-  
-      &.active-category { // הוספת המחלקה לקטגוריה הפעילה
-        background-color: #4CAF50; // צבע שונה לקטגוריה שנבחרה (ירוק)
-        color: white; // טקסט לבן לקריאות
-        &:hover {
-          background-color: #45a049; // גוון כהה יותר ל-hover
-        }
-      }
-    }
-  }
-  
-  // עיצוב לרשימת המוצרים
-  .products-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    
-    @media (max-width: 900px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    
-    @media (max-width: 600px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    @media (max-width: 400px) {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  // עיצוב לכל מוצר בודד
-  .product-card {
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 8px;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  
-    p {
-      margin: 5px 0;
-      font-size: 14px;
-    }
-  
-    button {
-      padding: 8px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 13px;
-      transition: background-color 0.3s ease;
-  
-      &:nth-child(1) { // עדכון מוצר
-        background-color: #4CAF50;
-        color: white;
-        &:hover {
-          background-color: #45a049;
-        }
-      }
-  
-      &:nth-child(2) { // פרטים נוספים
-        background-color: #2196F3;
-        color: white;
-        &:hover {
-          background-color: #1e87db;
-        }
-      }
-  
-      &:nth-child(3) { // הוספת מוצר לסל
-        background-color: #ff9800;
-        color: white;
-        &:hover {
-          background-color: #e68a00;
-        }
-      }
-    }
-  }
-  
-  // כפתור הוספת מוצר
-  .add-product-btn {
-    margin-top: 20px;
+  button {
     padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
+    background-color: #f0f0f0;
     border: none;
-    border-radius: 4px;
+    border-radius: 25px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s ease;
-  
+    min-width: 120px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
     &:hover {
-      background-color: #45a049;
+      background-color: #e0e0e0;
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &.active-category {
+      background-color: #4CAF50;
+      color: white;
+      &:hover {
+        background-color: #45a049;
+      }
     }
   }
+}
+
+// עיצוב לרשימת המוצרים
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px; // הקטנתי את המרווח בין הכרטיסיות מ-20px ל-15px
   
-  // כפתור חזרה
-  .go-back-btn {
-    margin: 20px 0;
-    padding: 10px 20px;
-    background-color: #666;
-    color: white;
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// עיצוב לכל מוצר בודד
+.product-card {
+  border: 1px solid #ddd;
+  padding: 10px; // הקטנתי את ה-padding מ-15px ל-10px
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 8px; // הקטנתי את ה-gap מ-12px ל-8px
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  max-width: 220px; // הוספתי רוחב מרבי כדי שהכרטיסיות יהיו קטנות יותר
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    max-height: 180px; // הקטנתי את הגובה המרבי מ-250px ל-180px
+    object-fit: contain;
+    border-radius: 6px;
+    margin-bottom: 8px; // הקטנתי מ-10px ל-8px
+  }
+
+  p {
+    margin: 3px 0; // הקטנתי מ-5px ל-3px
+    font-size: 13px; // הקטנתי מ-14px ל-13px
+    color: #333;
+    font-weight: 500;
+  }
+
+  button {
+    padding: 6px; // הקטנתי מ-8px ל-6px
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 12px; // הקטנתי מ-13px ל-12px
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &:nth-child(1) { // עדכון מוצר
+      background-color: #4CAF50;
+      color: white;
+      &:hover {
+        background-color: #45a049;
+      }
+    }
+
+    &:nth-child(2) { // פרטים נוספים
+      background-color: #2196F3;
+      color: white;
+      &:hover {
+        background-color: #1e87db;
+      }
+    }
+
+    &:nth-child(3) { // הוספת מוצר לסל
+      background-color: #ff9800;
+      color: white;
+      &:hover {
+        background-color: #e68a00;
+      }
+    }
   }
+}
+
+// כפתור הוספת מוצר
+.add-product-btn {
+  margin-top: 20px;
+  padding: 10px 20px; // הקטנתי מ-12px 24px ל-10px 20px
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px; // הקטנתי מ-16px ל-15px
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+  &:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+  }
+}
+
+// כפתור חזרה
+.go-back-btn {
+  margin: 20px 0;
+  padding: 8px 16px; // הקטנתי מ-10px 20px ל-8px 16px
+  background-color: #666;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #555;
+  }
+}

@@ -1,7 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup,Validators } from '@angular/forms';
+import { FormControl, FormGroup, ValidationErrors, Validators ,AbstractControl} from '@angular/forms';
 import { UserService } from '../../user.service';
 import { Router } from '@angular/router';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
+import { PopupService } from '../../../popup/popup.service';
+
+export function validatePhoneNumber(control: AbstractControl): ValidationErrors | null {
+  if (!control.value) {
+    return null; // אם השדה ריק - לא מחזירים שגיאה
+  }
+
+  const phoneNumber = parsePhoneNumberFromString(control.value, 'IL'); // IL זה ישראל
+  return phoneNumber && phoneNumber.isValid() ? null : { invalidPhone: true };
+}
 
 @Component({
   selector: 'app-sign-up',
@@ -9,27 +20,36 @@ import { Router } from '@angular/router';
   styleUrl: './sign-up.component.scss'
 })
 export class SignUpComponent implements OnInit {
-public addForm !: FormGroup;
-constructor(private _userService: UserService, private _router: Router){}
-ngOnInit() {
-  this.addForm = new FormGroup({
-      UserName: new FormControl('', Validators.required),
-      Email: new FormControl('', [Validators.required, Validators.email]),
-      Password: new FormControl('', [Validators.required, Validators.minLength(8)])
-  });
-}
+  public addForm !: FormGroup;
+  constructor(private _userService: UserService, private _router: Router,private _popupService: PopupService) { }
+  ngOnInit() {
+    this.addForm = new FormGroup({
+      userName: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      address: new FormControl('', Validators.required),
+      phone : new FormControl('', [
+        Validators.required,
+        validatePhoneNumber // שימי לב שאין צורך ב-`this`
+      ])
+    });
+  }
 
-   signUp(){
+  signUp() {
     console.log(this.addForm.value);
     this._userService.signUp(this.addForm.value).subscribe({
-      next:(res)=>{        
-        this._router.navigate(['/login'])
+      next: (res) => {
+        console.log("המשתמש הצליח להתחבר", res);
+        this._popupService.openPopup(
+          'נרשמת בהצלחה🎉🎉',
+          'תודה על הרשמתך לאתר<br>מקווים שתהנה מהאתר<br><a href="/login">לחץ כאן להתחברות</a>'
+        );
       },
-      error:(err)=>{
+      error: (err) => {
         console.log(err);
-        
+
       }
     })
-   }
+  }
 
 }

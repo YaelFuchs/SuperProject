@@ -1,45 +1,44 @@
 :host {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    overflow: hidden;
-  }
-  
-  app-header {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-  }
-  
-  app-footer {
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-    height: 50px; // גובה הפוטר
-  }
-  
-  main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    margin-top: 60px; // גובה ההדר
-    margin-bottom: 100px; // משאיר רווח מהפוטר
-    padding: 20px;
-    width: 100%;
-    overflow-y: auto;
-    height: calc(100vh - 120px); // גובה מינימלי מתאים
-    box-sizing: border-box;
-    
-  }
-  
-  /* הסתרת גלילה בכרום */
-  main::-webkit-scrollbar {
-    display: none;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+app-header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+app-footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  height: 50px; // גובה הפוטר
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 60px; // גובה ההדר
+  margin-bottom: 100px; // משאיר רווח מהפוטר
+  padding: 20px;
+  width: 100%;
+  overflow-y: auto;
+  height: calc(100vh - 120px); // גובה מינימלי מתאים
+  box-sizing: border-box;
+
+}
+
+/* הסתרת גלילה בכרום */
+main::-webkit-scrollbar {
+  display: none;
+}

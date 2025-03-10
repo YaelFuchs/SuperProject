@@ -11,56 +11,56 @@ import { Branch } from '../../../branch/branch.model';
   templateUrl: './update-branch-product.component.html',
   styleUrl: './update-branch-product.component.scss'
 })
-export class UpdateBranchProductComponent implements OnInit{
-   @Output() updateBranchProduct= new EventEmitter<BranchProduct>()
-   @Input() public branchProductUpdate!: BranchProduct
-   products!:Product[]
-   branches!:Branch[]
-   message=''
-   public branchProduct!:BranchProductPostModel
+export class UpdateBranchProductComponent implements OnInit {
+  @Output() updateBranchProduct = new EventEmitter<BranchProduct>()
+  @Input() public branchProductUpdate!: BranchProduct
+  products!: Product[]
+  branches!: Branch[]
+  message = ''
+  public branchProduct!: BranchProductPostModel
 
-   constructor(private _branchProductService :BranchProductService ,private _branchService : BranchService,private _productService:ProductService){}
+  constructor(private _branchProductService: BranchProductService, private _branchService: BranchService, private _productService: ProductService) { }
 
-   ngOnInit(): void {
+  ngOnInit(): void {
     this._branchService.getBranches().subscribe({
-      next:(res)=>{
-        console.log('res',res);
-        this.branches=res; 
+      next: (res) => {
+        console.log('res', res);
+        this.branches = res;
       },
-      error:(err)=>{
-        console.log('error',err);
+      error: (err) => {
+        console.log('error', err);
       }
     })
     this._productService.getProducts().subscribe({
-      next:(res)=>{
-        console.log('res',res);
-        this.products=res; 
+      next: (res) => {
+        console.log('res', res);
+        this.products = res;
       },
-      error:(err)=>{
-        console.log('error',err);
+      error: (err) => {
+        console.log('error', err);
       }
     })
-    this.branchProduct={
-     id:this.branchProductUpdate.id ,
-     branchId:this.branchProductUpdate.branch.id ,
-     productId: this.branchProductUpdate.product.id ,
-     price:this.branchProductUpdate.price 
-   }
+    this.branchProduct = {
+      id: this.branchProductUpdate.id,
+      branchId: this.branchProductUpdate.branch.id,
+      productId: this.branchProductUpdate.product.id,
+      price: this.branchProductUpdate.price
+    }
   }
 
-   saveChanges(){
-    this._branchProductService.updateBranchProduct(this.branchProduct.id,this.branchProduct).subscribe({
-      next:(res)=>{
-        console.log("המוצר סניף עודכן בהצלחה",res);
-        this.updateBranchProduct.emit(res);        
+  saveChanges() {
+    this._branchProductService.updateBranchProduct(this.branchProduct.id, this.branchProduct).subscribe({
+      next: (res) => {
+        console.log("המוצר סניף עודכן בהצלחה", res);
+        this.updateBranchProduct.emit(res);
       },
-      error:(err)=>{
-        this.message=err
-        console.log("שגיאה בעדכון המוצר סניף:",this.message);
-        
+      error: (err) => {
+        this.message = err
+        console.log("שגיאה בעדכון המוצר סניף:", this.message);
+
       }
     })
-   }
+  }
 
 
 }

@@ -20,5 +20,6 @@ namespace Super.Core
         List<UserRole> UserRoles { get; set; }
         List<ShoppingCart> ShoppingCarts { get; set; }
         List<ShoppingCartItem> ShoppingCartItems { get; set;}
+        List<Order> Orders { get; set; }
     }
 }

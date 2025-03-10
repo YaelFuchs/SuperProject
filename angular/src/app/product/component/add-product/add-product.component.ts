@@ -15,7 +15,7 @@ export class AddProductComponent implements OnInit{
   public addForm! : FormGroup;
   eUnitOfMeasure = eUnitOfMeasure;
   categories!: Category[];
-  // אתחול ישיר במקום בקונסטרקטור
+  selectedImage: File | null = null;
   unitOptions = Object.entries(eUnitOfMeasure)
     .filter(([key, value]) => isNaN(Number(key))) // סינון המפתחות שהם מספרים
     .map(([key, value]) => ({ key, value })); // המרה למערך של אובייקטים
@@ -38,18 +38,25 @@ export class AddProductComponent implements OnInit{
       name: new FormControl('', Validators.required),
       categoryId: new FormControl('', Validators.required),
       UnitOfMeasure: new FormControl('', Validators.required),
+      ImageUrl: new FormControl('',)
     })
   }
   addProduct(){
-    const productToSend = {
-        name: this.addForm.value.name,
-        categoryId: Number(this.addForm.value.categoryId),
-        UnitOfMeasure: Number(this.addForm.value.UnitOfMeasure)
-    };
 
-    console.log("המוצר החדש:", productToSend);
+    const formData = new FormData();
     
-    this._productService.addProduct(productToSend).subscribe({
+    formData.append("name", this.addForm.value.name);
+    formData.append("categoryId", this.addForm.value.categoryId);
+    formData.append("UnitOfMeasure", this.addForm.value.UnitOfMeasure);
+
+    if (this.selectedImage) {
+        formData.append("ImageUrl", this.selectedImage); // הוספת התמונה
+    }
+
+    console.log("שליחת מוצר עם קובץ:", formData.getAll);
+
+    
+    this._productService.addProduct(formData).subscribe({
       next:(res)=>{
         console.log("המוצר נוסף בהצלחה", res);
         this.productAdded.emit(res);
@@ -61,5 +68,11 @@ export class AddProductComponent implements OnInit{
 
     })
   }
+  onFileChange(event: any): void {
+    if (event.target.files.length > 0) {
+        this.selectedImage = event.target.files[0];
+    }
+}
+
 
 }

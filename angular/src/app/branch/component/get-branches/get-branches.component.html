@@ -1,25 +1,23 @@
 @if(!isShow){
-    @if(!showAdd){
-    @for (branch of branches ; track $index) {
-        <div style="border: 1px solid brown; margin-bottom: 10px;">
-            <p>קוד סניף:{{branch.id}}</p>
-            <p>שם סניף:{{branch.name}}</p>
-            <button (click)="update(branch)">לעדכון</button>
-            <button (click)="showDetailes(branch.id)">לפרטים נוספים </button>
-        </div>
-        @if (branchToUpdate && branchToUpdate.id==branch.id && showUpdate) {
-          <app-update-branch [branchUpdate]="branchToUpdate" (updateBranch)="onUpdateBrabch()"/>
-
-        }
-
-    }
+@if(!showAdd){
+@for (branch of branches ; track $index) {
+<div style="border: 1px solid brown; margin-bottom: 10px;">
+    <p>קוד סניף:{{branch.id}}</p>
+    <p>שם סניף:{{branch.name}}</p>
+    <button (click)="update(branch)">לעדכון</button>
+    <button (click)="showDetailes(branch.id)">לפרטים נוספים </button>
+</div>
+@if (branchToUpdate && branchToUpdate.id==branch.id && showUpdate && isAdmin()) {
+<app-update-branch [branchUpdate]="branchToUpdate" (updateBranch)="onUpdateBrabch()" />
+}
+}
 }
 }
 @else {
-    <button (click)="isShow=false">go back</button>
+<button (click)="isShow=false">לחזור חזרה</button>
 }
-<!-- @if(isManager()){ -->
-    <button (click)="showAdd=true">להוספת סניף</button>
-<!-- } -->
+@if(isManager()){
+<button (click)="showAdd=true">להוספת סניף</button>
+}
 @if(showAdd){
-<app-add-branch (branchAdded)="onBrabchAdded($event)"/>}
+<app-add-branch (branchAdded)="onBrabchAdded($event)" />}

@@ -16,9 +16,8 @@ namespace Super.Data.Repositories
         private readonly DataContext _context;
         public ShoppingCartRepository(DataContext context)
         {
-           _context = context;
+            _context = context;
         }
-
         public void addShoppingCart(int userId)
         {
             var cart = new ShoppingCart
@@ -28,10 +27,8 @@ namespace Super.Data.Repositories
             _context.ShoppingCarts.Add(cart);
             _context.SaveChanges();
         }
-
         public void AddProduct(int userId, Product product)
         {
-            // בדיקה אם המוצר קיים במסד הנתונים
             var existingProduct = _context.Products
                 .FirstOrDefault(p => p.Id == product.Id);
             if (existingProduct == null)
@@ -41,17 +38,16 @@ namespace Super.Data.Repositories
 
             var cart = _context.ShoppingCarts
                 .Where(c => c.UserId == userId)
-                .OrderByDescending(c => c.Id)  
-                .Include(c => c.Carts) // חשוב כדי לטעון את הפריטים בסל
+                .OrderByDescending(c => c.Id)
+                .Include(c => c.Carts)
                 .FirstOrDefault();
 
             if (cart == null)
             {
                 cart = new ShoppingCart { UserId = userId };
                 _context.ShoppingCarts.Add(cart);
-                _context.SaveChanges(); // שמירה כדי לקבל מזהה תקף לסל
+                _context.SaveChanges();
             }
-
             var existingItem = cart.Carts.FirstOrDefault(i => i.ProductId == product.Id);
             if (existingItem != null)
             {
@@ -64,8 +60,6 @@ namespace Super.Data.Repositories
 
             _context.SaveChanges();
         }
-
-
         public void RemoveProduct(int userId, Product product)
         {
             var cart = _context.ShoppingCarts
@@ -83,8 +77,8 @@ namespace Super.Data.Repositories
 
             if (existingItem.Quantity == 1)
             {
-                _context.ShoppingCartsItem.Remove(existingItem); // מחיקה מה-DB
-                cart.Carts.Remove(existingItem); // מחיקה מהאוסף בזיכרון
+                _context.ShoppingCartsItem.Remove(existingItem);
+                cart.Carts.Remove(existingItem);
             }
             else
             {
@@ -93,43 +87,27 @@ namespace Super.Data.Repositories
 
             _context.SaveChanges();
         }
-
-
         public void ClearCart(int userId)
         {
             var cart = _context.ShoppingCarts
                 .Where(c => c.UserId == userId)
                 .OrderByDescending(c => c.Id)
-                .Include(c => c.Carts) // טוען את הפריטים של הסל
+                .Include(c => c.Carts)
                 .FirstOrDefault();
 
             if (cart == null)
             {
-                Console.WriteLine("⚠️ לא נמצא סל למשתמש עם ID: " + userId);
                 return;
             }
-
-            Console.WriteLine("✅ נמצא סל למשתמש: " + userId);
-            Console.WriteLine("🔹 מספר פריטים בסל: " + cart.Carts.Count);
-
-            // מחיקת כל הפריטים מה-DbSet של ShoppingCartItems
             _context.ShoppingCartsItem.RemoveRange(cart.Carts);
-            Console.WriteLine("🗑️ פריטי הסל נמחקו");
-
-            // מחיקת הסל עצמו מה-DbSet
             _context.ShoppingCarts.Remove(cart);
-            Console.WriteLine("🗑️ הסל נמחק");
-
-            _context.SaveChanges(); // שמירת השינויים בבסיס הנתונים
-            Console.WriteLine("✅ שינויים נשמרו בהצלחה!");
+            _context.SaveChanges();
         }
-
-
         public List<ShoppingCartItem> GetShoppingCarts(int userId)
         {
             var cart = _context.ShoppingCarts
              .Where(c => c.UserId == userId)
-             .OrderByDescending(c => c.Id) // מזהה אחרון = סל אחרון
+             .OrderByDescending(c => c.Id)
              .Include(c => c.Carts)
              .ThenInclude(item => item.Product)
              .ThenInclude(c => c.Category)
@@ -154,7 +132,7 @@ namespace Super.Data.Repositories
 
             if (cart == null || !cart.Carts.Any())
             {
-                return null; // סל ריק או לא קיים
+                return null;
             }
 
             var products = cart.Carts
@@ -173,18 +151,18 @@ namespace Super.Data.Repositories
             {
                 prices[i] = new double[numProducts];
                 shippingCosts[i] = branches[i].ShippingCost;
-               
+
                 for (int j = 0; j < numProducts; j++)
                 {
                     var productPrice = _context.BranchProducts
                         .FirstOrDefault(pp => pp.ProductId == products[j].Id && pp.BranchId == branches[i].Id);
                     prices[i][j] = productPrice?.Price ?? double.MaxValue;
-                    cartCost+= productPrice.Price;
+                    cartCost += productPrice.Price;
                 }
                 cartTotalPriceList.Add(new CartTotalPrice
                 {
                     Id = i,
-                    TotalCartCost = shippingCosts[i]+cartCost
+                    TotalCartCost = shippingCosts[i] + cartCost
                 });
                 cartCost = 0;
             }
@@ -208,11 +186,10 @@ namespace Super.Data.Repositories
                 {
                     if ((subset & (1 << i)) != 0)
                     {
-                        selectedBranches.Add(top5Btanches[i].Id); 
+                        selectedBranches.Add(top5Btanches[i].Id);
                         shipping += shippingCosts[top5Btanches[i].Id];
                     }
                 }
-
 
                 double[] cartPrices = CalculateCombinedCost(selectedBranches, prices, numProducts);
                 double totalCost = cartPrices.Sum() + shipping;
@@ -223,7 +200,6 @@ namespace Super.Data.Repositories
                     bestCombination = selectedBranches;
                 }
             }
-
             // יצירת תוצאה למשתמש
             // יצירת תוצאה למשתמש באמצעות DTO
             var userResult = products.Select((p, i) => new ProductPriceDto
@@ -254,12 +230,13 @@ namespace Super.Data.Repositories
                 }
                 managerResult.ProductOrigins[products[i].Id] = branches[cheapestStore].Id;
             }
-            var result = new ResultDto {Prices= userResult,
-                                        CheapestShoppingCartResult = managerResult 
-                                         };
+            var result = new ResultDto
+            {
+                Prices = userResult,
+                CheapestShoppingCartResult = managerResult
+            };
             return result;
         }
-
         private double[] CalculateCombinedCost(HashSet<int> selectedBranches, double[][] prices, int numProducts)
         {
             double[] selectedProducts = new double[numProducts];

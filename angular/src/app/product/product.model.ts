@@ -11,10 +11,12 @@ export class Product{
     name! : string
     category!: Category
     UnitOfMeasure!: eUnitOfMeasure
+    imageUrl?: string
 }
 
 export class PostProduct{
     name! : string
     categoryId!: number
     UnitOfMeasure!: eUnitOfMeasure
+    ImageUrl?: string
 }

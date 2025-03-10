@@ -1,22 +1,10 @@
-<form [formGroup] = 'addForm'>
- 
+<form [formGroup]='addForm'>
     <div>
-        <label>  
-         name: 
+        <label>
+            שם קטגוריה:
         </label>
         <input type="text" formControlName="name" #id>
-        <div *ngIf="addForm.controls['name'].errors?.['required']"> you must enter category name!</div>
+        <div *ngIf="addForm.controls['name'].errors?.['required']"> חובה להכניס שם קטגוריה!</div>
     </div>
-    <button (click) = 'addCategory()' [disabled] = 'addForm.invalid' >הוספה</button>
+    <button (click)='addCategory()' [disabled]='addForm.invalid'>הוספה</button>
 </form>
-<!-- <div>
-    <label>
-        name: 
-    </label>
-    <input type="text" formControlName = "name">
-    @if("addForm.controls['name'].errors"){
-        <div>
-            you must enter category name!
-        </div>
-    }
-</div> -->

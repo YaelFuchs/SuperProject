@@ -1,16 +1,17 @@
 @if(branchProductDetails){
-    <p>קוד מוצר סניף:{{branchProductDetails.id}}</p>
-    <p>קוד סניף:{{branchProductDetails.branch.id}}</p>
-    <p>שם סניף:{{branchProductDetails.branch.name}}</p>
-    <p>טלפון סניף:{{branchProductDetails.branch.phone}}</p>
-    <p>כתובת סניף:{{branchProductDetails.branch.address}}</p>
-    <p>אימייל סניף:{{branchProductDetails.branch.email}}</p>
-    <p>קוד מוצר:{{branchProductDetails.product.id}}</p>
-    <p>שם מוצר:{{branchProductDetails.product.name}}</p>
-    <p>כמות:{{branchProductDetails.product.UnitOfMeasure}}</p>
-    <p>קוד קטגוריה:{{branchProductDetails.product.category.id}}</p>
-    <p>שם קטגוריה:{{branchProductDetails.product.category.name}}</p>
-    <button (click)="delete(branchProductDetails.id)">מחיקה</button>
-    <button (click)="goBack()">חזרה לרשימת מוצרי סניף</button>
+<p>קוד מוצר סניף:{{branchProductDetails.id}}</p>
+<p>קוד סניף:{{branchProductDetails.branch.id}}</p>
+<p>שם סניף:{{branchProductDetails.branch.name}}</p>
+<p>טלפון סניף:{{branchProductDetails.branch.phone}}</p>
+<p>כתובת סניף:{{branchProductDetails.branch.address}}</p>
+<p>אימייל סניף:{{branchProductDetails.branch.email}}</p>
+<p>קוד מוצר:{{branchProductDetails.product.id}}</p>
+<p>שם מוצר:{{branchProductDetails.product.name}}</p>
+<p>כמות:{{branchProductDetails.product.UnitOfMeasure}}</p>
+<p>קוד קטגוריה:{{branchProductDetails.product.category.id}}</p>
+<p>שם קטגוריה:{{branchProductDetails.product.category.name}}</p>
+@if(isAdmin()){
+   <button (click)="delete(branchProductDetails.id)">מחיקה</button> 
 }
-
+<button (click)="goBack()">חזרה לרשימת מוצרי סניף</button>
+}

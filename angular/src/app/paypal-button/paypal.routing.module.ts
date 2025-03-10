@@ -4,7 +4,7 @@ import { PaypalButtonComponent } from "./component/paypal-button/paypal-button.c
 
 const routes: Route[] = [
     { path: '', component: PaypalButtonComponent },
-    
+
 
 ]
 

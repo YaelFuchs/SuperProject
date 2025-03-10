@@ -7,10 +7,12 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule,HeaderComponent,FooterComponent, RouterOutlet],
+  imports: [CommonModule, HeaderComponent, FooterComponent, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'super';
+
+
 }

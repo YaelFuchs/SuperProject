@@ -1,5 +1,5 @@
-<button (click)="createPayment()">בצע תשלום באמצעות PayPal</button>
-
-<div *ngIf="approvalUrl">
-  <p>הופנית ל-PayPal...</p>
+<button (click)="createOrder()">Pay with PayPal</button>
+<div>
+    <p>userId: {{customerId}}</p>
+    <p>cost: {{sumForPay}}</p>
 </div>

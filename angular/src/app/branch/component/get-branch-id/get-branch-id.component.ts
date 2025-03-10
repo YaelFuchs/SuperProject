@@ -9,41 +9,41 @@ import { AuthService } from '../../../auth/auth.service';
   templateUrl: './get-branch-id.component.html',
   styleUrl: './get-branch-id.component.scss'
 })
-export class GetBranchIdComponent implements OnInit{
-  message=''
-  id=0
-  branchDetails!:Branch
+export class GetBranchIdComponent implements OnInit {
+  message = ''
+  id = 0
+  branchDetails!: Branch
 
-  constructor(private _branchService:BranchService,private _activatedRoute:ActivatedRoute,
-    private _router:Router , private _authService:AuthService ){}
+  constructor(private _branchService: BranchService, private _activatedRoute: ActivatedRoute,
+    private _router: Router, private _authService: AuthService) { }
   ngOnInit(): void {
-    this._activatedRoute.params.subscribe((param)=>{
-      this.id=+param['id'];
+    this._activatedRoute.params.subscribe((param) => {
+      this.id = +param['id'];
       this._branchService.getBranchById(this.id).subscribe({
-        next:(res)=>{
-          this.branchDetails=res
+        next: (res) => {
+          this.branchDetails = res
         },
-        error:(err)=>{
-          this.message=err
-          console.log("error",this.message);          
+        error: (err) => {
+          this.message = err
+          console.log("error", this.message);
         }
       })
     })
   }
-  public delete(id:number){
+  public delete(id: number) {
     this._branchService.deleteBranch(id).subscribe({
-      next:(res)=>{
-        console.log("res",res);
+      next: (res) => {
+        console.log("res", res);
         this._router.navigate(['branch/'])
       },
-      error:(err)=>{
-        this.message=err
-        console.log("error",this.message);
-        
+      error: (err) => {
+        this.message = err
+        console.log("error", this.message);
+
       }
     })
   }
-  goBack(){
+  goBack() {
     this._router.navigate(['branch/'])
   }
   isAdmin(): boolean {

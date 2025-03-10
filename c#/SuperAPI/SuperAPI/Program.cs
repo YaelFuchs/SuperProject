@@ -16,6 +16,8 @@ using SuperAPI.Mapping;
 using SuperAPI.Models;
 using System.Security.Claims;
 using System.Text;
+using PaypalServerSdk.Standard;
+using PaypalServerSdk.Standard.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
@@ -24,19 +26,16 @@ builder.Configuration
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
     .AddEnvironmentVariables();
 
-// Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhost", policy =>
-        policy.WithOrigins("http://localhost:4200")  // כתובת הלקוח
+        policy.WithOrigins("http://localhost:4200")
                .AllowAnyMethod()
                .AllowAnyHeader()
-               .AllowCredentials() );
-
+               .AllowCredentials());
 });
 
-// הגדרת Swagger עם תמיכה ב-JWT
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -49,7 +48,6 @@ builder.Services.AddSwaggerGen(options =>
         Description = "Bearer Authentication with JWT Token",
         Type = SecuritySchemeType.Http
     });
-
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
@@ -66,7 +64,6 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-// הגדרת אימות באמצעות JWT
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -87,10 +84,8 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// הוספת Authorization עם המדיניות שהגדרת
 builder.Services.AddAuthorization(options =>
 {
-    // רק למשתמשים שיש להם ROLE_MANAGER
     options.AddPolicy("Manager", policy =>
         policy.RequireAssertion(context =>
         {
@@ -100,31 +95,25 @@ builder.Services.AddAuthorization(options =>
             var roles = roleClaim.Value.Split(',');
             return roles.Contains("ROLE_MANAGER");
         }));
-
-    // רק למשתמשים שיש להם לפחות ROLE_ADMIN (או יותר)
     options.AddPolicy("Admin", policy =>
         policy.RequireAssertion(context =>
         {
             var roleClaim = context.User.FindFirst(ClaimTypes.Role);
             if (roleClaim == null) return false;
-
             var roles = roleClaim.Value.Split(',');
             return roles.Contains("ROLE_ADMIN");
         }));
 
-    // רק למשתמשים שיש להם לפחות ROLE_USER (או יותר)
     options.AddPolicy("User", policy =>
         policy.RequireAssertion(context =>
         {
             var roleClaim = context.User.FindFirst(ClaimTypes.Role);
             if (roleClaim == null) return false;
-
             var roles = roleClaim.Value.Split(',');
             return roles.Contains("ROLE_USER");
         }));
 });
 
-// חיבור ל-DB
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(@"Server=DESKTOP-SSNMLFD;DataBase=SuperDb;TrustServerCertificate=True;Trusted_Connection=True"));
 
@@ -136,14 +125,13 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepositoy, ProductRepository>();
 builder.Services.AddAutoMapper(typeof(MappingProduct), typeof(PostProductMapping));
 
-
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddAutoMapper( typeof(PostCategoryMapping));
+builder.Services.AddAutoMapper(typeof(PostCategoryMapping));
 
 builder.Services.AddScoped<IBranchProductService, BranchProductService>();
 builder.Services.AddScoped<IBranchProductRepository, BranchProductRepository>();
-builder.Services.AddAutoMapper(typeof(MappingBranchProduct),typeof(PostBranchProductMapping));
+builder.Services.AddAutoMapper(typeof(MappingBranchProduct), typeof(PostBranchProductMapping));
 builder.Services.AddAutoMapper(typeof(MappingProductPrice));
 
 builder.Services.AddScoped<IBranchService, BranchService>();
@@ -154,19 +142,33 @@ builder.Services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
 builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddAutoMapper(typeof(MappingShoppingCartItem), typeof(ShoppingCartMapping));
 
-builder.Services.AddTransient<IPayPalRepository,PayPalRepository>();
+builder.Services.AddTransient<IPayPalRepository, PayPalRepository>();
 builder.Services.AddScoped<IPayPalService, PayPalService>();
+builder.Services.AddAutoMapper(typeof(OrderMapping));
+
+var paypalClient = new PaypalServerSdkClient.Builder()
+    .ClientCredentialsAuth(
+        new ClientCredentialsAuthModel.Builder(
+            builder.Configuration["PayPal:ClientId"],
+            builder.Configuration["PayPal:ClientSecret"]
+        )
+        .OAuthTokenProvider(async (credentialsManager, token) =>
+        {
+            return await credentialsManager.FetchTokenAsync();
+        })
+        .Build())
+    .Build();
+
+builder.Services.AddSingleton(paypalClient);
 
 builder.Services.AddLogging(loggingBuilder =>
 {
-    loggingBuilder.AddConsole(); // הוספת logging לקונסולה
-    // אפשר להוסיף ספקי logging נוספים כאן (למשל, AddDebug, AddEventLog)
+    loggingBuilder.AddConsole();
 });
 var app = builder.Build();
 
 app.UseCors("AllowLocalhost");
 
-// הפעלת Swagger רק בסביבת פיתוח
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -179,14 +181,11 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
 app.Run();
 
-// אתחול הרשאות בסיסיות
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<DataContext>();
-
     if (!context.Roles.Any())
     {
         context.Roles.AddRange(

@@ -1,9 +1,9 @@
 @if(categoryDetails){
-    <div>
-        <p>id: {{categoryDetails.id}}</p>
-        <p>name: {{categoryDetails.name}}</p>
-        <button (click)="delete(categoryDetails.id)">מחיקה</button>
-        <button (click)="goBack()">חזור לרשימת הקטגוריות</button>
-    </div>
+<div>
+    <p>קוד קטגוריה: {{categoryDetails.id}}</p>
+    <p>שם קטגוריה: {{categoryDetails.name}}</p>
+    <button (click)="delete(categoryDetails.id)">מחיקה</button>
+    <button (click)="goBack()">חזור לרשימת הקטגוריות</button>
+</div>
 
 }

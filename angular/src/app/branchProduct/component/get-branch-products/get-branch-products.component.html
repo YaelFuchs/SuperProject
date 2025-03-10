@@ -1,27 +1,26 @@
 @if(!isShow){
-    @if(!showAdd){
-    @for (branchProduct of branchProducts; track $index) {
-        <div style="border: 1px solid brown; margin-bottom: 10px;">
-         <p>סניף:{{branchProduct.branch.name}}</p>
-         <p>מוצר:{{branchProduct.product.name}}</p>
-         <p>מחיר:{{branchProduct.price}}</p>
-         <button (click)="update(branchProduct)">לעדכון</button>
-            <button (click)="showDetails(branchProduct.id)">לפרטים נוספים </button>
-        </div>
-        @if (branchProductToUpdate && branchProductToUpdate.id==branchProduct.id && showUpdate) {
-            <app-update-branch-product [branchProductUpdate]="branchProductToUpdate" (updateBranchProduct)="onUpdateBranchProduct()"/>
-  
-          }
-    }
+@if(!showAdd){
+@for (branchProduct of branchProducts; track $index) {
+<div style="border: 1px solid brown; margin-bottom: 10px;">
+    <p>סניף:{{branchProduct.branch.name}}</p>
+    <p>מוצר:{{branchProduct.product.name}}</p>
+    <p>מחיר:{{branchProduct.price}}</p>
+    <button (click)="update(branchProduct)">לעדכון</button>
+    <button (click)="showDetails(branchProduct.id)">לפרטים נוספים </button>
+</div>
+@if (branchProductToUpdate && branchProductToUpdate.id==branchProduct.id && showUpdate) {
+<app-update-branch-product [branchProductUpdate]="branchProductToUpdate"
+    (updateBranchProduct)="onUpdateBranchProduct()" />
 }
-
+}
+}
 }
 @else {
-    <button (click)="isShow=false">go back</button>
+<button (click)="isShow=false">לחזור אחורה</button>
 }
-@if(isManager()){
-    <button (click)="showAdd=true " >להוספת סניף</button>
+@if(isAdmin()){
+<button (click)="showAdd=true ">להוספת מוצר סניף</button>
 }
 @if(showAdd){
-    <app-add-branch-product (branchProductAdded)="onBranchProductAdded($event)"/>
+<app-add-branch-product (branchProductAdded)="onBranchProductAdded($event)" />
 }

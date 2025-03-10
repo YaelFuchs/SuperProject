@@ -2,36 +2,43 @@
 
   <div>
     <label>
-      name:
+      שם מוצר:
     </label>
     <input type="text" formControlName="name" #id>
-    <div *ngIf="addForm.controls['name'].errors?.['required']"> you must enter product name!</div>
+    <div *ngIf="addForm.controls['name'].errors?.['required']"> חובה לכתוב שם מוצר</div>
   </div>
   <div>
     <label>
       בחר קטגוריה:
     </label>
-      <select id="categortId" formControlName="categoryId">
-        <option value="">
-          בחר קטגוריה:
-        </option>
-        <option *ngFor="let c of categories" [value]="c.id">
-          {{c.name}}
-        </option>
-      </select>
-    </div>
-    <div>
-      <label>
+    <select id="categortId" formControlName="categoryId">
+      <option value="">
+        בחר קטגוריה:
+      </option>
+      <option *ngFor="let c of categories" [value]="c.id">
+        {{c.name}}
+      </option>
+    </select>
+  </div>
+  <div>
+    <label>
+      בחר סוג:
+    </label>
+    <select id="UnitOfMeasure" formControlName="UnitOfMeasure">
+      <option value="">
         בחר סוג:
-      </label>
-      <select id="UnitOfMeasure" formControlName="UnitOfMeasure">
-        <option value="">
-          בחר סוג:
-        </option>
-        <option *ngFor="let unit of unitOptions" [value]="unit.value">
-          {{ unit.key }}
-        </option>
-      </select>
-    </div>
-    <button (click)='addProduct()' [disabled]='addForm.invalid'>הוספה</button>
+      </option>
+      <option *ngFor="let unit of unitOptions" [value]="unit.value">
+        {{ unit.key }}
+      </option>
+    </select>
+  </div>
+  <div>
+    <label>
+      תמונה:
+    </label>
+    <input type="file" (change)="onFileChange($event)" accept="image/*">
+
+  </div>
+  <button (click)='addProduct()' [disabled]='addForm.invalid'>הוספה</button>
 </form>

@@ -12,34 +12,36 @@ using System.Data;
 
 namespace SuperAPI.Controllers
 {
+    [Authorize(Policy = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Policy = "User")]
     public class BranchProductsController : ControllerBase
     {
         private readonly IBranchProductService _IbranchProduct;
         private readonly IMapper _mapper;
 
-        public BranchProductsController(IBranchProductService IbranchProduct ,IMapper mapper)
+        public BranchProductsController(IBranchProductService IbranchProduct, IMapper mapper)
         {
             _IbranchProduct = IbranchProduct;
             _mapper = mapper;
         }
         // GET: api/<BranchProductsController>
-        [AllowAnonymous]
+        [Authorize(Policy = "User")]
         [HttpGet]
         public ActionResult GetAllBranchProducts()
         {
-            try { 
-             return Ok(_mapper.Map<List<BranchProductDto>>(_IbranchProduct.GetAllBranchProducts()));
+            try
+            {
+                return Ok(_mapper.Map<List<BranchProductDto>>(_IbranchProduct.GetAllBranchProducts()));
             }
             catch (Exception ex)
             {
                 return BadRequest("problen with fetch the Brabch Product List");
             }
-            }
+        }
 
         // GET api/<BranchProductsController>/5
+        [Authorize(Policy = "User")]
         [HttpGet("{Id}")]
         public BranchProductDto GetBranchProductById(int Id)
         {
@@ -47,44 +49,37 @@ namespace SuperAPI.Controllers
         }
 
         // POST api/<BranchProductsController>
-        //[Authorize(Policy = "Admin")]
         [HttpPost]
         public void AddBranchProduct([FromBody] BranchProductPostModel branchProduct)
         {
-            try {
+            try
+            {
                 _IbranchProduct.AddBranchProduct(_mapper.Map<BranchProduct>(branchProduct));
             }
             catch (Exception ex)
             {
-                 BadRequest(ex.Message);
+                BadRequest(ex.Message);
             }
         }
-
         // PUT api/<BranchProductsController>/5
-        //[Authorize(Policy = "Admin")]
         [HttpPut("{Id}")]
         public void UpdateBranchProduct(int Id, [FromBody] BranchProductPostModel branchProduct)
         {
-            try {
+            try
+            {
                 _IbranchProduct.UpdateBranchProduct(Id, _mapper.Map<BranchProduct>(branchProduct));
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
                 BadRequest("There was a problem during the update.");
             }
         }
-
         // DELETE api/<BranchProductsController>/5
-        [Authorize(Policy = "Admin")]
         [HttpDelete("{Id}")]
         public void DeleteBranchProduct(int Id)
         {
-            try {
-                _IbranchProduct.DeleteBranchProduct(Id);
-            }
-            catch(Exception ex)
-            {
-                BadRequest("There was a problem during the delete.");
-            }
+
+            _IbranchProduct.DeleteBranchProduct(Id);
         }
     }
 }

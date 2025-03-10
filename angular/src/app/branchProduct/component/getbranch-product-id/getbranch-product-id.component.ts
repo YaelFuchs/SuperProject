@@ -51,8 +51,5 @@ export class GetbranchProductIdComponent implements OnInit{
     isAdmin(): boolean {
       return this._authService.isAdmin();
     }
-    isManager(): boolean {
-      return this._authService.isManager();
-    }
   
 }

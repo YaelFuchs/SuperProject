@@ -1,5 +1,4 @@
-﻿using PayPal.Api;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,10 +8,7 @@ namespace Super.Core.Repositories
 {
     public interface IPayPalRepository
     {
-        public string CreatePayment(double amount, string curency, string returnUrl, string cancelUrl);
-        Task<Payment> ExecutePaymentAsync(string paymentId, string payerId); // הוספתי פונקציה
+        Task<bool> ProcessPayment(string orderId, decimal sumForPay, string currency);
 
-        public void Success();
-        public void Cancel();
     }
 }

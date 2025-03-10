@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Product, eUnitOfMeasure } from '../../product.model';
+import { Product } from '../../product.model';
 import { ProductService } from '../../product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';  // הוספת AuthService
@@ -18,7 +18,7 @@ export class GetProductIdComponent {
     private _router: ActivatedRoute,
     private _r: Router,
     private _authService: AuthService  // הוספת AuthService לקונסטרקטור
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this._router.params.subscribe((param) => {
@@ -26,6 +26,7 @@ export class GetProductIdComponent {
       this._productService.getProductById(this.id).subscribe({
         next: (res) => {
           this.productDetails = res;
+
         },
         error: (err) => {
           console.log("err", err);
@@ -45,16 +46,9 @@ export class GetProductIdComponent {
       }
     });
   }
-
   goBack() {
     this._r.navigate(['product/']);
   }
-
-  // פונקציות לבדוק אם המשתמש הוא אדמין או מנהל
-  isAdmin(): boolean {
-    return this._authService.isAdmin();
-  }
-
   isManager(): boolean {
     return this._authService.isManager();
   }

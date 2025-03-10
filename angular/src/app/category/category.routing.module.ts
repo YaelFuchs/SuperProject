@@ -7,9 +7,9 @@ import { GetCategoryIdComponent } from './component/get-category-id/get-category
 
 const routes: Route[] = [
     { path: '', component: GetCategoriesComponent },
-    { path: 'add-category', component: AddCategoryComponent},
-    { path: 'update-category', component: UpdateCategoryComponent},
-    { path: 'get-category-id/:id', component: GetCategoryIdComponent}
+    { path: 'add-category', component: AddCategoryComponent },
+    { path: 'update-category', component: UpdateCategoryComponent },
+    { path: 'get-category-id/:id', component: GetCategoryIdComponent }
 
 ]
 

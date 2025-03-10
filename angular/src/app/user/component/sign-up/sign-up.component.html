@@ -1,19 +1,19 @@
 <form [formGroup]="addForm">
     <div>
         <label>user name:</label>
-        <input type="text" formControlName="UserName" #id>
-        @if (addForm.controls['UserName'].invalid && (addForm.controls['UserName'].dirty || addForm.controls['UserName'].touched)) {
+        <input type="text" formControlName="userName" #id>
+        @if (addForm.controls['userName'].invalid && (addForm.controls['userName'].dirty || addForm.controls['userName'].touched)) {
             <div>you must enter user name</div>
         }
     </div>
     <div>
         <label>email:</label>
-        <input type="email" formControlName="Email">
-        @if (addForm.controls['Email'].invalid && (addForm.controls['Email'].dirty || addForm.controls['Email'].touched)) {
-            @if (addForm.controls['Email'].errors?.['required']) {
+        <input type="email" formControlName="email">
+        @if (addForm.controls['email'].invalid && (addForm.controls['email'].dirty || addForm.controls['email'].touched)) {
+            @if (addForm.controls['email'].errors?.['required']) {
                 <div>you must enter email</div>
             }
-            @if (addForm.controls['Email'].errors?.['email']) {
+            @if (addForm.controls['email'].errors?.['email']) {
                 <div>אימייל לא חוקי</div>
             }
         }
@@ -21,15 +21,36 @@
 
     <div>
         <label>password:</label>
-        <input type="password" formControlName="Password">
-        @if (addForm.controls['Password'].invalid && (addForm.controls['Password'].dirty || addForm.controls['Password'].touched)) {
-            @if (addForm.controls['Password'].errors?.['required']) {
+        <input type="password" formControlName="password">
+        @if (addForm.controls['password'].invalid && (addForm.controls['password'].dirty || addForm.controls['password'].touched)) {
+            @if (addForm.controls['password'].errors?.['required']) {
                 <div>you must enter password</div>
             }
-            @if (addForm.controls['Password'].errors?.['minlength']) {
+            @if (addForm.controls['password'].errors?.['minlength']) {
                 <div>you must write at least 8 chars</div>
             }
         }
     </div>
+    <div>
+        <label>address:</label>
+        <input type="text" formControlName="address" #id>
+        @if (addForm.controls['address'].invalid && (addForm.controls['address'].dirty || addForm.controls['address'].touched)) {
+            <div>you must enter address</div>
+        }
+    </div>
+    <div>
+        <label for="phone">phone:</label>
+        <input type="text" id="phone" formControlName="phone">
+      
+        @if (addForm.controls['phone'].invalid && (addForm.controls['phone'].dirty || addForm.controls['phone'].touched)) {
+          @if (addForm.controls['phone'].errors?.['required']) {
+            <div>יש להזין מספר טלפון</div>
+          }
+          @if (addForm.controls['phone'].errors?.['invalidPhone']) {
+            <div>מספר הטלפון אינו תקין</div>
+          }
+        }
+      </div>
+      
     <button (click)="signUp()" [disabled]="addForm.invalid">הרשמה</button>
 </form>

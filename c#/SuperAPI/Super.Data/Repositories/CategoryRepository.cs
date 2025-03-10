@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Super.Data.Repositories
 {
-    public class CategoryRepository:ICategoryRepository
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly DataContext _context;
         public CategoryRepository(DataContext context)
@@ -31,7 +31,7 @@ namespace Super.Data.Repositories
         public void AddCategory(Category category)
         {
             // בדיקה האם קיים משתמש עם אותו שם משתמש
-            var existingCategory = _context.Categories.FirstOrDefault(c => c.Name ==category.Name);
+            var existingCategory = _context.Categories.FirstOrDefault(c => c.Name == category.Name);
 
             if (existingCategory == null) // אם לא קיים משתמש עם שם משתמש זהה
             {

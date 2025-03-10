@@ -8,9 +8,9 @@ import { AddBranchComponent } from "./component/add-branch/add-branch.component"
 import { UpdateBranchComponent } from "./component/update-branch/update-branch.component";
 
 @NgModule({
-    declarations:[GetBranchesComponent,GetBranchIdComponent ,AddBranchComponent ,UpdateBranchComponent 
+    declarations: [GetBranchesComponent, GetBranchIdComponent, AddBranchComponent, UpdateBranchComponent
     ],
-    imports:[ 
+    imports: [
         CommonModule,
         ReactiveFormsModule,
         NgClass,
@@ -20,4 +20,4 @@ import { UpdateBranchComponent } from "./component/update-branch/update-branch.c
         BranchRoutingMoudle
     ],
 })
-export class BranchModule{}
+export class BranchModule { }

@@ -1,8 +1,8 @@
-export class Branch{
+export class Branch {
      id !: number
-     name !:string
-     phone !:string
-     address !:string
+     name !: string
+     phone !: string
+     address !: string
      email !: string
-     shoppingCost !:number
+     shoppingCost !: number
 }

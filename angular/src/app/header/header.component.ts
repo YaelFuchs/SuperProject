@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
@@ -10,20 +10,19 @@ import { AuthService } from '../auth/auth.service';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  constructor(private _router: Router, private _authService: AuthService) { }
+  constructor(private _authService: AuthService) { }
 
-  logout(){
-   this._authService.logout()
-
+  logout() {
+    this._authService.logout()
   }
-  goToBranch() {
-    this._router.navigate(['/branch'])
+  isAdmin(): boolean {
+    return this._authService.isAdmin();
   }
-  goToProduct() {
-    this._router.navigate(['/product'])
+  isManager(): boolean {
+    return this._authService.isManager();
   }
-  goToBranchProduct() {
-    this._router.navigate(['/branchProduct'])
+  isUser():boolean{
+    return this._authService.isUser();
   }
 }
 

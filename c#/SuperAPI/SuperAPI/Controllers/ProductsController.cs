@@ -15,9 +15,9 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace SuperAPI.Controllers
 {
+    [Authorize(Policy = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Policy = "User")]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -27,7 +27,6 @@ namespace SuperAPI.Controllers
         {
             _productService = productService;
             _mapper = mapper;
-
         }
         // GET: api/<ProductsController>
         [AllowAnonymous]
@@ -35,7 +34,6 @@ namespace SuperAPI.Controllers
         public ActionResult GetAllProducts()
         {
             var productDtos = _mapper.Map<List<ProductDto>>(_productService.GetAllProducts());
-
             foreach (var productDto in productDtos)
             {
                 if (productDto.ImageUrl != null)
@@ -49,19 +47,15 @@ namespace SuperAPI.Controllers
                     }
                     else
                     {
-                        // אם הקובץ לא קיים, הגדר את ImageUrl ל-null או תמונה ברירת מחדל
-                        productDto.ImageUrl = null; // או תמונה ברירת מחדל
+                        productDto.ImageUrl = null; 
                     }
                 }
             }
-
             return Ok(productDtos);
         }
-
-
         // GET api/<ProductsController>/5
+        [Authorize(Policy = "User")]
         [HttpGet("{Id}")]
-        [AllowAnonymous]
         public ActionResult GetProductById(int Id)
         {
             var p = _mapper.Map<ProductDto>(_productService.GetProductById(Id));
@@ -72,23 +66,11 @@ namespace SuperAPI.Controllers
                 string imageBae64 = Convert.ToBase64String(bytes);
                 p.ImageUrl = string.Format("data:image/jpeg;base64,{0}", imageBae64);
                 return Ok(p);
-
             }
             p.ImageUrl = null;
             return Ok(p);
-
-
         }
-
-        // POST api/<ProductsController>
-        //[Authorize(Policy = "Admin")]
-        //[HttpPost]
-        //public void Post([FromBody] ProductPostModel product)
-        //{
-        //    _productService.AddProduct(_mapper.Map<Product>(product));
-
-        //}
-        [AllowAnonymous]
+        
         [HttpPost]
         [Consumes("multipart/form-data")]
         public IActionResult Post([FromForm] ProductPostModel product)
@@ -97,7 +79,6 @@ namespace SuperAPI.Controllers
             {
                 return BadRequest("You must enter an image.");
             }
-
             try
             {
                 var myPath = Path.Combine(Environment.CurrentDirectory, "images", product.ImageUrl.FileName);
@@ -105,12 +86,10 @@ namespace SuperAPI.Controllers
                 {
                     product.ImageUrl.CopyTo(fs);
                 }
-
                 var p = _mapper.Map<Product>(product);
                 p.ImageUrl = product.ImageUrl.FileName;
                 _productService.AddProduct(p);
-
-                return Ok("Product added successfully.");
+                return Ok(new { message = "Product added successfully." });
             }
             catch (Exception)
             {
@@ -118,7 +97,6 @@ namespace SuperAPI.Controllers
             }
         }
         // PUT api/<ProductsController>/5
-        //[Authorize(Policy = "Admin")]
         [HttpPut("{Id}")]
         [Consumes("multipart/form-data")]
         public IActionResult Put(int Id, [FromForm] ProductPostModel product)
@@ -128,12 +106,10 @@ namespace SuperAPI.Controllers
             {
                 return BadRequest("Product not found");
             }
-
-            if (product.ImageUrl != null && product.ImageUrl.Length > 0) // אם נשלחה תמונה
+            if (product.ImageUrl != null && product.ImageUrl.Length > 0)
             {
                 try
                 {
-                    // מחיקת תמונה קודמת (אם קיימת)
                     if (!string.IsNullOrEmpty(existingProduct.ImageUrl))
                     {
                         var oldImagePath = Path.Combine(Environment.CurrentDirectory, "images", existingProduct.ImageUrl);
@@ -142,15 +118,11 @@ namespace SuperAPI.Controllers
                             System.IO.File.Delete(oldImagePath);
                         }
                     }
-
-                    // שמירת תמונה חדשה
                     var newImagePath = Path.Combine(Environment.CurrentDirectory, "images", product.ImageUrl.FileName);
                     using (FileStream fs = new FileStream(newImagePath, FileMode.Create))
                     {
                         product.ImageUrl.CopyTo(fs);
                     }
-
-                    // עדכון המוצר
                     var updatedProduct = _mapper.Map<Product>(product);
                     updatedProduct.ImageUrl = product.ImageUrl.FileName;
                     _productService.UpdateProduct(Id, updatedProduct);
@@ -160,18 +132,14 @@ namespace SuperAPI.Controllers
                     return BadRequest($"Error processing image: {ex.Message}");
                 }
             }
-            else // אם לא נשלחה תמונה
+            else
             {
                 _productService.UpdateProduct(Id, _mapper.Map<Product>(product));
             }
-
             return Ok();
         }
-
-
         // DELETE api/<ProductsController>/5
-        //[Authorize(Policy = "Admin")]
-        [AllowAnonymous]
+        [Authorize(Policy = "Manager")]
         [HttpDelete("{Id}")]
         public void Delete(int Id)
         {
