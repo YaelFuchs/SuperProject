@@ -58,12 +58,10 @@ namespace Super.Data.Repositories
         }
         public void UpdateBranchProduct(int Id, BranchProduct branchProduct)
         {
-            Console.WriteLine("im here too");
 
             var branchProductToUpdate = _context.BranchProducts.Find(Id);
             if (branchProductToUpdate != null)
             {
-                Console.WriteLine("im here also");
 
                 if (branchProductToUpdate.Price!=branchProduct.Price)
                 {

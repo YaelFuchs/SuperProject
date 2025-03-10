@@ -79,6 +79,17 @@ addProductFromCart(product: Product){
 }
 
 orderCart(){
-  
+  this._cartService.CalculateCheapestCart(this.userId).subscribe({
+    next:(res)=>{
+      alert("ההזמנה בוצעה")
+      console.log("תוצאת האלגוריתם:",res);
+      this._cartService.addCart(this.userId)     
+    },
+    error:(err)=>{
+      alert("שגיאה בביצוע ההזמנה")
+     console.log("err",err);
+     
+    }
+  })
 }
 }

@@ -6,6 +6,7 @@ export class Router{
     Branch="branch"
     Product="product"
     BranchProduct="branchProduct"
+    PayPalButton="paypal"
 }
 
     // לא בטוחה אם נחוץ

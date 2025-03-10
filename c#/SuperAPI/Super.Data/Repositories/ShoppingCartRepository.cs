@@ -143,7 +143,6 @@ namespace Super.Data.Repositories
                 return new List<ShoppingCartItem>();
             }
         }
-        //=====================================להוסיף את כל הקטע עם האחרון גם כאן?
         public ResultDto CalculateCheapestCart(int userId)
         {
             var cart = _context.ShoppingCarts
@@ -158,8 +157,9 @@ namespace Super.Data.Repositories
                 return null; // סל ריק או לא קיים
             }
 
-            var products = cart.Carts.Select(item => item.Product).ToList();
-            var branches = _context.Branches.ToList();
+            var products = cart.Carts
+                .SelectMany(item => Enumerable.Repeat(item.Product, (int)item.Quantity))
+                .ToList(); var branches = _context.Branches.ToList();
 
             int numBranches = branches.Count;
             int numProducts = products.Count;
@@ -237,7 +237,7 @@ namespace Super.Data.Repositories
             {
                 BestCost = bestCost,
                 SelectedBranch = bestCombination.Select(i => branches[i]).ToList(),
-                ProductOrigins = new Dictionary<Product, Branch>()
+                ProductOrigins = new Dictionary<int, int>()
             };
 
             double[] bestCartPrices = CalculateCombinedCost(bestCombination, prices, numProducts);
@@ -252,7 +252,7 @@ namespace Super.Data.Repositories
                         break;
                     }
                 }
-                managerResult.ProductOrigins[products[i]] = branches[cheapestStore];
+                managerResult.ProductOrigins[products[i].Id] = branches[cheapestStore].Id;
             }
             var result = new ResultDto {Prices= userResult,
                                         CheapestShoppingCartResult = managerResult 

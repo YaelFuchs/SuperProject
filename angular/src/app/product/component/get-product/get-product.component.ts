@@ -1,36 +1,53 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { Product, eUnitOfMeasure } from '../../product.model';
+import { Component, Inject,OnInit, PLATFORM_ID } from '@angular/core';
+import { Product } from '../../product.model';
 import { Router } from '@angular/router';
 import { ProductService } from '../../product.service';
 import { AuthService } from '../../../auth/auth.service';
+import { CartService } from '../../../cart/cart.service';
 import { Category } from '../../../category/category.model';
 import { CategoryService } from '../../../category/category.service';
-import { CartService } from '../../../cart/cart.service';
+
 
 @Component({
   selector: 'app-get-product',
   templateUrl: './get-product.component.html',
-  styleUrls: ['./get-product.component.scss']
+  styleUrls: ['./get-product.component.scss'],
 })
 export class GetProductComponent implements OnInit {
   products: Product[] = [];  // בהתחלה, משאיר את המערך ריק
+  allProducts: Product[] = []
   showAdd = false;
   showUpdate = false;
   selectedProduct: Product | null = null;  // אם נבחר מוצר, ניתן לעדכן
   message = '';
   productToUpdate: Product | null = null;  // גם אם מדובר במוצר שאנחנו מעדכנים
   isShow = false;
-  
+  categories!: Category[]
+  activeCategory: string | null = null;
+
+
   constructor(
     private _router: Router,
     private _productService: ProductService,
     private __authService: AuthService,
     private _cartService: CartService,
+    private _categoryService: CategoryService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
+
   ngOnInit(): void {
+    this.products = [];
     this.getProducts();
+    this._categoryService.getCategoriesFromServer().subscribe({
+      next: (res) => {
+        this.categories = res;
+      },
+      error: (err) => {
+        console.log("לא הצלחתי להביא את הקטגוריות", err);
+
+      }
+    })
   }
 
   getProducts(): void {
@@ -38,6 +55,7 @@ export class GetProductComponent implements OnInit {
       next: (res) => {
         console.log("קבלת המוצרים עברה בהצלחה", res);
         this.products = res; // מקבל את המוצרים
+        this.allProducts = res;
         console.log(this.products);
       },
       error: (err) => {
@@ -55,7 +73,7 @@ export class GetProductComponent implements OnInit {
     this.productToUpdate = product;
     this.showUpdate = true;  // נציג את הטופס לעדכון
   }
-  
+
   onUpdateProduct(): void {
     this.showUpdate = false;
     this.getProducts();  // אחרי עדכון, נטען את המוצרים מחדש
@@ -73,21 +91,21 @@ export class GetProductComponent implements OnInit {
   isAdmin(): boolean {
     return this.__authService.isAdmin();  // מחזיר true אם המשתמש הוא אדמין
   }
-  addProductToCart(product: Product){
+  addProductToCart(product: Product) {
     const shoppingCart = {
-      name: product.name, 
+      name: product.name,
       categoryId: product.category.id,
       UnitOfMeasure: product.UnitOfMeasure
-  };
-  this._cartService.addProduct(this.getUserId() ,shoppingCart).subscribe({
-    next:(res)=>{
-      console.log("המוצר נוסף בהצלחה", res);
-    },
-    error: (err)=>{
-      console.log("המוצר לא הצליח להתווסף");
-      
-    }
-  })
+    };
+    this._cartService.addProduct(this.getUserId(), shoppingCart).subscribe({
+      next: (res) => {
+        console.log("המוצר נוסף בהצלחה", res);
+      },
+      error: (err) => {
+        console.log("המוצר לא הצליח להתווסף");
+
+      }
+    })
   }
   private getUserId(): number {
     const authDataString = localStorage.getItem('authToken');
@@ -100,5 +118,15 @@ export class GetProductComponent implements OnInit {
       }
     }
     return 0;
+  }
+
+  getProductByCategory(category: string) {
+    this.activeCategory = category;
+    this.products = this.allProducts.filter(p => p.category.name === category);
+  }
+
+  resetProducts() {
+    this.products = [...this.allProducts]; // מחזיר את כל המוצרים
+    this.activeCategory = null;
   }
 }

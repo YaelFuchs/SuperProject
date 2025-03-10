@@ -659,3 +659,7 @@ C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7
 C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\BCrypt.Net-Next.dll
 C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\PayPal.dll
+C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\SendGrid.dll
+C:\Users\user1\OneDrive\ש.ב\super-project-\c#\SuperAPI\SuperAPI\bin\Debug\net7.0\StarkbankEcdsa.dll

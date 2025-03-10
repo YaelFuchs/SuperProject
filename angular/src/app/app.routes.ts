@@ -15,6 +15,7 @@ export const routes: Routes = [
     { path: "product", loadChildren: () => import('./product/product.module').then(p => p.ProductModule) },
     { path: "branchProduct", loadChildren: () => import('./branchProduct/branchProduct.module').then(b => b.BranchProductModule) },
     { path: "cart", loadChildren: ()=> import('./cart/cart.module').then(c=>c.CartModule)},
+    {path:"paypal",loadChildren:()=>import('./paypal-button/paypal.module').then(p=>p.PayPalModule)},
 
     { path: "**", loadComponent: () => import('./not-found/not-found.component').then(c => c.NotFoundComponent), canActivate: [authGuard] },
 ];

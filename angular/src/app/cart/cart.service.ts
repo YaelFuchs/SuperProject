@@ -1,7 +1,7 @@
 import { HttpClient} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { CartItem, PostCart } from "./cart.model";
+import { CartItem, PostCart, ResultDto } from "./cart.model";
 import { PostProduct } from "../product/product.model";
 
 @Injectable({
@@ -36,7 +36,8 @@ export class CartService {
     getCartByUserId(userId: number):Observable<CartItem[]>{
         return this._httpClient.get<CartItem[]>(`${this.basicUrl}/${userId}`);
     }
-    orderCart(userId: number){
-      
+    
+    CalculateCheapestCart(userId:number):Observable<ResultDto>{
+      return this._httpClient.get<ResultDto>(`${this.basicUrl}/getCheapestCart/${userId}`);
     }
 }

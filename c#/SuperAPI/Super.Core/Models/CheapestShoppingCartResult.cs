@@ -11,7 +11,7 @@ namespace Super.Core.Models
     {
         public double BestCost { get; set; }
         public List<Branch> SelectedBranch { get; set; }
-        public Dictionary<Product, Branch> ProductOrigins { get; set; }
+        public Dictionary<int, int> ProductOrigins { get; set; }
     }
 }
 

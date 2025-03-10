@@ -30,8 +30,14 @@ namespace SuperAPI.Controllers
         [HttpGet]
         public ActionResult GetAllBranchProducts()
         {
-            return Ok(_mapper.Map<List<BranchProductDto>>(_IbranchProduct.GetAllBranchProducts()));
-        }
+            try { 
+             return Ok(_mapper.Map<List<BranchProductDto>>(_IbranchProduct.GetAllBranchProducts()));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("problen with fetch the Brabch Product List");
+            }
+            }
 
         // GET api/<BranchProductsController>/5
         [HttpGet("{Id}")]
@@ -45,7 +51,13 @@ namespace SuperAPI.Controllers
         [HttpPost]
         public void AddBranchProduct([FromBody] BranchProductPostModel branchProduct)
         {
-            _IbranchProduct.AddBranchProduct(_mapper.Map<BranchProduct>(branchProduct));
+            try {
+                _IbranchProduct.AddBranchProduct(_mapper.Map<BranchProduct>(branchProduct));
+            }
+            catch (Exception ex)
+            {
+                 BadRequest(ex.Message);
+            }
         }
 
         // PUT api/<BranchProductsController>/5
@@ -53,8 +65,12 @@ namespace SuperAPI.Controllers
         [HttpPut("{Id}")]
         public void UpdateBranchProduct(int Id, [FromBody] BranchProductPostModel branchProduct)
         {
-            Console.WriteLine("im here");
-            _IbranchProduct.UpdateBranchProduct(Id, _mapper.Map<BranchProduct>(branchProduct));
+            try {
+                _IbranchProduct.UpdateBranchProduct(Id, _mapper.Map<BranchProduct>(branchProduct));
+            }
+            catch(Exception ex) {
+                BadRequest("There was a problem during the update.");
+            }
         }
 
         // DELETE api/<BranchProductsController>/5
@@ -62,7 +78,13 @@ namespace SuperAPI.Controllers
         [HttpDelete("{Id}")]
         public void DeleteBranchProduct(int Id)
         {
-            _IbranchProduct.DeleteBranchProduct(Id);
+            try {
+                _IbranchProduct.DeleteBranchProduct(Id);
+            }
+            catch(Exception ex)
+            {
+                BadRequest("There was a problem during the delete.");
+            }
         }
     }
 }

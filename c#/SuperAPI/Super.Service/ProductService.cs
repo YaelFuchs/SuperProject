@@ -11,36 +11,36 @@ using System.Threading.Tasks;
 
 namespace Super.Service
 {
-    public class ProductService: IProductService
+    public class ProductService : IProductService
     {
-        
-            private readonly IProductRepositoy _productRepository;
-            public ProductService(IProductRepositoy productRepository)
-            {
+
+        private readonly IProductRepositoy _productRepository;
+        public ProductService(IProductRepositoy productRepository)
+        {
             _productRepository = productRepository;
-            }
-            public List<Product> GetAllProducts()
-            {
-                return _productRepository.GetProductList();
-            }
-            public Product GetProductById(int Id)
-            {
-                return _productRepository.GetProductById(Id);
+        }
+        public List<Product> GetAllProducts()
+        {
+            return _productRepository.GetProductList();
+        }
+        public Product GetProductById(int Id)
+        {
+            return _productRepository.GetProductById(Id);
 
-            }
-            public void AddProduct(Product product)
-            {
-                _productRepository.AddProduct(product);
-            }
-            public void UpdateProduct(int Id, Product product)
-            {
-                _productRepository.UpdateProduct(Id, product);
-            }
+        }
+        public void AddProduct(Product product)
+        {
+            _productRepository.AddProduct(product);
+        }
+        public void UpdateProduct(int Id, Product product)
+        {
+            _productRepository.UpdateProduct(Id, product);
+        }
 
-            public void DeleteProduct(int Id)
-            {
-                _productRepository.DeleteProduct(Id);
-            }
+        public void DeleteProduct(int Id)
+        {
+            _productRepository.DeleteProduct(Id);
+        }
 
     }
 }

@@ -1,24 +1,42 @@
-@if(!isShow){
-  @for(product of products ;track $index){
-    <p>מוצר ID: {{ product.id }}</p>
-    <p>שם מוצר: {{ product.name }}</p>
-    <button (click)="update(product)">עדכון מוצר</button>
-    <button (click)="showDetailes(product.id)">פרטים נוספים</button>
-    <button (click)="addProductToCart(product)">הוספת מוצר לסל</button>
+<div class="get-product-container">
+  <div class="category-buttons">
+    <button (click)="resetProducts()">כל המוצרים</button>
+    @for(category of categories ;track $index){
+      <button 
+        (click)="getProductByCategory(category.name)" 
+        [ngClass]="{'active-category': activeCategory === category.name}">
+        {{ category.name }}
+      </button>
+    }
+    <button (click)="resetProducts()">כל המוצרים</button>
+  </div>
 
-    @if(productToUpdate && productToUpdate.id == product.id && showUpdate){
-      <app-update-product [productUpdate] = "productToUpdate" (updateProduct)="onUpdateProduct()"></app-update-product>
-     }
+  @if(!isShow){
+    <div class="products-grid">
+      @for(product of products ;track $index){
+        <div class="product-card">
+          <p>מוצר ID: {{ product.id }}</p>
+          <p>שם מוצר: {{ product.name }}</p>
+          <button (click)="update(product)">עדכון מוצר</button>
+          <button (click)="showDetailes(product.id)">פרטים נוספים</button>
+          <button (click)="addProductToCart(product)">הוספת מוצר לסל</button>
+
+          @if(productToUpdate && productToUpdate.id == product.id && showUpdate){
+            <app-update-product [productUpdate]="productToUpdate" (updateProduct)="onUpdateProduct()"></app-update-product>
+          }
+        </div>
+      }
+    </div>
   }
-}
-@else{
-  <button (click)="isShow=false">go back</button>
+  @else{
+    <button class="go-back-btn" (click)="isShow=false">go back</button>
   }    
 
-  <button (click)="showAdd = true">הוספת מוצר</button>
+  <button class="add-product-btn" (click)="showAdd = true">הוספת מוצר</button>
 
- @if(showAdd){
-  <app-add-product (productAdded)="onProductAdded($event)"></app-add-product>
- }
+  @if(showAdd){
+    <app-add-product (productAdded)="onProductAdded($event)"></app-add-product>
+  }
+</div>
 
     

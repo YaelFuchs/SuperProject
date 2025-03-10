@@ -154,6 +154,14 @@ builder.Services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
 builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddAutoMapper(typeof(MappingShoppingCartItem), typeof(ShoppingCartMapping));
 
+builder.Services.AddTransient<IPayPalRepository,PayPalRepository>();
+builder.Services.AddScoped<IPayPalService, PayPalService>();
+
+builder.Services.AddLogging(loggingBuilder =>
+{
+    loggingBuilder.AddConsole(); // הוספת logging לקונסולה
+    // אפשר להוסיף ספקי logging נוספים כאן (למשל, AddDebug, AddEventLog)
+});
 var app = builder.Build();
 
 app.UseCors("AllowLocalhost");
