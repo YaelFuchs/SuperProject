@@ -66,13 +66,16 @@ export class AuthService implements OnInit {
   }
 
   isAdmin(): boolean {
+    this.checkAuth();
     return this.roles.includes('ROLE_USER,ROLE_ADMIN,ROLE_MANAGER') ||
       this.roles.includes('ROLE_USER,ROLE_ADMIN');
   }
   isManager(): boolean {
+    this.checkAuth();
     return this.roles.includes('ROLE_USER,ROLE_ADMIN,ROLE_MANAGER');
   }
   isUser(): boolean {
+    this.checkAuth();
     return this.roles.includes('ROLE_USER');
   }
   get isAuthenticated(): boolean {

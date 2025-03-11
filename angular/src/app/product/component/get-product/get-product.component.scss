@@ -223,3 +223,89 @@
     background-color: #555;
   }
 }
+/* עיצוב שורת החיפוש */
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* מרווח בין האלמנטים */
+  max-width: 600px; /* רוחב מרבי */
+  width: 100%;
+  margin: 20px auto; /* מרכוז בעמוד עם מרווח */
+  padding: 10px;
+  background-color: #f5f7fa; /* רקע עדין */
+  border-radius: 25px; /* פינות מעוגלות */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* צל קל */
+}
+
+/* עיצוב התווית */
+.search-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #2c3e50; /* צבע כהה */
+  white-space: nowrap; /* מונע שבירת שורה */
+}
+
+/* עיצוב שדה הקלט */
+.search-input {
+  flex: 1; /* תופס את החלל הזמין */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:focus {
+    border-color: #3498db; /* כחול בהדגשה */
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+  }
+
+  &::placeholder {
+    color: #7f8c8d; /* צבע פלצהבולדר עדין */
+  }
+}
+
+/* עיצוב הכפתור */
+.search-button {
+  padding: 10px 20px;
+  background-color: #3498db; /* כחול מודרני */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: #2980b9; /* כחול כהה יותר */
+    transform: translateY(-2px); /* הרמה קלה */
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+/* מדיה קוורי למסכים קטנים (עד 600px - טלפונים) */
+@media (max-width: 600px) {
+  .search-container {
+    flex-direction: column;
+    gap: 5px;
+    padding: 15px;
+  }
+
+  .search-label {
+    font-size: 14px;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 8px;
+  }
+
+  .search-button {
+    width: 100%;
+    padding: 8px;
+  }
+}

@@ -10,10 +10,10 @@
   
     
   </div>
-  <div>
-    <label for="search">חיפוש מוצר:</label>
-    <input type="text" id="search" [(ngModel)]="searchTerm">
-    <button (click)="goToSearch(searchTerm)">חיפוש</button>
+  <div class="search-container">
+    <label for="search" class="search-label">חיפוש מוצר:</label>
+    <input type="text" id="search" [(ngModel)]="searchTerm" class="search-input">
+    <button (click)="goToSearch(searchTerm)" class="search-button">חיפוש</button>
   </div>
   @if (!isShow) {
     @if (!showAdd) {
