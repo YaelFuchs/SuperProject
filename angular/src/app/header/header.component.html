@@ -1,21 +1,21 @@
 <ul>
-   
+
+    @if(isUser()){
+    <button (click)="logout()">התנתקות</button>
+    <button routerLink="/cart">סל קניות</button>
+    <button routerLink="/user">איזור אישי</button>
+    <button routerLink="/product">מוצרים</button>
+    }
     @if(isAdmin()){
     <button routerLink="/category">קטגוריות</button>
     <button routerLink="/branch">סניפים</button>
     <button routerLink="/branchProduct">מוצרי סניף</button>
     }
-    @if(isUser()){
-    <button routerLink="/cart">סל קניות</button>
-    <button routerLink="/user">איזור אישי</button>
-    <button (click)="logout()">התנתקות</button>
-    }
 
     @else{
     <button routerLink="/user/signin">הרשמה</button>
     <button routerLink="/login">התחברות</button>
-  
     }
-    <button routerLink="/product">מוצרים</button>
+
 
 </ul>

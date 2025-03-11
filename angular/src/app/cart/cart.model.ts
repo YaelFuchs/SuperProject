@@ -21,7 +21,7 @@ export class PostCart {
     UnitOfMeasure!: eUnitOfMeasure
 }
 export class ResultDto {
-    Prices!: ProductPriceDto[]
+    prices!: ProductPriceDto[]
     cheapestShoppingCartResult!: CheapestShoppingCartResult
 }
 export class ProductPriceDto {
