@@ -1,34 +1,84 @@
-<form *ngIf="product" #form="ngForm" (ngSubmit)="saveChanges()">
-  <div>
-    <label for="name">שם מוצר:</label>
-    <input type="text" id="name" name="name" [(ngModel)]="product.name" required #name="ngModel">
-    <div *ngIf="name.invalid && name.touched">
-      <div *ngIf="name.errors?.['required']">חובה להזין שם</div>
-    </div>
-  </div>
+<div class="form-container">
+  <div class="form-card">
+    <h2 class="form-title">עדכון מוצר</h2>
+    <form *ngIf="product" #form="ngForm" (ngSubmit)="saveChanges()" class="update-form">
+      <!-- שם מוצר -->
+      <div class="form-row">
+        <label for="name" class="form-label">שם מוצר:</label>
+        <div class="form-field">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            [(ngModel)]="product.name"
+            required
+            #name="ngModel"
+            class="form-input">
+          @if (name.invalid && name.touched) {
+            @if (name.errors?.['required']) {
+              <div class="error-message">חובה להזין שם</div>
+            }
+          }
+        </div>
+      </div>
 
-  <div>
-    <label>בחר קטגוריה:</label>
-    <select id="categoryId" name="categoryId" [(ngModel)]="product.categoryId" required #categoryId="ngModel">
-      <option value="">בחר קטגוריה</option>
-      <option *ngFor="let c of categories" [value]="c.id">
-        {{ c.name }}
-      </option>
-    </select>
-    <div *ngIf="categoryId.invalid && categoryId.touched">
-      <div *ngIf="categoryId.errors?.['required']">חובה לבחור קטגוריה</div>
-    </div>
-  </div>
+      <!-- בחירת קטגוריה -->
+      <div class="form-row">
+        <label for="categoryId" class="form-label">בחר קטגוריה:</label>
+        <div class="form-field">
+          <select
+            id="categoryId"
+            name="categoryId"
+            [(ngModel)]="product.categoryId"
+            required
+            #categoryId="ngModel"
+            class="form-select">
+            <option value="">בחר קטגוריה</option>
+            @for (c of categories; track c.id) {
+              <option [value]="c.id">{{ c.name }}</option>
+            }
+          </select>
+          @if (categoryId.invalid && categoryId.touched) {
+            @if (categoryId.errors?.['required']) {
+              <div class="error-message">חובה לבחור קטגוריה</div>
+            }
+          }
+        </div>
+      </div>
 
-  <div>
-    <label>בחר סוג:</label>
-    <select id="UnitOfMeasure" name="UnitOfMeasure" [(ngModel)]="product.UnitOfMeasure" required
-      #UnitOfMeasure="ngModel">
-      <option value="">בחר סוג</option>
-      <option *ngFor="let unit of unitOptions" [value]="unit.value">
-        {{ unit.key }}
-      </option>
-    </select>
+      <!-- בחירת סוג -->
+      <div class="form-row">
+        <label for="UnitOfMeasure" class="form-label">בחר סוג:</label>
+        <div class="form-field">
+          <select
+            id="UnitOfMeasure"
+            name="UnitOfMeasure"
+            [(ngModel)]="product.UnitOfMeasure"
+            required
+            #UnitOfMeasure="ngModel"
+            class="form-select">
+            <option value="">בחר סוג</option>
+            @for (unit of unitOptions; track unit.value) {
+              <option [value]="unit.value">{{ unit.key }}</option>
+            }
+          </select>
+          @if (UnitOfMeasure.invalid && UnitOfMeasure.touched) {
+            @if (UnitOfMeasure.errors?.['required']) {
+              <div class="error-message">חובה לבחור סוג</div>
+            }
+          }
+        </div>
+      </div>
+
+      <!-- כפתור עדכון -->
+      <div class="form-actions">
+        <button
+          type="submit"
+          [disabled]="form.invalid"
+          class="btn btn-submit">
+          עדכון
+        </button>
+      </div>
+    </form>
   </div>
-  <button type="submit" [disabled]="form.invalid">עדכון</button>
-</form>
+</div>

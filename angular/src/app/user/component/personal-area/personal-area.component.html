@@ -1,11 +1,31 @@
-<div>
-    <p>פרטי משתמש:</p>
-    <p>שם: {{userData.UserName}}</p>
-    <p>מייל:{{userData.Email}}</p>
-    <p>כתובת:{{userData.Address}}</p>
-    <p>טלפון:{{userData.Phone}}</p>
-</div>
-<button (click)="update()">עדכון הפרטים</button>
-<button (click)="delete()">מחיקת חשבון</button>
-<button (click)="logout()">התנתקות מהמערכת</button>
-
+<div class="user-details-container" *ngIf="userData">
+    <h2>פרטי משתמש</h2>
+    <div class="user-info">
+      <div class="info-item">
+        <span class="label">שם:</span>
+        <span class="value">{{ userData.userName }}</span>
+      </div>
+      <div class="info-item">
+        <span class="label">מייל:</span>
+        <span class="value">{{ userData.email }}</span>
+      </div>
+      <div class="info-item">
+        <span class="label">כתובת:</span>
+        <span class="value">{{ userData.address }}</span>
+      </div>
+      <div class="info-item">
+        <span class="label">טלפון:</span>
+        <span class="value">{{ userData.phone }}</span>
+      </div>
+    </div>
+  
+    <div class="actions">
+      <button class="btn" (click)="update()">עדכון הפרטים</button>
+      <button class="btn" (click)="delete()">מחיקת חשבון</button>
+      <button class="btn" (click)="logout()">התנתקות מהמערכת</button>
+    </div>
+  </div>
+  
+  <div *ngIf="!userData" class="loading">
+    <p>טוען פרטי משתמש...</p>
+  </div>

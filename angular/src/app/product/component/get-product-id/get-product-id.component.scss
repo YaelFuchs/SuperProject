@@ -1,0 +1,99 @@
+.product-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* גובה מלא של המסך */
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%); /* גרדיאנט עדין */
+    padding: 20px;
+  }
+  
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* צל מודרני */
+    max-width: 500px; /* רוחב מרבי */
+    width: 100%;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+    &:hover {
+      transform: translateY(-5px); /* הרמה קלה ב-hover */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+  
+    .product-image {
+      width: 100%;
+      max-height: 300px; /* גובה מרבי לתמונה */
+      object-fit: contain; /* שומר על התמונה במלואה */
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #e0e0e0; /* מסגרת עדינה */
+    }
+  
+    .product-details {
+      text-align: center;
+      width: 100%;
+  
+      .product-name {
+        font-size: 28px;
+        font-weight: 600;
+        color: #2c3e50; /* כחול-אפור כהה */
+        margin: 0 0 15px;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* צל קל */
+      }
+  
+      .product-info {
+        font-size: 16px;
+        color: #34495e; /* גוון כחול-אפור */
+        margin: 5px 0;
+        line-height: 1.5;
+      }
+    }
+  
+    .product-actions {
+      display: flex;
+      gap: 15px; /* מרווח בין הכפתורים */
+      margin-top: 20px;
+  
+      button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  
+        &:hover {
+          transform: translateY(-2px); /* הרמה קלה */
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+  
+        &:active {
+          transform: translateY(0);
+        }
+      }
+  
+      .back-btn {
+        background-color: #3498db; /* כחול */
+        color: white;
+  
+        &:hover {
+          background-color: #2980b9;
+        }
+      }
+  
+      .delete-btn {
+        background-color: #e74c3c; /* אדום */
+        color: white;
+  
+        &:hover {
+          background-color: #c0392b;
+        }
+      }
+    }
+  }

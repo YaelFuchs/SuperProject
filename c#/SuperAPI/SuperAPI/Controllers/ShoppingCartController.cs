@@ -105,7 +105,7 @@ namespace SuperAPI.Controllers
                     return BadRequest("Product not found");
                 }
                 _shoppingCartService.RemoveProduct(userId, product);
-                return Ok("RemoveProduct successfully");
+                return Ok(new { message = "RemoveProduct successfully" });
             }
             catch { return BadRequest("cant RemoveProduct"); }
         }

@@ -8,6 +8,7 @@ import { UpdateProductComponent } from "./component/update-product/update-produc
 const routes: Route[] = [
     { path: "", component: GetProductComponent },
     { path: 'get-product/:category', component: GetProductComponent },
+    { path: 'get-product/search/:word', component: GetProductComponent },
     { path: 'get-product-id/:id', component: GetProductIdComponent },
     { path: 'add-product', component: AddProductComponent },
     { path: 'update-product', component: UpdateProductComponent },

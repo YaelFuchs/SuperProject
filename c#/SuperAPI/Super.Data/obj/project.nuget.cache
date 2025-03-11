@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nnuxVaiXeo7X5aZXbMzSA0zWvfJewsojPftBugFU+kz1FWFWiy7uVHcN20L+/LP1r4gA6vD3nOLFkZt4kOHFxw==",
+  "dgSpecHash": "V/JVa8Yml594cYyk8i6vaTWcykcT7z+jmF/GOnf3ZAKxtWwDmvDalAk9oe6CJniC6CCy3Bb6KrMJRQ/JXNHliQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj",
+  "projectFilePath": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Data\\Super.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user1\\.nuget\\packages\\apimatic.core\\0.4.3\\apimatic.core.0.4.3.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\automapper\\6.0.2\\automapper.6.0.2.nupkg.sha512",

@@ -1,23 +1,51 @@
-@if(!isShow){
-@for(category of categories ;track $index){
-<div style="border: 1px solid brown; margin-bottom: 10px;">
-    <p>מספר סידורי: {{ $index }}</p>
-    <p>קטגוריה ID: {{ category.id }}</p>
-    <p>שם הקטגוריה: {{ category.name }}</p>
-    <button (click)="update(category)">עדכון קטגוריה</button>
-    <button (click)="showDetailes(category.id)">פרטים נוספים</button>
+<div class="categories-container">
+  @if (!isShow) {
+    @if(!showAdd){
+    <div class="categories-list">
+      @for (category of categories; track $index) {
+        <div class="category-card">
+          <div class="category-info">
+            <p class="id">מזהה קטגוריה: {{ category.id }}</p>
+            <p class="name">שם הקטגוריה: {{ category.name }}</p>
+          </div>
+          <div class="category-actions">
+            <button class="btn update" (click)="update(category)">עדכון קטגוריה</button>
+            <button class="btn details" (click)="showDetailes(category.id)">פרטים נוספים</button>
+          </div>
+        </div>
+      }
+    
+    
+    </div>
+  }
+    <!-- מודל לעדכון קטגוריה -->
+    @if (showUpdate && categoryToUpdate && isManager()) {
+      <div class="modal-overlay">
+        <div class="modal-content">
+          <button class="modal-close-btn" (click)="showUpdate=false">✕</button>
+          <app-update-category 
+            [categoryUpdate]="categoryToUpdate" 
+            (updatecategory)="onUpdatecategory()" />
+        </div>
+      </div>
+    }
+  } @else {
+    <div class="back-button">
+      <button class="btn back" (click)="isShow = false">חזרה לקטגוריות</button>
+    </div>
+  }
+
+  @if (isManager()) {
+    @if (!showAdd) {
+      <div class="add-button">
+        <button class="btn add" (click)="showAdd = true">הוספת קטגוריה</button>
+      </div>
+    }
+  }
+
+  @if (showAdd) {
+    <div class="add-section">
+      <app-add-category (categoryAdded)="onCategoryAdded($event)" />
+    </div>
+  }
 </div>
-@if (categoryToUpdate && categoryToUpdate.id == category.id && showUpdate && isManager()) {
-<app-update-category [categoryUpdate]="categoryToUpdate" (updatecategory)="onUpdatecategory()" />
-}
-}
-}
-@else{
-<button (click)="isShow=false">חזרה לקטגוריות</button>
-}
-@if(isManager()){
-<button (click)="showAdd = true">הוספת קטגוריה</button>
-}
-@if(showAdd){
-<app-add-category (categoryAdded)="onCategoryAdded($event)" />
-}

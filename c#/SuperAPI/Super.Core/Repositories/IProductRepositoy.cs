@@ -15,5 +15,7 @@ namespace Super.Core.Repositories
         public void AddProduct(Product product);
         public void UpdateProduct(int Id, Product product);
         public void DeleteProduct(int Id);
+        public List<Product> Search(string word);
+
     }
 }

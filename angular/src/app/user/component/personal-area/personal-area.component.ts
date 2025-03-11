@@ -29,6 +29,8 @@ export class PersonalAreaComponent implements OnInit{
     }
     this._userService.getUserById(this.userId).subscribe({
     next: (res) => {
+      console.log("data",res);
+      
       this.userData = res; 
   },
   error:(err)=>{

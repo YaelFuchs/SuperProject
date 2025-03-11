@@ -1,40 +1,63 @@
 <div class="get-product-container">
   <div class="category-buttons">
-    @for(category of categories ;track $index){
-    <button (click)="getProductByCategory(category.name)"
-      [ngClass]="{'active-category': activeCategory === category.name}">
-      {{ category.name }}
-    </button>
+    @for(category of categories; track $index) {
+      <button 
+        (click)="getProductByCategory(category.name)"
+        [ngClass]="{'active-category': activeCategory === category.name}">
+        {{ category.name }}
+      </button>
     }
+  
+    
   </div>
+  <div>
+    <label for="search">חיפוש מוצר:</label>
+    <input type="text" id="search" [(ngModel)]="searchTerm">
+    <button (click)="goToSearch(searchTerm)">חיפוש</button>
+  </div>
+  @if (!isShow) {
+    @if (!showAdd) {
+      <div class="products-grid">
+        @for (product of products; track $index) {
+          <div class="product-card">
+            <img *ngIf="product.imageUrl" [src]="product.imageUrl" alt="תמונה של {{ product.name }}">
+            <p>{{ product.name }}</p>
+            @if (isAdmin()) {
+              <button (click)="update(product)">עדכון מוצר</button>
+              <button (click)="showDetailes(product.id)">פרטים נוספים</button>
+              <button (click)="addProductToCart(product)">הוספת מוצר לסל</button>
+            }
+            @if (isUser()) {
+              <button (click)="showDetailes(product.id)">פרטים נוספים</button>
+              <button (click)="addProductToCart(product)">הוספת מוצר לסל</button>
+            }
+          </div>
+        }
+      </div>
 
-  @if(!isShow){
-  <div class="products-grid">
-    @for(product of products ;track $index){
-    <div class="product-card">
-      <img *ngIf="product.imageUrl" [src]="product.imageUrl" alt="תמונה של {{ product.name }}">
-      <p> {{ product.name }}</p>
-      @if(isAdmin()){
-        <button (click)="update(product)">עדכון מוצר</button>
+      <!-- מודל לעדכון מוצר -->
+      @if (showUpdate && productToUpdate && isAdmin()) {
+        <div class="modal-overlay">
+          <div class="modal-content">
+            <button class="modal-close-btn" (click)="showUpdate=false">✕</button>
+            <app-update-product 
+              [productUpdate]="productToUpdate" 
+              (updateProduct)="onUpdateProduct()" />
+          </div>
+        </div>
       }
-      @if(isUser()){
-        <button (click)="showDetailes(product.id)">פרטים נוספים</button>
-        <button (click)="addProductToCart(product)">הוספת מוצר לסל</button>
-      }
-      @if(productToUpdate && productToUpdate.id == product.id && showUpdate && isAdmin()){
-      <app-update-product [productUpdate]="productToUpdate" (updateProduct)="onUpdateProduct()"></app-update-product>
-      }
-    </div>
     }
-  </div>
+  } @else {
+    <button class="go-back-btn" (click)="isShow=false">חזרה לכל המוצרים</button>
   }
-  @else{
-  <button class="go-back-btn" (click)="isShow=false">חזרה לכל המוצרים</button>
+
+  @if (isAdmin()) {
+    @if (!showAdd) {
+      <button class="add-product-btn" (click)="showAdd = true">הוספת מוצר</button>
+    }
   }
- @if(isAdmin()){
-  <button class="add-product-btn" (click)="showAdd = true">הוספת מוצר</button>
- }
-  @if(showAdd){
-  <app-add-product (productAdded)="onProductAdded($event)"></app-add-product>
+
+  @if (showAdd) {
+    <app-add-product (productAdded)="onProductAdded($event)"></app-add-product>
   }
 </div>

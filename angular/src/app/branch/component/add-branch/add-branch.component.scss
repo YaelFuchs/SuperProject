@@ -1,7 +1,99 @@
-input.ng-invalid {
-    border-left: 3px solid red;
-}
-
-input.ng-valid {
-    border-left: 3px solid green;
-}
+.add-branch-container {
+    width: 800px; /* קביעת רוחב ישיר במקום להסתמך רק על max-width */
+    max-width: 90%; /* מגבלה של 90% מהמסך לרספונסיביות */
+    margin: 20px auto;
+    direction: rtl;
+  }
+  
+  .add-form {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%; /* מבטיח שהטופס יתפרס על כל רוחב הקונטיינר */
+    box-sizing: border-box; /* מבטיח שה-padding לא יגרום לחריגה מהרוחב */
+  }
+  
+  /* להרחיב את שדות הקלט עצמם */
+  .form-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+    width: 100%; /* מבטיח שהשדות יתפרסו על כל הרוחב הזמין */
+    box-sizing: border-box;
+  
+    &:focus {
+      border-color: #4caf50;
+      box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+    }
+  
+    &.ng-invalid.ng-touched {
+      border-color: #f44336;
+    }
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  .error {
+    color: #f44336;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+  
+    &:hover {
+      transform: translateY(-2px);
+    }
+  
+    &:active {
+      transform: translateY(0);
+    }
+  
+    &:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+  
+  .add {
+    background-color: #4caf50;
+    color: white;
+  
+    &:hover {
+      background-color: #45a049;
+    }
+  }

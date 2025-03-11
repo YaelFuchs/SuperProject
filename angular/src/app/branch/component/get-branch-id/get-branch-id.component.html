@@ -1,9 +1,39 @@
-@if (branchDetails) {
-<p>קוד סניף:{{branchDetails.id}}</p>
-<p>שם סניף:{{branchDetails.name}}</p>
-<p>אימייל:{{branchDetails.email}}</p>
-<p>טלפון:{{branchDetails.phone}}</p>
-<p>כתובת:{{branchDetails.address}}</p>
-<p>כתובת:{{branchDetails.shoppingCost}}</p>
-<button (click)="delete(branchDetails.id)">מחיקה</button>
-<button (click)="goBack()">חזרה לרשימת סניפים</button>}
+<div class="branch-details-container" *ngIf="branchDetails">
+    <div class="branch-card">
+      <h2>פרטי סניף</h2>
+      <div class="details-info">
+        <div class="info-item">
+          <span class="label">קוד סניף:</span>
+          <span class="value">{{ branchDetails.id }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">שם סניף:</span>
+          <span class="value">{{ branchDetails.name }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">אימייל:</span>
+          <span class="value">{{ branchDetails.email }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">טלפון:</span>
+          <span class="value">{{ branchDetails.phone }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">כתובת:</span>
+          <span class="value">{{ branchDetails.address }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">עלות משלוח:</span>
+          <span class="value">{{ branchDetails.shoppingCost }}</span>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn delete" (click)="delete(branchDetails.id)">מחיקה</button>
+        <button class="btn back" (click)="goBack()">חזרה לרשימת סניפים</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="loading" *ngIf="!branchDetails">
+    <p>טוען פרטי סניף...</p>
+  </div>

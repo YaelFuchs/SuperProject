@@ -42,8 +42,13 @@ export class SignUpComponent implements OnInit {
         console.log("המשתמש הצליח להתחבר", res);
         this._popupService.openPopup(
           'נרשמת בהצלחה🎉🎉',
-          'תודה על הרשמתך לאתר<br>מקווים שתהנה מהאתר<br><a href="/login">לחץ כאן להתחברות</a>'
+          'מיד תועבר לדף ההתחברות'
         );
+        
+        setTimeout(() => {
+          this._popupService.closePopup();
+          this._router.navigate(['/login']);
+        }, 3000);
       },
       error: (err) => {
         console.log(err);

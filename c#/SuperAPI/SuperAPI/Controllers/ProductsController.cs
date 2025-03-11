@@ -145,6 +145,51 @@ namespace SuperAPI.Controllers
         {
             _productService.DeleteProduct(Id);
         }
+        // GET: api/<ProductsController>
+        //[Authorize(Policy = "User")]
+        [AllowAnonymous]
+
+        [HttpGet("search/{word}")]
+        public ActionResult Search(string? word)
+        {
+            List<Product> products;
+
+            if (string.IsNullOrWhiteSpace(word))
+            {
+                products = _productService.GetAllProducts();
+            }
+            else
+            {
+                products = _productService.Search(word);
+            }
+
+            if (products == null || !products.Any())
+            {
+                return NotFound("No products found.");
+            }
+
+            var productDtos = _mapper.Map<List<ProductDto>>(products);
+
+            foreach (var productDto in productDtos)
+            {
+                if (productDto.ImageUrl != null)
+                {
+                    var path = Path.Combine(Environment.CurrentDirectory, "images/", productDto.ImageUrl);
+                    if (System.IO.File.Exists(path))
+                    {
+                        byte[] bytes = System.IO.File.ReadAllBytes(path);
+                        string imageBase64 = Convert.ToBase64String(bytes);
+                        productDto.ImageUrl = $"data:image/jpeg;base64,{imageBase64}";
+                    }
+                    else
+                    {
+                        productDto.ImageUrl = null;
+                    }
+                }
+            }
+
+            return Ok(productDtos);
+        }
     }
 }
 

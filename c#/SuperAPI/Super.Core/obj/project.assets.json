@@ -3037,11 +3037,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj",
+      "projectUniqueName": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj",
       "projectName": "Super.Core",
-      "projectPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj",
+      "projectPath": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Core\\Super.Core.csproj",
       "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user1\\Desktop\\super-project\\c#\\SuperAPI\\Super.Core\\obj\\",
+      "outputPath": "C:\\Users\\user1\\OneDrive\\ש.ב\\super-project-\\c#\\SuperAPI\\Super.Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config",

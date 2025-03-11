@@ -41,6 +41,11 @@ namespace Super.Service
         {
             _productRepository.DeleteProduct(Id);
         }
+        public List<Product> Search(string word)
+        {
+            return _productRepository.Search(word);
+        }
+
 
     }
 }

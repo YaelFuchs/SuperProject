@@ -1,9 +1,23 @@
-@if(categoryDetails){
-<div>
-    <p>קוד קטגוריה: {{categoryDetails.id}}</p>
-    <p>שם קטגוריה: {{categoryDetails.name}}</p>
-    <button (click)="delete(categoryDetails.id)">מחיקה</button>
-    <button (click)="goBack()">חזור לרשימת הקטגוריות</button>
-</div>
-
-}
+<div class="category-details-container" *ngIf="categoryDetails">
+    <div class="category-card">
+      <h2>פרטי קטגוריה</h2>
+      <div class="details-info">
+        <div class="info-item">
+          <span class="label">מזהה קטגוריה:</span>
+          <span class="value">{{ categoryDetails.id }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">שם קטגוריה:</span>
+          <span class="value">{{ categoryDetails.name }}</span>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn delete" (click)="delete(categoryDetails.id)">מחיקה</button>
+        <button class="btn back" (click)="goBack()">חזור לרשימת הקטגוריות</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="loading" *ngIf="!categoryDetails">
+    <p>טוען פרטי קטגוריה...</p>
+  </div>

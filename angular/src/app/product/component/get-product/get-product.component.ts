@@ -17,6 +17,7 @@ import { PopupService } from '../../../popup/popup.service';
 export class GetProductComponent implements OnInit {
   products: Product[] = [];  // בהתחלה, משאיר את המערך ריק
   allProducts: Product[] = []
+  searchList: Product []=[]
   showAdd = false;
   showUpdate = false;
   selectedProduct: Product | null = null;  // אם נבחר מוצר, ניתן לעדכן
@@ -25,6 +26,7 @@ export class GetProductComponent implements OnInit {
   isShow = false;
   categories!: Category[]
   activeCategory: string | null = null;
+  searchTerm: string = '';
 
 
 
@@ -41,9 +43,12 @@ export class GetProductComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.activeCategory = params.get('category');
+      const searchWord = params.get('word');
       this.getProducts(() => { // מחכה שהמוצרים ייטענו קודם
         if (this.activeCategory) {
           this.filterProductsByCategory();
+        }else if (searchWord) {
+          this.search(searchWord); // מבצע חיפוש דרך ה-URL
         }
       });
     });
@@ -58,6 +63,7 @@ export class GetProductComponent implements OnInit {
     });
   }
 
+  
 
   getProducts(callback?: () => void): void {
     this._productService.getProducts().subscribe({
@@ -93,7 +99,7 @@ export class GetProductComponent implements OnInit {
   }
 
   showDetailes(id: number): void {
-    this.isShow = true;  // מגדירים את ה- isShow להיות true כדי להציג פרטי מוצר
+    this.isShow = true;  // מגדירים את ה- isShow להיות
     this._router.navigate(['product/get-product-id', id]);  // מעבירים לעמוד של פרטי המוצר
   }
   addProductToCart(product: Product) {
@@ -138,5 +144,24 @@ export class GetProductComponent implements OnInit {
   isUser(): boolean {
     return this._authService.isUser();
   }
+  goToSearch(word:string){
+    this._router.navigate(['product/get-product/search', word]);
 
+  }
+  search(word:string){
+    this._productService.search(word).subscribe({
+      next:(res)=>{
+        console.log("הסינון הצליח", res);
+        this.products = res;
+      },
+      error:(err)=>{
+        if (err.status === 404) {
+          console.log("לא נמצאו מוצרים עבור החיפוש:", word);
+          this.products = []; // אופציונלי: ניקוי המוצרים במקרה של 404
+        } else {
+          console.log("שגיאה אחרת התרחשה:", err);
+        }
+      }
+    })
+  }
 }

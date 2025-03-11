@@ -1,39 +1,89 @@
-@if(branchProduct){
-<form #form="ngForm">
-  <div>
-    <label for="branchId">סניף:</label>
-    <select id="branchId" name="branchId" [(ngModel)]="branchProduct.branchId" required #branchId="ngModel">
-      <option value="">בחר סניף</option>
-      <option *ngFor="let branch of branches" [value]="branch.id" [selected]="branch.id === branchProduct.branchId">
-        {{ branch.name }}
-      </option>
-    </select>
-    <div [hidden]="branchId.valid || branchId.pristine">
-      <div [hidden]="!branchId.errors?.['required']">חובה לבחור סניף</div>
-    </div>
-  </div>
+@if (branchProduct) {
+  <div class="form-container">
+    <div class="form-card">
+      <h2 class="form-title">עדכון מוצר לסניף</h2>
+      <form #form="ngForm" class="update-form">
+      
+        <div class="form-row">
+          <label for="branchId" class="form-label">סניף:</label>
+          <div class="form-field">
+            <select
+              id="branchId"
+              name="branchId"
+              [(ngModel)]="branchProduct.branchId"
+              required
+              #branchId="ngModel"
+              class="form-select">
+              <option value="">בחר סניף</option>
+              @for (branch of branches; track branch.id) {
+                <option
+                  [value]="branch.id"
+                  [selected]="branch.id === branchProduct.branchId">
+                  {{ branch.name }}
+                </option>
+              }
+            </select>
+            <div class="error-message" [hidden]="branchId.valid || branchId.pristine">
+              <div [hidden]="!branchId.errors?.['required']">חובה לבחור סניף</div>
+            </div>
+          </div>
+        </div>
 
-  <div>
-    <label for="productId">מוצר:</label>
-    <select id="productId" name="productId" [(ngModel)]="branchProduct.productId" required #productId="ngModel">
-      <option value="">בחר מוצר</option>
-      <option *ngFor="let product of products" [value]="product.id" [selected]="product.id === branchProduct.productId">
-        {{ product.name }}
-      </option>
-    </select>
-    <div [hidden]="productId.valid || productId.pristine">
-      <div [hidden]="!productId.errors?.['required']">חובה לבחור מוצר</div>
-    </div>
-  </div>
+      
+        <div class="form-row">
+          <label for="productId" class="form-label">מוצר:</label>
+          <div class="form-field">
+            <select
+              id="productId"
+              name="productId"
+              [(ngModel)]="branchProduct.productId"
+              required
+              #productId="ngModel"
+              class="form-select">
+              <option value="">בחר מוצר</option>
+              @for (product of products; track product.id) {
+                <option
+                  [value]="product.id"
+                  [selected]="product.id === branchProduct.productId">
+                  {{ product.name }}
+                </option>
+              }
+            </select>
+            <div class="error-message" [hidden]="productId.valid || productId.pristine">
+              <div [hidden]="!productId.errors?.['required']">חובה לבחור מוצר</div>
+            </div>
+          </div>
+        </div>
 
-  <div>
-    <label for="price">מחיר:</label>
-    <input type="text" id="price" name="price" [(ngModel)]="branchProduct.price" required min="0" #price="ngModel">
-    <div [hidden]="price.valid || price.pristine">
-      <div [hidden]="!price.errors?.['required']">חובה להזין מחיר</div>
-      <div [hidden]="!price.errors?.['min']">מחיר המינימום גדול מ-0</div>
+        <div class="form-row">
+          <label for="price" class="form-label">מחיר:</label>
+          <div class="form-field">
+            <input
+              type="text"
+              id="price"
+              name="price"
+              [(ngModel)]="branchProduct.price"
+              required
+              min="0"
+              #price="ngModel"
+              class="form-input">
+            <div class="error-message" [hidden]="price.valid || price.pristine">
+              <div [hidden]="!price.errors?.['required']">חובה להזין מחיר</div>
+              <div [hidden]="!price.errors?.['min']">מחיר המינימום גדול מ-0</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button
+            type="submit"
+            [disabled]="form.invalid"
+            (click)="saveChanges()"
+            class="btn btn-submit">
+            עדכן מוצר לסניף
+          </button>
+        </div>
+      </form>
     </div>
   </div>
-  <button type="submit" [disabled]="form.invalid" (click)="saveChanges()">עדכן מוצר לסניף</button>
-</form>
 }

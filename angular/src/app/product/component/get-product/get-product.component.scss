@@ -1,14 +1,13 @@
-// get-product.component.scss
-
-// כללי לדף
+/* עיצוב כללי לדף */
 .get-product-container {
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
   background-color: #f9f9f9;
+  direction: rtl; /* כיווניות עברית */
 }
 
-// עיצוב לקטגוריות
+/* עיצוב לקטגוריות */
 .category-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -46,11 +45,11 @@
   }
 }
 
-// עיצוב לרשימת המוצרים
+/* עיצוב לרשימת המוצרים */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 15px; // הקטנתי את המרווח בין הכרטיסיות מ-20px ל-15px
+  gap: 15px;
   
   @media (max-width: 900px) {
     grid-template-columns: repeat(3, 1fr);
@@ -65,19 +64,19 @@
   }
 }
 
-// עיצוב לכל מוצר בודד
+/* עיצוב לכל מוצר בודד */
 .product-card {
   border: 1px solid #ddd;
-  padding: 10px; // הקטנתי את ה-padding מ-15px ל-10px
+  padding: 10px;
   border-radius: 8px;
   background-color: white;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
   text-align: center;
-  gap: 8px; // הקטנתי את ה-gap מ-12px ל-8px
+  gap: 8px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  max-width: 220px; // הוספתי רוחב מרבי כדי שהכרטיסיות יהיו קטנות יותר
+  max-width: 220px;
 
   &:hover {
     transform: translateY(-5px);
@@ -87,32 +86,32 @@
   img {
     width: 100%;
     height: auto;
-    max-height: 180px; // הקטנתי את הגובה המרבי מ-250px ל-180px
+    max-height: 180px;
     object-fit: contain;
     border-radius: 6px;
-    margin-bottom: 8px; // הקטנתי מ-10px ל-8px
+    margin-bottom: 8px;
   }
 
   p {
-    margin: 3px 0; // הקטנתי מ-5px ל-3px
-    font-size: 13px; // הקטנתי מ-14px ל-13px
+    margin: 3px 0;
+    font-size: 13px;
     color: #333;
     font-weight: 500;
   }
 
   button {
-    padding: 6px; // הקטנתי מ-8px ל-6px
+    padding: 6px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 12px; // הקטנתי מ-13px ל-12px
+    font-size: 12px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 
     &:hover {
       transform: scale(1.05);
     }
 
-    &:nth-child(1) { // עדכון מוצר
+    &:nth-child(1) { /* עדכון מוצר */
       background-color: #4CAF50;
       color: white;
       &:hover {
@@ -120,7 +119,7 @@
       }
     }
 
-    &:nth-child(2) { // פרטים נוספים
+    &:nth-child(2) { /* פרטים נוספים */
       background-color: #2196F3;
       color: white;
       &:hover {
@@ -128,7 +127,7 @@
       }
     }
 
-    &:nth-child(3) { // הוספת מוצר לסל
+    &:nth-child(3) { /* הוספת מוצר לסל */
       background-color: #ff9800;
       color: white;
       &:hover {
@@ -138,16 +137,67 @@
   }
 }
 
-// כפתור הוספת מוצר
+/* עיצוב המודל לעדכון */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* רקע חצי שקוף */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* עיצוב תוכן המודל */
+.modal-content {
+  position: relative;
+  background-color: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* עיצוב כפתור סגירת המודל */
+.modal-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.modal-close-btn:hover {
+  background-color: #c82333;
+}
+
+/* כפתור הוספת מוצר */
 .add-product-btn {
-  margin-top: 20px;
-  padding: 10px 20px; // הקטנתי מ-12px 24px ל-10px 20px
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
   background-color: #4CAF50;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 15px; // הקטנתי מ-16px ל-15px
+  font-size: 15px;
   transition: background-color 0.3s ease, transform 0.2s ease;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 
@@ -157,10 +207,11 @@
   }
 }
 
-// כפתור חזרה
+/* כפתור חזרה */
 .go-back-btn {
-  margin: 20px 0;
-  padding: 8px 16px; // הקטנתי מ-10px 20px ל-8px 16px
+  display: block;
+  margin: 20px auto;
+  padding: 8px 16px;
   background-color: #666;
   color: white;
   border: none;

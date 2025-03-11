@@ -1,49 +1,106 @@
-@if(branch){
-<form #form="ngForm">
-    <div>
-        <label>שם הסניף :</label>
-        <input type="text" name="name" [(ngModel)]="branch.name" required="true" #name="ngModel">
-        <div [ngSwitch]="name.errors">
-            <div *ngSwitchCase="'required'">
-                חובה להכניס שם סניף!
-            </div>
+<div class="update-branch-container" *ngIf="branch">
+    <form #form="ngForm" class="update-form">
+      <h2>עדכון סניף</h2>
+  
+      <div class="form-group">
+        <label for="name">שם הסניף:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          [(ngModel)]="branch.name"
+          required
+          #name="ngModel"
+          class="form-input"
+          placeholder="הזן שם סניף"
+        />
+        <div class="error" [ngSwitch]="name.errors">
+          <div *ngSwitchCase="'required'">חובה להכניס שם סניף!</div>
         </div>
-        <label>טלפון:</label>
-        <input type="text" name="phone" [(ngModel)]="branch.phone" required="true" #phone="ngModel">
-        <div [ngSwitch]="phone.errors">
-            <div *ngSwitchCase="'required'">
-                חובה להוסיף מספר טלפון
-            </div>
-            <div *ngSwitchCase="'minlength'">
-                האורך החוקי המינימלי הוא 7
-            </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="phone">טלפון:</label>
+        <input
+          type="text"
+          id="phone"
+          name="phone"
+          [(ngModel)]="branch.phone"
+          required
+          #phone="ngModel"
+          class="form-input"
+          placeholder="הזן מספר טלפון"
+        />
+        <div class="error" [ngSwitch]="phone.errors">
+          <div *ngSwitchCase="'required'">חובה להוסיף מספר טלפון</div>
+          <div *ngSwitchCase="'minlength'">האורך החוקי המינימלי הוא 7</div>
         </div>
-        <label>כתובת:</label>
-        <input type="text" name="address" [(ngModel)]="branch.address" required="true" #address="ngModel">
-        <div [ngSwitch]="address.errors">
-            <div *ngSwitchCase="'required'">
-                חובה להכניס כתובת
-            </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="address">כתובת:</label>
+        <input
+          type="text"
+          id="address"
+          name="address"
+          [(ngModel)]="branch.address"
+          required
+          #address="ngModel"
+          class="form-input"
+          placeholder="הזן כתובת"
+        />
+        <div class="error" [ngSwitch]="address.errors">
+          <div *ngSwitchCase="'required'">חובה להכניס כתובת</div>
         </div>
-        <label>אימייל:</label>
-        <input type="email" name="email" [(ngModel)]="branch.email" required="true" #email="ngModel">
-        <div [ngSwitch]="email.errors">
-            <div *ngSwitchCase="'required'">
-                חובה להכניס אימייל
-            </div>
-            <div *ngSwitchCase="'email'">
-               אימייל לא חוקי
-            </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="email">אימייל:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="branch.email"
+          required
+          #email="ngModel"
+          class="form-input"
+          placeholder="הזן אימייל"
+        />
+        <div class="error" [ngSwitch]="email.errors">
+          <div *ngSwitchCase="'required'">חובה להכניס אימייל</div>
+          <div *ngSwitchCase="'email'">אימייל לא חוקי</div>
         </div>
-        <label>עלות משלוח:</label>
-        <input type="text" name="shoppingCost" [(ngModel)]="branch.shoppingCost" required="true"
-            #shoppingCost="ngModel">
-        <div [ngSwitch]="shoppingCost.errors">
-            <div *ngSwitchCase="'required'">
-                חובה להכניס עלות משלוח!
-            </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="shoppingCost">עלות משלוח:</label>
+        <input
+          type="text"
+          id="shoppingCost"
+          name="shoppingCost"
+          [(ngModel)]="branch.shoppingCost"
+          required
+          #shoppingCost="ngModel"
+          class="form-input"
+          placeholder="הזן עלות משלוח"
+        />
+        <div class="error" [ngSwitch]="shoppingCost.errors">
+          <div *ngSwitchCase="'required'">חובה להכניס עלות משלוח!</div>
         </div>
-        <button [disabled]="form.invalid" (click)="saveChanges()">עדכון</button>
-    </div>
-</form>
-}
+      </div>
+  
+      <div class="actions">
+        <button
+          class="btn save"
+          [disabled]="form.invalid"
+          (click)="saveChanges()"
+        >
+          עדכון
+        </button>
+      </div>
+    </form>
+  </div>
+  
+  <div class="loading" *ngIf="!branch">
+    <p>טוען פרטי סניף...</p>
+  </div>

@@ -1,52 +1,95 @@
-<form [formGroup]="addForm">
-    <div>
-        <label> שם סניף: </label>
-        <input type="text" formControlName="name" #id>
+<div class="add-branch-container">
+    <form [formGroup]="addForm" class="add-form">
+      <h2>הוספת סניף</h2>
+  
+      <div class="form-group">
+        <label for="name">שם סניף:</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="form-input"
+          placeholder="הזן שם סניף"
+        />
         @if (addForm.controls['name'].invalid && (addForm.controls['name'].dirty || addForm.controls['name'].touched)) {
-        <div>חובה להכניס שם סניף</div>
+          <div class="error">חובה להכניס שם סניף</div>
         }
-    </div>
-    <div>
-        <label> טלפון: </label>
-        <input type="text" formControlName="phone">
-        @if (addForm.controls['phone'].invalid && (addForm.controls['phone'].dirty ||
-        addForm.controls['phone'].touched)) {
-        @if (addForm.controls['phone'].errors?.['required']) {
-        <div>חובה להכניס טלפון</div>
+      </div>
+  
+      <div class="form-group">
+        <label for="phone">טלפון:</label>
+        <input
+          type="text"
+          id="phone"
+          formControlName="phone"
+          class="form-input"
+          placeholder="הזן מספר טלפון"
+        />
+        @if (addForm.controls['phone'].invalid && (addForm.controls['phone'].dirty || addForm.controls['phone'].touched)) {
+          @if (addForm.controls['phone'].errors?.['required']) {
+            <div class="error">חובה להכניס טלפון</div>
+          }
+          @if (addForm.controls['phone'].errors?.['minlength']) {
+            <div class="error">האורך המינימלי של טלפון הוא 7</div>
+          }
         }
-        @if (addForm.controls['phone'].errors?.['minlength']) {
-        <div>האורך המינימלי של טלפון הוא 7</div>
+      </div>
+  
+      <div class="form-group">
+        <label for="address">כתובת:</label>
+        <input
+          type="text"
+          id="address"
+          formControlName="address"
+          class="form-input"
+          placeholder="הזן כתובת"
+        />
+        @if (addForm.controls['address'].invalid && (addForm.controls['address'].dirty || addForm.controls['address'].touched)) {
+          <div class="error">חובה להכניס כתובת</div>
         }
+      </div>
+  
+      <div class="form-group">
+        <label for="email">אימייל:</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-input"
+          placeholder="הזן אימייל"
+        />
+        @if (addForm.controls['email'].invalid && (addForm.controls['email'].dirty || addForm.controls['email'].touched)) {
+          @if (addForm.controls['email'].errors?.['required']) {
+            <div class="error">חובה להכניס אימייל</div>
+          }
+          @if (addForm.controls['email'].errors?.['email']) {
+            <div class="error">אימייל לא חוקי</div>
+          }
         }
-    </div>
-    <div>
-        <label>כתובת:</label>
-        <input type="text" formControlName="address" #id>
-        @if (addForm.controls['address'].invalid && (addForm.controls['address'].dirty ||
-        addForm.controls['address'].touched)) {
-        <div>חובה להכניס כתובת</div>
+      </div>
+  
+      <div class="form-group">
+        <label for="shoppingCost">עלות משלוח:</label>
+        <input
+          type="text"
+          id="shoppingCost"
+          formControlName="shoppingCost"
+          class="form-input"
+          placeholder="הזן עלות משלוח"
+        />
+        @if (addForm.controls['shoppingCost'].invalid && (addForm.controls['shoppingCost'].dirty || addForm.controls['shoppingCost'].touched)) {
+          <div class="error">חובה להכניס עלות משלוח</div>
         }
-    </div>
-    <div>
-        <label>אימייל:</label>
-        <input type="email" formControlName="email">
-        @if (addForm.controls['email'].invalid && (addForm.controls['email'].dirty ||
-        addForm.controls['email'].touched)) {
-        @if (addForm.controls['email'].errors?.['required']) {
-        <div>חובה להכניס אימייל</div>
-        }
-        @if (addForm.controls['email'].errors?.['email']) {
-        <div>אימייל לא חוקי</div>
-        }
-        }
-    </div>
-    <div>
-        <label> עלות משלוח: </label>
-        <input type="text" formControlName="shoppingCost" #id>
-        @if (addForm.controls['shoppingCost'].invalid && (addForm.controls['shoppingCost'].dirty ||
-        addForm.controls['shoppingCost'].touched)) {
-        <div>חובה להכניס עלות משלוח</div>
-        }
-    </div>
-    <button (click)='addBranch()' [disabled]='addForm.invalid'>הוספה</button>
-</form>
+      </div>
+  
+      <div class="actions">
+        <button
+          class="btn add"
+          [disabled]="addForm.invalid"
+          (click)="addBranch()"
+        >
+          הוספה
+        </button>
+      </div>
+    </form>
+  </div>

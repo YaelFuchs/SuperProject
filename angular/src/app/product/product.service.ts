@@ -33,4 +33,7 @@ export class ProductService {
     updateProduct(id: number, product: PostProduct): Observable<any> {
         return this._httpClient.put<any>(`${this.basicUrl}/${id}`, product);
     }
+    search(word:string):Observable<Product[]>{
+        return this._httpClient.get<Product[]>(`${this.basicUrl}/search/${word}`);
+    }
 }

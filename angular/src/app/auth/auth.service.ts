@@ -93,7 +93,7 @@ export class AuthService implements OnInit {
             console.error('שגיאה בשמירה:', error);
           }
         }
-        this._router.navigate(['/home'])
+        this._router.navigate(['/product'])
       },
       error: (err) => {
         alert('שגיאה בהתחברות: ' + err.error);

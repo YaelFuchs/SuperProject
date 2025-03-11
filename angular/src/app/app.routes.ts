@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-// import { authGuard } from './auth.guard';
 import { AuthComponent } from './auth/auth.component';
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
     { path: "", redirectTo: "product", pathMatch: "full" },
@@ -12,5 +12,5 @@ export const routes: Routes = [
     { path: "branchProduct", loadChildren: () => import('./branchProduct/branchProduct.module').then(b => b.BranchProductModule) },
     { path: "cart", loadChildren: () => import('./cart/cart.module').then(c => c.CartModule) },
     { path: "paypal/:userId/:cost", loadChildren: () => import('./paypal-button/paypal.module').then(p => p.PayPalModule) },
-    { path: "**", loadComponent: () => import('./not-found/not-found.component').then(c => c.NotFoundComponent)},
+    { path: "**", loadComponent: () => import('./not-found/not-found.component').then(c => c.NotFoundComponent),canActivate:[authGuard]},
 ];

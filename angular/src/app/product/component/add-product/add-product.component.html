@@ -1,44 +1,88 @@
-<form [formGroup]='addForm'>
+<div class="form-container">
+  <div class="form-card">
+    <h2 class="form-title">הוספת מוצר חדש</h2>
+    <form [formGroup]="addForm" (ngSubmit)="addProduct()" class="add-form">
+      <!-- שם מוצר -->
+      <div class="form-row">
+        <label for="name" class="form-label">שם מוצר:</label>
+        <div class="form-field">
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            class="form-input">
+          @if (addForm.controls['name'].invalid && (addForm.controls['name'].dirty || addForm.controls['name'].touched)) {
+            @if (addForm.controls['name'].errors?.['required']) {
+              <div class="error-message">חובה לכתוב שם מוצר</div>
+            }
+          }
+        </div>
+      </div>
 
-  <div>
-    <label>
-      שם מוצר:
-    </label>
-    <input type="text" formControlName="name" #id>
-    <div *ngIf="addForm.controls['name'].errors?.['required']"> חובה לכתוב שם מוצר</div>
-  </div>
-  <div>
-    <label>
-      בחר קטגוריה:
-    </label>
-    <select id="categortId" formControlName="categoryId">
-      <option value="">
-        בחר קטגוריה:
-      </option>
-      <option *ngFor="let c of categories" [value]="c.id">
-        {{c.name}}
-      </option>
-    </select>
-  </div>
-  <div>
-    <label>
-      בחר סוג:
-    </label>
-    <select id="UnitOfMeasure" formControlName="UnitOfMeasure">
-      <option value="">
-        בחר סוג:
-      </option>
-      <option *ngFor="let unit of unitOptions" [value]="unit.value">
-        {{ unit.key }}
-      </option>
-    </select>
-  </div>
-  <div>
-    <label>
-      תמונה:
-    </label>
-    <input type="file" (change)="onFileChange($event)" accept="image/*">
+      <!-- בחירת קטגוריה -->
+      <div class="form-row">
+        <label for="categoryId" class="form-label">בחר קטגוריה:</label>
+        <div class="form-field">
+          <select
+            id="categoryId"
+            formControlName="categoryId"
+            class="form-select">
+            <option value="">בחר קטגוריה</option>
+            @for (c of categories; track c.id) {
+              <option [value]="c.id">{{ c.name }}</option>
+            }
+          </select>
+          @if (addForm.controls['categoryId'].invalid && (addForm.controls['categoryId'].dirty || addForm.controls['categoryId'].touched)) {
+            @if (addForm.controls['categoryId'].errors?.['required']) {
+              <div class="error-message">חובה לבחור קטגוריה</div>
+            }
+          }
+        </div>
+      </div>
 
+      <!-- בחירת סוג -->
+      <div class="form-row">
+        <label for="UnitOfMeasure" class="form-label">בחר סוג:</label>
+        <div class="form-field">
+          <select
+            id="UnitOfMeasure"
+            formControlName="UnitOfMeasure"
+            class="form-select">
+            <option value="">בחר סוג</option>
+            @for (unit of unitOptions; track unit.value) {
+              <option [value]="unit.value">{{ unit.key }}</option>
+            }
+          </select>
+          @if (addForm.controls['UnitOfMeasure'].invalid && (addForm.controls['UnitOfMeasure'].dirty || addForm.controls['UnitOfMeasure'].touched)) {
+            @if (addForm.controls['UnitOfMeasure'].errors?.['required']) {
+              <div class="error-message">חובה לבחור סוג</div>
+            }
+          }
+        </div>
+      </div>
+
+      <!-- העלאת תמונה -->
+      <div class="form-row">
+        <label for="image" class="form-label">תמונה:</label>
+        <div class="form-field">
+          <input
+            type="file"
+            id="image"
+            (change)="onFileChange($event)"
+            accept="image/*"
+            class="form-file">
+        </div>
+      </div>
+
+      <!-- כפתור הוספה -->
+      <div class="form-actions">
+        <button
+          type="submit"
+          [disabled]="addForm.invalid"
+          class="btn btn-submit">
+          הוספה
+        </button>
+      </div>
+    </form>
   </div>
-  <button (click)='addProduct()' [disabled]='addForm.invalid'>הוספה</button>
-</form>
+</div>

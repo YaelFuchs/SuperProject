@@ -1,46 +1,69 @@
-<form [formGroup]="addForm" (ngSubmit)="addBranchProduc()">
-  <div>
-    <label for="branchId">סניף:</label>
-    <select id="branchId" formControlName="branchId">
-      <option value="">בחר סניף</option>
-      <option *ngFor="let branch of branches" [value]="branch.id">
-        {{ branch.name }}
-      </option>
-    </select>
-    @if (addForm.controls['branchId'].invalid && (addForm.controls['branchId'].dirty || addForm.controls['branchId'].touched)) {
-      @if (addForm.controls['branchId'].errors?.['required']) {
-        <div>חובה להכניס סניף</div>
-        }
-      }
-  </div>
+<div class="form-container">
+  <div class="form-card">
+    <h2 class="form-title">הוספת מוצר לסניף</h2>
+    <form [formGroup]="addForm" (ngSubmit)="addBranchProduc()" class="add-form">
 
-  <div>
-    <label for="productId">מוצר:</label>
-    <select id="productId" formControlName="productId">
-      <option value="">בחר מוצר</option>
-      <option *ngFor="let product of products" [value]="product.id">
-        {{ product.name }}
-      </option>
-    </select>
-    @if (addForm.controls['productId'].invalid && (addForm.controls['productId'].dirty || addForm.controls['productId'].touched)) {
-      @if (addForm.controls['productId'].errors?.['required']) {
-        <div>חובה להכניס מוצר</div>
-        }
-      }
-  </div>
-
-  <div>
-    <label for="price">מחיר:</label>
-    <input type="text" id="price" formControlName="price">
-    @if (addForm.controls['price'].invalid && (addForm.controls['price'].dirty || addForm.controls['price'].touched)) {
-      @if (addForm.controls['price'].errors?.['required']) {
-        <div>חובה להזין מחיר</div>
-        }
-        @if (addForm.controls['price'].errors?.['min']) {
-          <div>מחיר המינימום גדול מ0</div>
+      <div class="form-row">
+        <label for="branchId" class="form-label">סניף:</label>
+        <div class="form-field">
+          <select id="branchId" formControlName="branchId" class="form-select">
+            <option value="">בחר סניף</option>
+            @for (branch of branches; track branch.id) {
+              <option [value]="branch.id">{{ branch.name }}</option>
+            }
+          </select>
+          @if (addForm.controls['branchId'].invalid && (addForm.controls['branchId'].dirty || addForm.controls['branchId'].touched)) {
+            @if (addForm.controls['branchId'].errors?.['required']) {
+              <div class="error-message">חובה להכניס סניף</div>
+            }
           }
-      }
-  </div>
+        </div>
+      </div>
 
-  <button type="submit" [disabled]="addForm.invalid">הוסף מוצר לסניף</button>
-</form>
+      <div class="form-row">
+        <label for="productId" class="form-label">מוצר:</label>
+        <div class="form-field">
+          <select id="productId" formControlName="productId" class="form-select">
+            <option value="">בחר מוצר</option>
+            @for (product of products; track product.id) {
+              <option [value]="product.id">{{ product.name }}</option>
+            }
+          </select>
+          @if (addForm.controls['productId'].invalid && (addForm.controls['productId'].dirty || addForm.controls['productId'].touched)) {
+            @if (addForm.controls['productId'].errors?.['required']) {
+              <div class="error-message">חובה להכניס מוצר</div>
+            }
+          }
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label for="price" class="form-label">מחיר:</label>
+        <div class="form-field">
+          <input
+            type="number"
+            id="price"
+            formControlName="price"
+            class="form-input">
+          @if (addForm.controls['price'].invalid && (addForm.controls['price'].dirty || addForm.controls['price'].touched)) {
+            @if (addForm.controls['price'].errors?.['required']) {
+              <div class="error-message">חובה להזין מחיר</div>
+            }
+            @if (addForm.controls['price'].errors?.['min']) {
+              <div class="error-message">מחיר המינימום גדול מ-0</div>
+            }
+          }
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button
+          type="submit"
+          [disabled]="addForm.invalid"
+          class="btn btn-submit">
+          הוסף מוצר לסניף
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

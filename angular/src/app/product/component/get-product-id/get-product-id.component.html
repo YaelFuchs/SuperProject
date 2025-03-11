@@ -1,13 +1,14 @@
-@if(productDetails){
-<div>
-    <img *ngIf="productDetails.imageUrl" [src]="productDetails.imageUrl" alt="תמונה של {{ productDetails.name }}">
-    <p>שם מוצר: {{productDetails.name}}</p>
-    <p>סוג מכירה:{{productDetails.UnitOfMeasure === 0 ? 'Units' : 'Kilograms'}}</p>
-    <p>שם קטגוריה: {{productDetails.category.name}}</p>
-    @if(isManager()){
-    <button (click)="delete(productDetails.id)">מחיקה</button>
-    }
-    <button (click)="goBack()">חזור לרשימת מוצר</button>
-</div>
-
-}
+<div class="product-container" *ngIf="productDetails">
+    <div class="product-card">
+      <img *ngIf="productDetails.imageUrl" [src]="productDetails.imageUrl" alt="תמונה של {{ productDetails.name }}" class="product-image">
+      <div class="product-details">
+        <h2 class="product-name">{{ productDetails.name }}</h2>
+        <p class="product-info">סוג מכירה: {{ productDetails.UnitOfMeasure === 0 ? 'יחידות' : 'קילוגרמים' }}</p>
+        <p class="product-info">קטגוריה: {{ productDetails.category.name }}</p>
+      </div>
+      <div class="product-actions">
+        <button class="back-btn" (click)="goBack()">חזור לרשימת המוצרים</button>
+        <button *ngIf="isManager()" class="delete-btn" (click)="delete(productDetails.id)">מחק מוצר</button>
+      </div>
+    </div>
+  </div>

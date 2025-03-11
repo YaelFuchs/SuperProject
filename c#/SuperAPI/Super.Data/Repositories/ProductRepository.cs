@@ -106,5 +106,12 @@ namespace Super.Data.Repositories
         {
             throw new NotImplementedException();
         }
+        public List<Product> Search(string word)
+        {
+            return _context.Products.
+            Where(p => p.Name.Contains(word))
+            .Include(p => p.Category) // מביא גם את הקטגוריה
+            .ToList();
+        }
     }
 }

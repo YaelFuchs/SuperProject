@@ -1,0 +1,100 @@
+.branch-details-container {
+    max-width: 600px;
+    margin: 20px auto;
+    direction: rtl;
+  }
+  
+  .branch-card {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .details-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+  
+  .label {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .value {
+    color: #333;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+  
+    &:hover {
+      transform: translateY(-2px);
+    }
+  
+    &:active {
+      transform: translateY(0);
+    }
+  }
+  
+  .delete {
+    background-color: #f44336; // אדום - תואם לפעולה מסוכנת
+    color: white;
+  
+    &:hover {
+      background-color: #da190b;
+    }
+  }
+  
+  .back {
+    background-color: #ff9800; // כתום - תואם ל"חזרה" בדף הקודם
+    color: white;
+  
+    &:hover {
+      background-color: #f57c00;
+    }
+  }
+  
+  .loading {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+  }

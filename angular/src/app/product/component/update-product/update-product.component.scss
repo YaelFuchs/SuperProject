@@ -1,0 +1,172 @@
+/* עיצוב כללי לדף */
+.form-container {
+    padding: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    direction: rtl; /* כיווניות עברית */
+  }
+  
+  /* עיצוב הכרטיסיה שמכילה את הטופס */
+  .form-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    transition: transform 0.2s ease;
+  }
+  
+  .form-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* עיצוב הכותרת */
+  .form-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 10px;
+  }
+  
+  /* עיצוב הטופס */
+  .update-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* עיצוב שורת שדה בטופס */
+  .form-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  /* עיצוב התווית */
+  .form-label {
+    font-size: 16px;
+    color: #555;
+    font-weight: 500;
+    text-align: right;
+    flex: 0 0 120px; /* רוחב קבוע לתווית */
+    line-height: 40px; /* יישור אנכי לשדה */
+  }
+  
+  /* עיצוב השדה */
+  .form-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  /* עיצוב שדות קלט ובחירה */
+  .form-input,
+  .form-select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-input:focus,
+  .form-select:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+  }
+  
+  /* עיצוב הודעות שגיאה */
+  .error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  /* עיצוב כפתור עדכון */
+  .form-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .btn-submit {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .btn-submit:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+  }
+  
+  .btn-submit:active {
+    transform: scale(0.95);
+  }
+  
+  .btn-submit:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  /* עיצוב תגובתי */
+  @media (max-width: 600px) {
+    .form-container {
+      padding: 15px;
+    }
+  
+    .form-card {
+      padding: 20px;
+    }
+  
+    .form-title {
+      font-size: 20px;
+    }
+  
+    .form-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+  
+    .form-label {
+      flex: none;
+      line-height: normal;
+    }
+  
+    .form-input,
+    .form-select {
+      font-size: 14px;
+      padding: 8px;
+    }
+  
+    .btn {
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+  }
