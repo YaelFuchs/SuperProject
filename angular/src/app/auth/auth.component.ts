@@ -11,8 +11,8 @@ import { AuthService } from './auth.service';
   styleUrl: './auth.component.scss'
 })
 export class AuthComponent implements OnInit {
-
     addForm !:FormGroup
+
     constructor(private _authService : AuthService){}
     ngOnInit() {
      this.addForm = new FormGroup({

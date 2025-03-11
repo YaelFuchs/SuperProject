@@ -1,17 +1,16 @@
 <ul>
-    @if(isAdmin() ||isUser()){
+   
     @if(isAdmin()){
     <button routerLink="/category">קטגוריות</button>
     <button routerLink="/branch">סניפים</button>
     <button routerLink="/branchProduct">מוצרי סניף</button>
-    <button routerLink="/cart">סל קניות</button>
     }
     @if(isUser()){
     <button routerLink="/cart">סל קניות</button>
     <button routerLink="/user">איזור אישי</button>
     <button (click)="logout()">התנתקות</button>
     }
-}
+
     @else{
     <button routerLink="/user/signin">הרשמה</button>
     <button routerLink="/login">התחברות</button>

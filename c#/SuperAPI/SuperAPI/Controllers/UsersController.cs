@@ -60,7 +60,11 @@ namespace SuperAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message); // החזרת תגובה עם הודעת השגיאה
+                if (ex.Message == "User already exists!")
+                {
+                    return Conflict(new { error = "User already exists!" }); 
+                }
+                return BadRequest(new { error = ex.Message }); 
             }
         }
         // PUT api/<UsersController>/5

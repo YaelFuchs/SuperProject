@@ -22,6 +22,7 @@ export class AuthService implements OnInit {
   public userId: number = 0;
 
 
+
   constructor(
     private _httpClient: HttpClient, private _router: Router,
     @Inject(PLATFORM_ID) private _platformId: Object) { }
@@ -76,7 +77,10 @@ export class AuthService implements OnInit {
   }
   isUser(): boolean {
     this.checkAuth();
-    return this.roles.includes('ROLE_USER');
+    return this.roles.includes('ROLE_USER')||
+    this.roles.includes('ROLE_USER,ROLE_ADMIN,ROLE_MANAGER') ||
+      this.roles.includes('ROLE_USER,ROLE_ADMIN');
+    ;
   }
   get isAuthenticated(): boolean {
     return this.isAuthenticated$.getValue();
@@ -99,7 +103,15 @@ export class AuthService implements OnInit {
         this._router.navigate(['/product'])
       },
       error: (err) => {
-        alert('שגיאה בהתחברות: ' + err.error);
+        console.log(err);
+        if (err.status === 404) { 
+          alert("שם משתמש שגוי") }
+          else if(err.status === 401){
+            alert("הסיסמה שגויה")
+          }
+        else {
+          alert("שגיאת מערכת")
+        }
       }
     });
   }

@@ -53,4 +53,12 @@
       </div>
       
     <button (click)="signUp()" [disabled]="addForm.invalid">הרשמה</button>
+    @if (isPopupVisible) {
+        <div class="popup-overlay">
+          <div class="popup-content">
+            <p [innerHTML]="popupMessage"></p>
+          </div>
+        </div>
+      }
+      
 </form>

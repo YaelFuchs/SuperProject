@@ -1,0 +1,123 @@
+/* מרכוז הכרטיסייה בעמוד */
+.paypal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh; /* שמירה על גובה מופחת */
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+  padding: 10px;
+}
+
+/* עיצוב הכרטיסייה */
+.paypal-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 500px; /* הרחבת הרוחב מ-400px ל-500px */
+  width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  /* כותרת */
+  .title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  /* פרטי התשלום */
+  .details {
+    margin-bottom: 20px;
+
+    .detail-item {
+      font-size: 15px;
+      color: #34495e;
+      margin: 8px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .label {
+        font-weight: 500;
+        color: #2c3e50;
+      }
+    }
+  }
+
+  /* טקסט מידע */
+  .info-text {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  /* כפתור התשלום */
+  .paypal-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    background-color: #0070ba;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      background-color: #005ea6;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+/* רספונסיביות למסכים קטנים (עד 600px) */
+@media (max-width: 600px) {
+  .paypal-container {
+    min-height: 40vh;
+    padding: 5px;
+  }
+
+  .paypal-card {
+    padding: 15px;
+    max-width: 90%; /* שמירה על התאמה למסכים קטנים */
+
+    .title {
+      font-size: 18px;
+    }
+
+    .details {
+      .detail-item {
+        font-size: 13px;
+        flex-direction: column;
+        gap: 3px;
+      }
+    }
+
+    .info-text {
+      font-size: 12px;
+    }
+
+    .paypal-button {
+      font-size: 13px;
+      padding: 8px 12px;
+    }
+  }
+}

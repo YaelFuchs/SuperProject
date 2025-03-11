@@ -6,7 +6,6 @@ import { AuthService } from '../../../auth/auth.service';
 import { CartService } from '../../../cart/cart.service';
 import { Category } from '../../../category/category.model';
 import { CategoryService } from '../../../category/category.service';
-import { PopupService } from '../../../popup/popup.service';
 
 
 @Component({
@@ -27,6 +26,8 @@ export class GetProductComponent implements OnInit {
   categories!: Category[]
   activeCategory: string | null = null;
   searchTerm: string = '';
+  popupMessage: string = '';
+  isPopupVisible = false;
 
 
 
@@ -37,7 +38,7 @@ export class GetProductComponent implements OnInit {
     private _authService: AuthService,
     private _cartService: CartService,
     private _categoryService: CategoryService,
-    private _popupService: PopupService) { }
+   ) { }
 
 
   ngOnInit(): void {
@@ -111,7 +112,9 @@ export class GetProductComponent implements OnInit {
     this._cartService.addProduct(this.getUserId(), shoppingCart).subscribe({
       next: (res) => {
         console.log("המוצר נוסף בהצלחה", res);
-        this._popupService.openPopup(' סל קניות', 'המוצר התווסף לסל הקניות🎉🎉');
+        this.popupMessage = `המוצר "${product.name}" התווסף לסל הקניות! 🎉`;
+        this.isPopupVisible = true;
+        setTimeout(() => this.isPopupVisible = false, 2000);
       },
       error: (err) => {
         console.log("המוצר לא הצליח להתווסף");

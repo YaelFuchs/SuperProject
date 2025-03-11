@@ -24,8 +24,6 @@
             <p>{{ product.name }}</p>
             @if (isAdmin()) {
               <button (click)="update(product)">עדכון מוצר</button>
-              <button (click)="showDetailes(product.id)">פרטים נוספים</button>
-              <button (click)="addProductToCart(product)">הוספת מוצר לסל</button>
             }
             @if (isUser()) {
               <button (click)="showDetailes(product.id)">פרטים נוספים</button>
@@ -60,4 +58,12 @@
   @if (showAdd) {
     <app-add-product (productAdded)="onProductAdded($event)"></app-add-product>
   }
+  @if (isPopupVisible) {
+    <div class="popup-overlay">
+      <div class="popup-content">
+        <p>{{ popupMessage }}</p>
+      </div>
+    </div>
+  }
+  
 </div>

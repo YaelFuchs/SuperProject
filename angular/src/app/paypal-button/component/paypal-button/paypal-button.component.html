@@ -1,5 +1,10 @@
-<button (click)="createOrder()">Pay with PayPal</button>
-<div>
-    <p>userId: {{customerId}}</p>
-    <p>cost: {{sumForPay}}</p>
-</div>
+<div class="paypal-container">
+    <div class="paypal-card">
+      <h2 class="title">תשלום עם PayPal</h2>
+      <div class="details">
+        <p class="detail-item"><span class="label">מזהה משתמש:</span> {{customerId}}</p>
+        <p class="detail-item"><span class="label">עלות:</span> {{sumForPay | currency:'ILS':'symbol'}}</p>
+      </div>
+      <button class="paypal-button" (click)="createOrder()">שלם עם PayPal</button>
+    </div>
+  </div>

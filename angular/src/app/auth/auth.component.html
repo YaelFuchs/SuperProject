@@ -1,22 +1,23 @@
 <form [formGroup]="addForm" >
     <div>
-        <label>user name:</label>
+        <label>שם משתמש:</label>
         <input type="text" formControlName="UserName" #id>
         @if (addForm.controls['UserName'].invalid && (addForm.controls['UserName'].dirty || addForm.controls['UserName'].touched)) {
-            <div>you must enter user name</div>
+            <div>חובה להכניס שם</div>
         }
     </div>
     <div>
-        <label>password:</label>
+        <label>סיסמה:</label>
         <input type="password" formControlName="Password">
         @if (addForm.controls['Password'].invalid && (addForm.controls['Password'].dirty || addForm.controls['Password'].touched)) {
             @if (addForm.controls['Password'].errors?.['required']) {
-                <div>you must enter password</div>
+                <div>חובה להכניס סיסמה</div>
             }
             @if (addForm.controls['Password'].errors?.['minlength']) {
-                <div>you must write at least 8 chars</div>
+                <div>חובה לכתוב לפחות באורך 8 תווים</div>
             }
         }
     </div>
     <button (click)="login()" [disabled]="addForm.invalid">התחברות</button>
+
 </form>

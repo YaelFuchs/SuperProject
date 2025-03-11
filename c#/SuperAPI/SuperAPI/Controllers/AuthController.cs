@@ -24,11 +24,11 @@ public class AuthController : ControllerBase
         var findUser = _userService.GetUserByName(userLoginModel.UserName);
         if (findUser == null)
         {
-            return BadRequest(new { message = "User not found" });
+            return NotFound(new { message = "User not found" }); // 404 במקום 400
         }
         else if (!BCrypt.Net.BCrypt.Verify(userLoginModel.Password, findUser.Password))
         {
-            return Unauthorized(new { message = "Incorrect password" });
+            return Unauthorized(new { message = "Incorrect password" }); // 401
         }
         var roles = findUser.UserRoles?.Select(ur => ur.Role.Name).ToList() ?? new List<string>();
         var claims = new List<Claim>()
