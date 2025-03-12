@@ -20,16 +20,20 @@
    git clone https://github.com/michalLewenstein/super-project-.git
    
 התקנת תלויות (Angular):
-bash
+
 npm install
+
 הרצת השרת (.NET):
-bash
+
 dotnet run
+
 הרצת הפרויקט (Angular):
-bash
+
 ng s -o
 
 
 יוצרים 👩‍💻
+
 michal lewenstein – מפתחת ראשית 
+
 yael fucs – מפתחת ראשית 
