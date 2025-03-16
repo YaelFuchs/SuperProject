@@ -22,7 +22,7 @@ export class AddBranchComponent implements OnInit {
       phone: new FormControl('', [Validators.required, Validators.minLength(7)]),
       address: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
-      shoppingCost: new FormControl('', Validators.required)
+      shippingCost: new FormControl('', Validators.required)
     })
   }
   addBranch() {

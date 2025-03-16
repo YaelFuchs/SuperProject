@@ -73,18 +73,18 @@
       </div>
   
       <div class="form-group">
-        <label for="shoppingCost">עלות משלוח:</label>
+        <label for="shippingCost">עלות משלוח:</label>
         <input
           type="text"
-          id="shoppingCost"
-          name="shoppingCost"
-          [(ngModel)]="branch.shoppingCost"
+          id="shippingCost"
+          name="shippingCost"
+          [(ngModel)]="branch.shippingCost"
           required
-          #shoppingCost="ngModel"
+          #shippingCost="ngModel"
           class="form-input"
           placeholder="הזן עלות משלוח"
         />
-        <div class="error" [ngSwitch]="shoppingCost.errors">
+        <div class="error" [ngSwitch]="shippingCost.errors">
           <div *ngSwitchCase="'required'">חובה להכניס עלות משלוח!</div>
         </div>
       </div>

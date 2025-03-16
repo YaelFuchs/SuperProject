@@ -7,7 +7,6 @@
         {{ category.name }}
       </button>
     }
-  
     
   </div>
   <div class="search-container">
@@ -32,8 +31,11 @@
           </div>
         }
       </div>
-
-      <!-- מודל לעדכון מוצר -->
+      @if(products.length == 0) {
+        <div class="no-products-message">
+          <p>מוצר זה אינו קיים במערכת</p>
+        </div>
+      }
       @if (showUpdate && productToUpdate && isAdmin()) {
         <div class="modal-overlay">
           <div class="modal-content">

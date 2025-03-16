@@ -96,19 +96,21 @@ namespace SuperAPI.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
-        // PUT api/<ProductsController>/5
+        // PUT api/Products/5
         [HttpPut("{Id}")]
         [Consumes("multipart/form-data")]
         public IActionResult Put(int Id, [FromForm] ProductPostModel product)
         {
+            // 1. בדיקה אם המוצר קיים
             var existingProduct = _productService.GetProductById(Id);
             if (existingProduct == null)
             {
-                return BadRequest("Product not found");
+                return NotFound("Product not found.");
             }
-            if (product.ImageUrl != null && product.ImageUrl.Length > 0)
+
+            try
             {
-                try
+                if (product.ImageUrl != null && product.ImageUrl.Length > 0)
                 {
                     if (!string.IsNullOrEmpty(existingProduct.ImageUrl))
                     {
@@ -118,28 +120,33 @@ namespace SuperAPI.Controllers
                             System.IO.File.Delete(oldImagePath);
                         }
                     }
+
                     var newImagePath = Path.Combine(Environment.CurrentDirectory, "images", product.ImageUrl.FileName);
                     using (FileStream fs = new FileStream(newImagePath, FileMode.Create))
                     {
                         product.ImageUrl.CopyTo(fs);
                     }
-                    var updatedProduct = _mapper.Map<Product>(product);
-                    updatedProduct.ImageUrl = product.ImageUrl.FileName;
-                    _productService.UpdateProduct(Id, updatedProduct);
+
+                    existingProduct.ImageUrl = product.ImageUrl.FileName;
                 }
-                catch (Exception ex)
-                {
-                    return BadRequest($"Error processing image: {ex.Message}");
-                }
+
+                _productService.UpdateProduct(Id,existingProduct);
+
+                return Ok("Product updated successfully.");
             }
-            else
+            catch (DbUpdateException ex)
             {
-                _productService.UpdateProduct(Id, _mapper.Map<Product>(product));
+                return BadRequest($"Database update error: {ex.InnerException?.Message ?? ex.Message}");
             }
-            return Ok();
+            catch (Exception ex)
+            {
+                return BadRequest($"Unexpected error: {ex.Message}");
+            }
         }
-        // DELETE api/<ProductsController>/5
-        [Authorize(Policy = "Manager")]
+    
+
+// DELETE api/<ProductsController>/5
+[Authorize(Policy = "Manager")]
         [HttpDelete("{Id}")]
         public void Delete(int Id)
         {

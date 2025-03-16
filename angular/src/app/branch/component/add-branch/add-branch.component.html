@@ -69,15 +69,15 @@
       </div>
   
       <div class="form-group">
-        <label for="shoppingCost">עלות משלוח:</label>
+        <label for="shippingCost">עלות משלוח:</label>
         <input
           type="text"
-          id="shoppingCost"
-          formControlName="shoppingCost"
+          id="shippingCost"
+          formControlName="shippingCost"
           class="form-input"
           placeholder="הזן עלות משלוח"
         />
-        @if (addForm.controls['shoppingCost'].invalid && (addForm.controls['shoppingCost'].dirty || addForm.controls['shoppingCost'].touched)) {
+        @if (addForm.controls['shippingCost'].invalid && (addForm.controls['shippingCost'].dirty || addForm.controls['shippingCost'].touched)) {
           <div class="error">חובה להכניס עלות משלוח</div>
         }
       </div>

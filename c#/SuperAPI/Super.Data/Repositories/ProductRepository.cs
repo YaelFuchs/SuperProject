@@ -71,24 +71,26 @@ namespace Super.Data.Repositories
 
         public void UpdateProduct(int Id, Product product)
         {
-            var productToUpdate = _context.Products.Find(Id);
+            var productToUpdate = _context.Products.Find(product.Id);
             if (productToUpdate != null)
             {
-                if (!productToUpdate.Name.Equals(product.Name))
-                {
-                    productToUpdate.Name = product.Name;
+                productToUpdate.Name = product.Name;
+                productToUpdate.CategoryId = product.CategoryId;
+                productToUpdate.UnitOfMeasure = product.UnitOfMeasure;
+                productToUpdate.ImageUrl = product.ImageUrl;
 
-                }
-                if (productToUpdate.Category != product.Category)
+                try
                 {
-                    productToUpdate.Category = product.Category;
+                    _context.SaveChanges();
                 }
-                if (productToUpdate.UnitOfMeasure != product.UnitOfMeasure)
+                catch (DbUpdateException ex)
                 {
-                    productToUpdate.UnitOfMeasure = product.UnitOfMeasure;
+                    throw new Exception($"Database update error: {ex.InnerException?.Message ?? ex.Message}");
                 }
-                _context.SaveChanges();
-
+            }
+            else
+            {
+                throw new Exception("Product not found.");
             }
 
         }

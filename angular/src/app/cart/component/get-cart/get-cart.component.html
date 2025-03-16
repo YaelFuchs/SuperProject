@@ -1,34 +1,35 @@
 <div class="cart-container">
   <h2>סל הקניות שלי</h2>
   @if (carts.length > 0) {
-  <div class="cart-items">
-    @for (cart of carts; track cart.Id) {
-    <div class="cart-item">
-      <img *ngIf="cart.product.imageUrl" [src]="cart.product.imageUrl" alt="תמונה של {{ cart.product.name }}"
-        class="product-image">
-      <div class="item-details">
-        <p class="product-name">שם מוצר: {{ cart.product.name }}</p>
-        <p class="product-quantity">מספר יחידות: {{ cart.quantity }}</p>
-    
-      </div>
-      <div class="item-actions">
-        <button class="add-btn" (click)="addProductFromCart(cart.product)">+</button>
-        <button class="remove-btn" (click)="deleteProductFromCart(cart.product)">-</button>
-      </div>
+    <div class="cart-items">
+      @for (cart of carts; track cart.Id) {
+        <div class="cart-item">
+          <img *ngIf="cart.product.imageUrl" [src]="cart.product.imageUrl" alt="תמונה של {{ cart.product.name }}" class="product-image">
+          <div class="item-details">
+            <p class="product-name">שם מוצר: {{ cart.product.name }}</p>
+            <p class="product-quantity">מספר יחידות: {{ cart.quantity }}</p>
+            @if(orderPrice > 0){
+              <p class="product-price">מחיר: {{ getProductPrice(cart.product.id) }} ₪</p>
+            }
+          </div>
+          <div class="item-actions">
+            <button class="add-btn" (click)="addProductFromCart(cart.product)">+</button>
+            <button class="remove-btn" (click)="deleteProductFromCart(cart.product)">-</button>
+          </div>
+        </div>
+      }
     </div>
+
+    @if (orderPrice > 0) {
+      <p>מחיר הסל: {{ orderPrice }}</p>
+      <button class="order-btn" (click)="orderCart()">לביצוע הזמנה</button>
+    } @else {
+      <button class="order-btn" (click)="getPrice()">לחישוב סל קניות</button>
     }
-  </div>
-  @if(orderPrice>0){
-  <p>מחיר הסל: {{orderPrice}}</p>
-  <button class="order-btn" (click)="orderCart()">לביצוע הזמנה</button>
-  }
-  @else{
-  <button class="order-btn" (click)="getPrice()">לחישוב סל קניות</button>
-  }
 
   } @else {
-  <div class="empty-cart">
-    <p>כרגע אין מוצרים בסל</p>
-  </div>
+    <div class="empty-cart">
+      <p>כרגע אין מוצרים בסל</p>
+    </div>
   }
 </div>

@@ -57,7 +57,6 @@ export class AuthService implements OnInit {
       const payload = JSON.parse(atob(token.split('.')[1]));
       const roleClaim = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
       const roles = payload[roleClaim];
-      console.log("תפקידים: ", roles);
 
       return Array.isArray(roles) ? roles : [roles];
     } catch (e) {

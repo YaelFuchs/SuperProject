@@ -14,6 +14,7 @@ export class GetCartComponent implements OnInit {
   userId = 0
   shoppingCart!: PostCart
   orderPrice: number = 0
+  productPrice!: ProductPriceDto[]
   constructor(private _cartService: CartService, private _router: Router) { }
 
   ngOnInit(): void {
@@ -33,15 +34,28 @@ export class GetCartComponent implements OnInit {
     this.getCart();
     const c = localStorage.getItem('orderPrice');
     if (c) {
-      this.orderPrice = JSON.parse(c);
-      console.log("מהלוקאלסטוראגגגגגג", this.orderPrice);
-    }
+      this.orderPrice = JSON.parse(c);    }
   }
   getCart() {
     this._cartService.getCartByUserId(this.userId).subscribe({
       next: (res) => {
         this.carts = res;
         console.log("הסל שחוזר למשתמש: ", res,);
+        const productList = JSON.parse(localStorage.getItem("orderProductList")|| "[]");
+        console.log("הסל הישן:", productList);
+        
+        if(this.carts.length!=productList.length || 
+         ! this.carts.every((item, index) => item.quantity === productList[index].quantity)
+          ){
+          this.orderPrice = 0
+          localStorage.removeItem('orderPrice')
+          localStorage.removeItem('orderProductList')
+          localStorage.removeItem('prices')
+        }
+        const prices =JSON.parse(localStorage.getItem('prices')|| "[]");
+        if(prices!=null){
+          this.productPrice = prices
+        }
       },
       error: (err) => {
         console.log("שגיאה בהבאת סל הקניות של המשתמש", err);
@@ -86,7 +100,10 @@ export class GetCartComponent implements OnInit {
         console.log("תוצאת האלגוריתם:", res);
         this._cartService.addCart(this.userId);
         this.orderPrice = res?.cheapestShoppingCartResult?.bestCost
+        this.productPrice = res.prices
         localStorage.setItem('orderPrice', JSON.stringify(this.orderPrice))
+        localStorage.setItem('orderProductList', JSON.stringify(this.carts))
+        localStorage.setItem('prices', JSON.stringify(this.productPrice))
       },
       error: (err) => {
         alert("שגיאה בביצוע ההזמנה")
@@ -108,4 +125,11 @@ export class GetCartComponent implements OnInit {
       }
     })
   }
+  getProductPrice(productId: number): number {
+    return this.carts.reduce((total, cartItem) => {
+      const productPrice = this.productPrice.find(p => p.product.id === productId)?.price || 0;
+      return total + (productPrice * cartItem.quantity);
+    }, 0);
+  }
+  
 }

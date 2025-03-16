@@ -21,7 +21,7 @@ export class UpdateBranchComponent implements OnInit {
       phone: this.branchUpdate.phone,
       address: this.branchUpdate.address,
       email: this.branchUpdate.email,
-      shoppingCost: this.branchUpdate.shoppingCost
+      shippingCost: this.branchUpdate.shippingCost
     }
   }
   saveChanges() {
