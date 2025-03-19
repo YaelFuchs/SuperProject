@@ -7,7 +7,7 @@
           <img *ngIf="cart.product.imageUrl" [src]="cart.product.imageUrl" alt="תמונה של {{ cart.product.name }}" class="product-image">
           <div class="item-details">
             <p class="product-name">שם מוצר: {{ cart.product.name }}</p>
-            <p class="product-quantity">מספר יחידות: {{ cart.quantity }}</p>
+            <p class="product-quantity">כמות {{ getUnitOfMeasureText(cart.product) }}: {{ cart.quantity }}</p>
             @if(orderPrice > 0){
               <p class="product-price">מחיר: {{ getProductPrice(cart.product.id) }} ₪</p>
             }

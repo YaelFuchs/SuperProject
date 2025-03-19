@@ -172,16 +172,16 @@ namespace Super.Data.Repositories
             List<CartTotalPrice> top5Btanches = cartTotalPriceList.Take(5).ToList();
             HashSet<int> bestCombination = new HashSet<int>();
 
-            // 1. בחירת הסניף הזול ביותר
+            // 1. Choosing the cheapest branch
             int cheapestBranchId = top5Btanches[0].Id;
 
-            // 2. לולאה על שאר 4 הסניפים
-            for (int subset = 1; subset < (1 << 4); subset++) // 1 << 4 = 16 (כל השילובים האפשריים של 4 סניפים)
+            // 2. Loop over the remaining 4 branches
+            for (int subset = 1; subset < (1 << 4); subset++) // 1 << 4 = 16 (all possible combinations of 4 branches)
             {
-                HashSet<int> selectedBranches = new HashSet<int> { cheapestBranchId }; // תמיד כולל את הסניף הזול ביותר
-                double shipping = shippingCosts[cheapestBranchId]; // עלות משלוח של הסניף הזול ביותר
+                HashSet<int> selectedBranches = new HashSet<int> { cheapestBranchId }; // Always includes the cheapest branch
+                double shipping = shippingCosts[cheapestBranchId]; // Shipping cost of the cheapest branch
 
-                // 3. הוספת שאר הסניפים הנבחרים
+                // 3. Adding the remaining selected branches
                 for (int i = 1; i < 5; i++)
                 {
                     if ((subset & (1 << i)) != 0)
@@ -200,15 +200,15 @@ namespace Super.Data.Repositories
                     bestCombination = selectedBranches;
                 }
             }
-            // יצירת תוצאה למשתמש
-            // יצירת תוצאה למשתמש באמצעות DTO
+            // Create a result for the user
+            // Create a result for the user using a DTO
             var userResult = products.Select((p, i) => new ProductPriceDto
             {
                 Product = p,
                 Price = CalculateCombinedCost(bestCombination, prices, numProducts)[i]
             }).ToList();
 
-            // יצירת תוצאה למנהל
+            // Creating a result for the manager
             var managerResult = new CheapestShoppingCartResult
             {
                 BestCost = bestCost,

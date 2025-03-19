@@ -17,11 +17,9 @@ export class AuthService implements OnInit {
     observe.error('error');
   });
 
-  isAuthenticated$ = new BehaviorSubject<boolean>(false); // השם הנכון
+  isAuthenticated$ = new BehaviorSubject<boolean>(false); 
   private roles: string[] = [];
   public userId: number = 0;
-
-
 
   constructor(
     private _httpClient: HttpClient, private _router: Router,
@@ -34,15 +32,19 @@ export class AuthService implements OnInit {
 
   }
   private checkAuth(): void {
-    const tokenString = localStorage.getItem('authToken');
-    if (tokenString) {
-      try {
-        const tokenObj = JSON.parse(tokenString);
-        const token = tokenObj.token;
-        this.isAuthenticated$.next(true);
-        this.roles = this.getRolesFromToken(token);
-      } catch (error) {
-        console.error('שגיאה בפרסור הטוקן:', error);
+    if (isPlatformBrowser(this._platformId)) {
+      const tokenString = localStorage.getItem('authToken');
+      if (tokenString) {
+        try {
+          const tokenObj = JSON.parse(tokenString);
+          const token = tokenObj.token;
+          this.isAuthenticated$.next(true);
+          this.roles = this.getRolesFromToken(token);
+        } catch (error) {
+          this.isAuthenticated$.next(false);
+          this.roles = [];
+        }
+      } else {
         this.isAuthenticated$.next(false);
         this.roles = [];
       }
@@ -51,6 +53,7 @@ export class AuthService implements OnInit {
       this.roles = [];
     }
   }
+  
 
   private getRolesFromToken(token: string): string[] {
     try {

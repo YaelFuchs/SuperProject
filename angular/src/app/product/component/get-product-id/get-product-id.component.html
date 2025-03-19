@@ -3,7 +3,7 @@
       <img *ngIf="productDetails.imageUrl" [src]="productDetails.imageUrl" alt="תמונה של {{ productDetails.name }}" class="product-image">
       <div class="product-details">
         <h2 class="product-name">{{ productDetails.name }}</h2>
-        <p class="product-info">סוג מכירה: {{ productDetails.UnitOfMeasure === 0 ? 'יחידות' : 'קילוגרמים' }}</p>
+        <p class="product-info">סוג מכירה: {{ productDetails.unitOfMeasure === 0 ? 'יחידות' : 'קילוגרמים' }}</p>
         <p class="product-info">קטגוריה: {{ productDetails.category.name }}</p>
       </div>
       <div class="product-actions">

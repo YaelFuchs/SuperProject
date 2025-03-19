@@ -1,21 +1,23 @@
-<form [formGroup]="addForm" >
+<form [formGroup]="addForm">
     <div>
         <label>שם משתמש:</label>
-        <input type="text" formControlName="UserName" #id>
-        @if (addForm.controls['UserName'].invalid && (addForm.controls['UserName'].dirty || addForm.controls['UserName'].touched)) {
-            <div>חובה להכניס שם</div>
+        <input type="text" formControlName="userName" #id>
+        @if (addForm.controls['userName'].invalid && (addForm.controls['userName'].dirty ||
+        addForm.controls['userName'].touched)) {
+        <div>חובה להכניס שם</div>
         }
     </div>
     <div>
         <label>סיסמה:</label>
-        <input type="password" formControlName="Password">
-        @if (addForm.controls['Password'].invalid && (addForm.controls['Password'].dirty || addForm.controls['Password'].touched)) {
-            @if (addForm.controls['Password'].errors?.['required']) {
-                <div>חובה להכניס סיסמה</div>
-            }
-            @if (addForm.controls['Password'].errors?.['minlength']) {
-                <div>חובה לכתוב לפחות באורך 8 תווים</div>
-            }
+        <input type="password" formControlName="password">
+        @if (addForm.controls['password'].invalid && (addForm.controls['password'].dirty ||
+        addForm.controls['password'].touched)) {
+        @if (addForm.controls['password'].errors?.['required']) {
+        <div>חובה להכניס סיסמה</div>
+        }
+        @if (addForm.controls['password'].errors?.['minlength']) {
+        <div>חובה לכתוב לפחות באורך 8 תווים</div>
+        }
         }
     </div>
     <button (click)="login()" [disabled]="addForm.invalid">התחברות</button>

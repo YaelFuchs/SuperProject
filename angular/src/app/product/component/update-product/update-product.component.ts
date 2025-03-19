@@ -30,7 +30,7 @@ export class UpdateProductComponent implements OnInit {
       this.product = {
         name: this.productUpdate.name,
         categoryId: this.productUpdate.category.id,
-        UnitOfMeasure: this.productUpdate.UnitOfMeasure
+        unitOfMeasure: this.productUpdate.unitOfMeasure
       };
     }
 
@@ -40,7 +40,7 @@ export class UpdateProductComponent implements OnInit {
         console.log("Product received:", res);
         this.product.name = res.name;
         this.product.categoryId = res.category.id;
-        this.product.UnitOfMeasure = res.UnitOfMeasure;
+        this.product.unitOfMeasure = res.unitOfMeasure;
       },
       error: (err) => {
         console.log("Error fetching product:", err);

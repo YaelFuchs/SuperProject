@@ -47,7 +47,7 @@ namespace SuperAPI.Controllers
                     }
                     else
                     {
-                        productDto.ImageUrl = null; 
+                        productDto.ImageUrl = null;
                     }
                 }
             }
@@ -70,7 +70,7 @@ namespace SuperAPI.Controllers
             p.ImageUrl = null;
             return Ok(p);
         }
-        
+
         [HttpPost]
         [Consumes("multipart/form-data")]
         public IActionResult Post([FromForm] ProductPostModel product)
@@ -101,7 +101,6 @@ namespace SuperAPI.Controllers
         [Consumes("multipart/form-data")]
         public IActionResult Put(int Id, [FromForm] ProductPostModel product)
         {
-            // 1. בדיקה אם המוצר קיים
             var existingProduct = _productService.GetProductById(Id);
             if (existingProduct == null)
             {
@@ -130,7 +129,7 @@ namespace SuperAPI.Controllers
                     existingProduct.ImageUrl = product.ImageUrl.FileName;
                 }
 
-                _productService.UpdateProduct(Id,existingProduct);
+                _productService.UpdateProduct(Id, existingProduct);
 
                 return Ok("Product updated successfully.");
             }
@@ -143,10 +142,10 @@ namespace SuperAPI.Controllers
                 return BadRequest($"Unexpected error: {ex.Message}");
             }
         }
-    
 
-// DELETE api/<ProductsController>/5
-[Authorize(Policy = "Manager")]
+
+        // DELETE api/<ProductsController>/5
+        [Authorize(Policy = "Manager")]
         [HttpDelete("{Id}")]
         public void Delete(int Id)
         {

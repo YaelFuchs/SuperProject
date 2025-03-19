@@ -34,26 +34,25 @@ export class GetCartComponent implements OnInit {
     this.getCart();
     const c = localStorage.getItem('orderPrice');
     if (c) {
-      this.orderPrice = JSON.parse(c);    }
+      this.orderPrice = JSON.parse(c);
+    }
   }
   getCart() {
     this._cartService.getCartByUserId(this.userId).subscribe({
       next: (res) => {
         this.carts = res;
-        console.log("הסל שחוזר למשתמש: ", res,);
-        const productList = JSON.parse(localStorage.getItem("orderProductList")|| "[]");
-        console.log("הסל הישן:", productList);
-        
-        if(this.carts.length!=productList.length || 
-         ! this.carts.every((item, index) => item.quantity === productList[index].quantity)
-          ){
+        const productList = JSON.parse(localStorage.getItem("orderProductList") || "[]");
+
+        if (this.carts.length != productList.length ||
+          !this.carts.every((item, index) => item.quantity === productList[index].quantity)
+        ) {
           this.orderPrice = 0
           localStorage.removeItem('orderPrice')
           localStorage.removeItem('orderProductList')
           localStorage.removeItem('prices')
         }
-        const prices =JSON.parse(localStorage.getItem('prices')|| "[]");
-        if(prices!=null){
+        const prices = JSON.parse(localStorage.getItem('prices') || "[]");
+        if (prices != null) {
           this.productPrice = prices
         }
       },
@@ -66,7 +65,7 @@ export class GetCartComponent implements OnInit {
     const p = {
       name: product.name,
       categoryId: product.category.id,
-      UnitOfMeasure: product.UnitOfMeasure
+      unitOfMeasure: product.unitOfMeasure
     }
     this._cartService.removeProduct(this.userId, p).subscribe({
       next: (res) => {
@@ -82,7 +81,7 @@ export class GetCartComponent implements OnInit {
     this.shoppingCart = {
       name: product.name,
       categoryId: product.category.id,
-      UnitOfMeasure: product.UnitOfMeasure
+      UnitOfMeasure: product.unitOfMeasure
     };
     this._cartService.addProduct(this.userId, this.shoppingCart).subscribe({
       next: (res) => {
@@ -98,7 +97,6 @@ export class GetCartComponent implements OnInit {
     this._cartService.CalculateCheapestCart(this.userId).subscribe({
       next: (res) => {
         console.log("תוצאת האלגוריתם:", res);
-        this._cartService.addCart(this.userId);
         this.orderPrice = res?.cheapestShoppingCartResult?.bestCost
         this.productPrice = res.prices
         localStorage.setItem('orderPrice', JSON.stringify(this.orderPrice))
@@ -126,10 +124,17 @@ export class GetCartComponent implements OnInit {
     })
   }
   getProductPrice(productId: number): number {
-    return this.carts.reduce((total, cartItem) => {
-      const productPrice = this.productPrice.find(p => p.product.id === productId)?.price || 0;
-      return total + (productPrice * cartItem.quantity);
-    }, 0);
+    const productprice = this.productPrice.find(p => p.product.id === productId);
+    const product = this.carts.find(p => p.product.id === productId);
+
+    if (product && productprice) {
+      return product.quantity * productprice.price;
+    }
+    return 0;
   }
   
+  getUnitOfMeasureText(p: Product): string {
+   
+    return p.unitOfMeasure==0? 'יחידות': 'קילוגרמים';
+  }
 }

@@ -14,22 +14,20 @@ import { CategoryService } from '../../../category/category.service';
   styleUrls: ['./get-product.component.scss'],
 })
 export class GetProductComponent implements OnInit {
-  products: Product[] = [];  // בהתחלה, משאיר את המערך ריק
+  products: Product[] = [];  
   allProducts: Product[] = []
-  searchList: Product []=[]
+  searchList: Product[] = []
   showAdd = false;
   showUpdate = false;
-  selectedProduct: Product | null = null;  // אם נבחר מוצר, ניתן לעדכן
+  selectedProduct: Product | null = null;  
   message = '';
-  productToUpdate: Product | null = null;  // גם אם מדובר במוצר שאנחנו מעדכנים
+  productToUpdate: Product | null = null;  
   isShow = false;
   categories!: Category[]
   activeCategory: string | null = null;
   searchTerm: string = '';
   popupMessage: string = '';
   isPopupVisible = false;
-
-
 
   constructor(
     private _router: Router,
@@ -38,33 +36,31 @@ export class GetProductComponent implements OnInit {
     private _authService: AuthService,
     private _cartService: CartService,
     private _categoryService: CategoryService,
-   ) { }
-
+  ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.activeCategory = params.get('category');
       const searchWord = params.get('word');
-      this.getProducts(() => { // מחכה שהמוצרים ייטענו קודם
+      this.getProducts(() => {
         if (this.activeCategory) {
           this.filterProductsByCategory();
-        }else if (searchWord) {
-          this.search(searchWord); // מבצע חיפוש דרך ה-URL
+        } else if (searchWord) {
+          this.search(searchWord); 
         }
       });
     });
-
-    this._categoryService.getCategoriesFromServer().subscribe({
-      next: (res) => {
-        this.categories = res;
-      },
-      error: (err) => {
-        console.log("לא הצלחתי להביא את הקטגוריות", err);
-      }
-    });
+    if (this.isUser()) {
+      this._categoryService.getCategoriesFromServer().subscribe({
+        next: (res) => {
+          this.categories = res;
+        },
+        error: (err) => {
+          console.log("לא הצלחתי להביא את הקטגוריות", err);
+        }
+      });
+    }
   }
-
-  
 
   getProducts(callback?: () => void): void {
     this._productService.getProducts().subscribe({
@@ -73,7 +69,7 @@ export class GetProductComponent implements OnInit {
         this.allProducts = res;
         console.log("המוצרים נטענו בהצלחה", this.products);
 
-        if (callback) { // אם יש פונקציה נוספת שצריך לקרוא לה
+        if (callback) { 
           callback();
         }
       },
@@ -83,31 +79,30 @@ export class GetProductComponent implements OnInit {
     });
   }
 
-
   onProductAdded(product: Product): void {
     this.showAdd = false;
-    this.getProducts();  // אחרי הוספת מוצר, נטען את המוצרים מחדש
+    this.getProducts();  
   }
 
   update(product: Product): void {
     this.productToUpdate = product;
-    this.showUpdate = true;  // נציג את הטופס לעדכון
+    this.showUpdate = true;  
   }
 
   onUpdateProduct(): void {
     this.showUpdate = false;
-    this.getProducts();  // אחרי עדכון, נטען את המוצרים מחדש
+    this.getProducts();  
   }
 
   showDetailes(id: number): void {
-    this.isShow = true;  // מגדירים את ה- isShow להיות
-    this._router.navigate(['product/get-product-id', id]);  // מעבירים לעמוד של פרטי המוצר
+    this.isShow = true;  
+    this._router.navigate(['product/get-product-id', id]); 
   }
   addProductToCart(product: Product) {
     const shoppingCart = {
       name: product.name,
       categoryId: product.category.id,
-      UnitOfMeasure: product.UnitOfMeasure
+      UnitOfMeasure: product.unitOfMeasure
     };
     this._cartService.addProduct(this.getUserId(), shoppingCart).subscribe({
       next: (res) => {
@@ -147,20 +142,20 @@ export class GetProductComponent implements OnInit {
   isUser(): boolean {
     return this._authService.isUser();
   }
-  goToSearch(word:string){
+  goToSearch(word: string) {
     this._router.navigate(['product/get-product/search', word]);
 
   }
-  search(word:string){
+  search(word: string) {
     this._productService.search(word).subscribe({
-      next:(res)=>{
+      next: (res) => {
         console.log("הסינון הצליח", res);
         this.products = res;
       },
-      error:(err)=>{
+      error: (err) => {
         if (err.status === 404) {
           console.log("לא נמצאו מוצרים עבור החיפוש:", word);
-          this.products = []; // אופציונלי: ניקוי המוצרים במקרה של 404
+          this.products = []; 
         } else {
           console.log("שגיאה אחרת התרחשה:", err);
         }

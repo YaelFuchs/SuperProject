@@ -1,4 +1,4 @@
 export class Auth{
-    UserName!:string
-    Password!:string
+    userName!:string
+    password!:string
 }
