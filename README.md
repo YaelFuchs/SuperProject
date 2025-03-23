@@ -36,4 +36,4 @@ ng s -o
 
 michal lewenstein – מפתחת ראשית 
 
-yael fucs – מפתחת ראשית 
+yael fuchs – מפתחת ראשית 
